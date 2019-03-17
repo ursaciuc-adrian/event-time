@@ -107,3 +107,146 @@
     margin: 40px 0;
     box-shadow: 0px 1px 1px 0px #B0B0B0;
 }
+
+.sidenav {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    overflow-x: hidden;
+    padding: 40px 20px;
+
+    .title {
+        padding: 0 20px;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    a {
+        text-decoration: none;
+        font-size: 15px;
+        color: #818181;
+        display: block;
+        margin-top: 20px;
+        padding: 20px;
+        border-radius: 10px;
+        transition: all .2s ease;
+
+        i {
+            margin-right: 20px;
+        }
+
+        &:hover {
+            color: #000;
+            box-shadow: 0 0px 10px rgba(0, 0, 0, 0.25);
+        }
+    }
+}
+
+.top-nav {
+    background-color: #FCFDFE;
+    width: 100%;
+    margin-top: -20px;
+    margin-bottom: 20px;
+    padding: 20px 0;
+    color: #404043;
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .user {
+        display: flex;
+        color: #B2B2B2;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50px;
+            margin: 0 20px;
+            box-shadow: 0px 1px 15px 2px #21BBFF;
+        }
+    }
+}
+
+table {
+    width: 100%;
+    text-align: left;
+
+    thead {
+        background-color: #fff;
+        border-radius: 10px;
+
+        th {
+            padding: 20px 20px;
+        }
+    }
+
+    tbody {
+        tr {
+            background-color: #fff;
+
+            &:nth-child(2n) {
+                background-color: #F8F8F8;
+            }
+        }
+        
+
+        td {
+            padding: 10px 20px;
+        }
+    }
+}
+
+#admin-zone {
+    .page-title {
+        font-weight: bold;
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+}
+
+.button {
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 15px;
+
+    i {
+        margin-right: 5px;
+    }
+
+    &.button-success {
+        background-color: #21D146;
+        color: #fff;
+    }
+
+    &.button-icon {
+        padding: 0;
+        width: 30px;
+        height: 30px;
+
+        i {
+            margin: 0;
+        }
+    }
+
+    &.hover-info {
+        &:hover {
+            background-color: #21BBFF;
+        }
+    }
+
+    &.hover-danger {
+        &:hover {
+            background-color: #FF6699;
+        }
+    }
+}

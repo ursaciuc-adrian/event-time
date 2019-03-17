@@ -1,3 +1,17 @@
 .container {
-    padding: 0 80px;
+    padding: 0 40px;
+}
+
+#admin-zone {
+    min-width: 100%;
+    min-height: 100%;
+    background-color: #F2F4F8;
+
+    .main {
+        margin-left: 250px;
+    }
+}
+
+.space-top {
+    margin-top: 20px;
 }
