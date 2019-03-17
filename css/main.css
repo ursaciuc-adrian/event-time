@@ -18,7 +18,26 @@ body {
   width: 100%;
 }
 
+@media screen and (min-width: 601px) {
+  .navbar-list > li {
+    padding-left: 10px;
+    padding-right: 20px;
+  }
+  .navbar-list > li > a {
+    font-size: 19px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .navbar-list > li {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .navbar-list > li > a {
+    font-size: 10px;
+  }
+}
 .navbar {
+  padding-top: 10px;
   position: fixed;
   display: flex;
   flex-direction: row;
@@ -43,29 +62,34 @@ body {
   padding: 0;
 }
 .navbar-list > li {
-  padding-left: 10px;
-  padding-right: 20px;
   float: right;
   display: block;
 }
 .navbar-list > li > a {
+  font-weight: bold;
+  text-decoration-line: none;
   display: block;
   color: white;
+  transition: 0.7s;
   padding: 15px 15px;
 }
 .navbar-list > li > a:hover, .navbar-list > li > a:active, .navbar-list > li > a:focus {
-  color: red;
-  border: 1px solid red;
+  color: #121370;
+  border: none;
+  border-radius: 30px;
+  background-color: #c2d0ff;
 }
 
-.main {
-  background-image: url("../lel.jpg");
+.hero {
+  background-image: url("../hero_background.jpeg");
   /* Full height */
-  height: 100%;
+  height: 100vh;
+  width: auto;
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
 }
 
 /*# sourceMappingURL=main.css.map */
