@@ -18,6 +18,23 @@ body {
   width: 100%;
 }
 
+.container {
+  padding: 0 40px;
+}
+
+#admin-zone {
+  min-width: 100%;
+  min-height: 100%;
+  background-color: #F2F4F8;
+}
+#admin-zone .main {
+  margin-left: 250px;
+}
+
+.space-top {
+  margin-top: 20px;
+}
+
 @media screen and (min-width: 601px) {
   .navbar-list > li {
     padding-left: 10px;
@@ -74,7 +91,9 @@ body {
   transition: 0.7s;
   padding: 15px 15px;
 }
-.navbar-list > li > a:hover, .navbar-list > li > a:active, .navbar-list > li > a:focus {
+.navbar-list > li > a:hover,
+.navbar-list > li > a:active,
+.navbar-list > li > a:focus {
   color: #121370;
   border: none;
   border-radius: 30px;
@@ -92,6 +111,115 @@ body {
   width: 100%;
 }
 
+.footer {
+  background-color: #666;
+  height: 100px;
+}
+
+.login-signup-page {
+  background-image: url("../images/mountains.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.login-container {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: white;
+  height: 400px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 0px solid black;
+  border-radius: 5px;
+  box-shadow: -2px 0px 100px -25px rgba(0, 0, 0, 0.49);
+}
+.login-container #login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+}
+.login-container #login-form h1 {
+  margin: 10px;
+  text-align: center;
+}
+.login-container #login-form input {
+  outline: none !important;
+  transition: 0.5s;
+  width: 100%;
+  border-radius: 5px;
+  font-size: 15px;
+  background: gray;
+  border: 0px solid;
+  padding: 7px 0px 7px 20px;
+  color: #666;
+  background: #e6e6e6;
+}
+.login-container #login-form .field-container {
+  width: 100%;
+  margin: 10px;
+}
+.login-container #login-form #login-submit-button {
+  cursor: pointer;
+  border: 1px solid;
+  border-radius: 5px;
+  color: aliceblue;
+  background: #122335;
+  text-align: center;
+  width: 100%;
+  padding: 7px 0;
+}
+.login-container #login-form #login-submit-button:hover {
+  background-color: #1e4564;
+}
+.login-container #login-form #forgot-your-password-a {
+  font-size: 90%;
+}
+.login-container #login-form #sign-up-span {
+  font-size: 90%;
+}
+.login-container #login-form a {
+  color: #122335;
+}
+
+.signup-container {
+  height: 500px;
+}
+
+.forgot-password-container {
+  height: 300px;
+}
+.forgot-password-container span {
+  text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+  .login-container,
+.signup-container,
+.forgot-password-container,
+.login-form {
+    width: 100%;
+    height: 100%;
+  }
+
+  .login-container,
+.signup-container,
+.forgot-password-container {
+    border-radius: 0%;
+  }
+
+  .login-signup-page {
+    height: 100%;
+    width: 100%;
+  }
+}
 .hero {
   background-image: url("../hero_background.jpeg");
   /* Full height */
@@ -117,6 +245,203 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+}
+
+.event {
+  display: flex;
+  margin-bottom: 20px;
+}
+.event .date {
+  color: #6A6A6A;
+  margin-right: 40px;
+}
+.event .date .month {
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  position: relative;
+}
+.event .date .month:after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 20px;
+  background: #B0B0B0;
+  bottom: -10px;
+  left: 0;
+}
+.event .date .day {
+  margin-top: 10px;
+  font-size: 3rem;
+  font-weight: bold;
+}
+.event img {
+  margin-right: 40px;
+  height: 300;
+  widows: 400;
+}
+.event .details {
+  color: #B0B0B0;
+  position: relative;
+}
+.event .details .title {
+  color: #6A6A6A;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+.event .details .description {
+  margin: 20px 0;
+}
+.event .details .spacer {
+  height: 1px;
+  width: 100%;
+  box-shadow: 0px 1px 1px 0px #B0B0B0;
+}
+.event .details .goto {
+  position: absolute;
+  color: #6A6A6A;
+  text-decoration: none;
+  font-size: 1.2rem;
+  bottom: 0;
+}
+.event .tags {
+  display: flex;
+  margin-top: 20px;
+}
+.event .tags .tag {
+  background-color: #122335;
+  color: #fff;
+  padding: 5px 20px;
+  border-radius: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.bottom-spacer {
+  height: 1px;
+  width: 100%;
+  margin: 40px 0;
+  box-shadow: 0px 1px 1px 0px #B0B0B0;
+}
+
+.sidenav {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  overflow-x: hidden;
+  padding: 40px 20px;
+}
+.sidenav .title {
+  padding: 0 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.sidenav a {
+  text-decoration: none;
+  font-size: 15px;
+  color: #818181;
+  display: block;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+.sidenav a i {
+  margin-right: 20px;
+}
+.sidenav a:hover {
+  color: #000;
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.25);
+}
+
+.top-nav {
+  background-color: #FCFDFE;
+  width: 100%;
+  margin-top: -20px;
+  margin-bottom: 20px;
+  padding: 20px 0;
+  color: #404043;
+}
+.top-nav .container {
+  display: flex;
+  justify-content: space-between;
+}
+.top-nav .user {
+  display: flex;
+  color: #B2B2B2;
+  align-items: center;
+  justify-content: center;
+}
+.top-nav .user img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  margin: 0 20px;
+  box-shadow: 0px 1px 15px 2px #21BBFF;
+}
+
+table {
+  width: 100%;
+  text-align: left;
+}
+table thead {
+  background-color: #fff;
+  border-radius: 10px;
+}
+table thead th {
+  padding: 20px 20px;
+}
+table tbody tr {
+  background-color: #fff;
+}
+table tbody tr:nth-child(2n) {
+  background-color: #F8F8F8;
+}
+table tbody td {
+  padding: 10px 20px;
+}
+
+#admin-zone .page-title {
+  font-weight: bold;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.button {
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 15px;
+}
+.button i {
+  margin-right: 5px;
+}
+.button.button-success {
+  background-color: #21D146;
+  color: #fff;
+}
+.button.button-icon {
+  padding: 0;
+  width: 30px;
+  height: 30px;
+}
+.button.button-icon i {
+  margin: 0;
+}
+.button.hover-info:hover {
+  background-color: #21BBFF;
+}
+.button.hover-danger:hover {
+  background-color: #FF6699;
+}
+
+.events {
+  margin: 100px 40px;
 }
 
 /*# sourceMappingURL=main.css.map */
