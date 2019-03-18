@@ -60,6 +60,7 @@ body {
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  transition: 0.5s;
 }
 
 .navbar-left {
@@ -68,6 +69,7 @@ body {
 }
 
 .navbar-right {
+  padding-bottom: 10px;
   color: white;
   border: none;
   background-color: transparent;
@@ -97,6 +99,45 @@ body {
   border: none;
   border-radius: 30px;
   background-color: #c2d0ff;
+}
+
+.navbar-scrolled {
+  z-index: 900;
+  transition: 0.5s;
+  background-color: #122335;
+  padding-top: 10px;
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.hero {
+  background-image: url("../hero_background.jpeg");
+  /* Full height */
+  height: 100vh;
+  width: auto;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  transition: 0.5s;
+}
+
+.hero-scrolled {
+  background-image: url("../hero_background.jpeg");
+  transition: 0.5s;
+  /* Full height */
+  height: 100vh;
+  width: auto;
+  opacity: 0.5;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 .footer {
@@ -208,18 +249,6 @@ body {
     width: 100%;
   }
 }
-.hero {
-  background-image: url("../hero_background.jpeg");
-  /* Full height */
-  height: 100vh;
-  width: auto;
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-}
-
 .event {
   display: flex;
   margin-bottom: 20px;
