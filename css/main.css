@@ -90,7 +90,9 @@ body {
   transition: 0.7s;
   padding: 15px 15px;
 }
-.navbar-list > li > a:hover, .navbar-list > li > a:active, .navbar-list > li > a:focus {
+.navbar-list > li > a:hover,
+.navbar-list > li > a:active,
+.navbar-list > li > a:focus {
   color: #121370;
   border: none;
   border-radius: 30px;
