@@ -23,7 +23,7 @@
 }
 
 .navbar {
-    padding-top: 10px;
+    padding: 10px 40px 0 40px;
     position: fixed;
     display: flex;
     flex-direction: row;
@@ -52,12 +52,14 @@
         float: right;
         display: block;
         >a {
-            font-weight: bold;
             text-decoration-line: none;
+            text-transform: uppercase;
             display: block;
-            color: white;
+            color: #f8f8ff;
             transition: 0.7s;
             padding: 15px 15px;
+            font-size: 15px;
+
         }
         >a:hover,
         >a:active,
@@ -179,7 +181,10 @@
 }
 
 .hero {
-    background-image: url("../hero_background.jpeg");
+    background:linear-gradient(
+        rgba(0, 0, 0, 0.4), 
+        rgba(0, 0, 0, 0.4)
+      ), url("../hero_background.jpeg");
     /* Full height */
     height: 100vh;
     width: auto;
@@ -188,6 +193,56 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .hero-content {
+        text-align: center;
+        color: #fff;
+
+        .title {
+            text-transform: uppercase;
+            font-size: 5rem;
+            letter-spacing: 20px;
+            margin-bottom: 50px;
+        }
+    
+        .description {
+            margin: 0 25%;
+            line-height: 1.5;
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+        
+        .dots {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center; 
+            width: 100%;
+            position: absolute;
+            margin-top: 10px;
+
+            .dot {
+                margin-top: 20px;
+                border-radius: 20px;
+                width: 10px;
+                height: 10px;
+                background-color: #fff;
+
+                &:nth-child(2) {
+                    opacity: 0.6;
+                }
+
+                &:nth-child(3) {
+                    opacity: 0.3;
+                }
+            }
+        }
+    }
+    
 }
 
 .event {
