@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .navbar {
     background-color: #666;
     padding: 30px 20px;
@@ -7,11 +8,79 @@
         background-color: blue;
         margin: 0 5px;
         padding: 30px 20px;
+=======
+@media screen and (min-width: 601px) {
+    .navbar-list {
+        > li {
+            padding-left: 10px;
+            padding-right: 20px;
+        > a {
+            font-size: 19px;
+        }
+    }
+    }
+  }
+  
+
+  @media screen and (max-width: 600px) {
+    .navbar-list {
+        > li {
+            padding-left: 0;
+            padding-right: 0;
+        > a {
+            font-size: 10px;
+        }
+>>>>>>> origin/master
     }
 }
+  }
 
-.main {
-    margin: 20px 0;
+.navbar {
+    padding-top: 10px;
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+.navbar-left {
+    display: flex;
+    flex-direction: row;
+}
+
+.navbar-right {
+    color: white;
+    border: none;
+    background-color: transparent;
+}
+
+    .navbar-list {
+        > ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+      
+      > li {
+          float: right;
+          display: block;
+        
+        > a {
+            font-weight: bold;
+            text-decoration-line: none;
+            display: block;
+            color: white;
+            transition: 0.7s;
+            padding: 15px 15px;
+          
+        }
+        > a:hover, > a:active, > a:focus {
+          color: rgb(18, 19, 112);
+          border: none;
+          border-radius: 30px;
+          background-color: rgb(194, 208, 255);
+        }
+    }
 }
 
 .footer {
@@ -138,4 +207,16 @@
         width: 100%;
     }
 
+.hero {
+    background-image: url("../hero_background.jpeg");
+
+    /* Full height */
+    height: 100vh; 
+    width: auto;
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
