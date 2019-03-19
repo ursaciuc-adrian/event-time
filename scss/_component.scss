@@ -23,12 +23,13 @@
 }
 
 .navbar {
-    padding: 10px 40px 0 40px;
+    padding-top: 10px 40px 0 40px;
     position: fixed;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
+    transition: 0.5s;
 }
 
 .navbar-left {
@@ -37,12 +38,15 @@
 }
 
 .navbar-right {
+    padding-bottom: 10px;
     color: white;
     border: none;
     background-color: transparent;
 }
 
 .navbar-list {
+	padding-top: 10px;
+	
     >ul {
         list-style-type: none;
         margin: 0;
@@ -53,14 +57,13 @@
         display: block;
         >a {
             text-decoration-line: none;
-            text-transform: uppercase;
             display: block;
-            color: #f8f8ff;
-            transition: 0.7s;
+            color: white;
+			transition: 0.7s;
+			text-transform: uppercase;
             padding: 15px 15px;
-            font-size: 15px;
-
-        }
+		}
+		
         >a:hover,
         >a:active,
         >a:focus {
@@ -72,9 +75,75 @@
     }
 }
 
+.navbar-scrolled {
+    z-index: 900;
+    transition: 0.5s;
+    background-color: #122335;
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.hero {
+    background-image: url("../hero_background.jpeg");
+    /* Full height */
+    height: 100vh;
+    width: auto;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    transition: 0.5s;
+}
+
+.hero-scrolled {
+    background-image: url("../hero_background.jpeg");
+    transition: 0.5s;
+    /* Full height */
+    height: 100vh;
+    width: auto;
+    opacity: 0.5;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
 .footer {
-    background-color: #666;
-    height: 100px;
+    background: #122335;
+    height: 70px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: whitesmoke;
+    #footer-left {
+        margin-left: 30px;
+    }
+    #footer-middle {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        #footer-logo {
+            height: 25px;
+            width: 25px;
+            border-radius: 50%;
+            margin: 0px 3px;
+        }
+    }
+    #footer-right {
+        margin-right: 30px;
+        a {
+            color: whitesmoke;
+            text-decoration: none;
+        }
+    }
 }
 
 .login-signup-page {
@@ -150,6 +219,59 @@
     }
 }
 
+.hero {
+    background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../hero_background.jpeg");
+    /* Full height */
+    height: 100vh;
+    width: auto;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .hero-content {
+        text-align: center;
+        color: #fff;
+        .title {
+            text-transform: uppercase;
+            font-size: 5rem;
+            letter-spacing: 20px;
+            margin-bottom: 50px;
+        }
+        .description {
+            margin: 0 25%;
+            line-height: 1.5;
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+        .dots {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            position: absolute;
+            margin-top: 10px;
+            .dot {
+                margin-top: 20px;
+                border-radius: 20px;
+                width: 10px;
+                height: 10px;
+                background-color: #fff;
+                &:nth-child(2) {
+                    opacity: 0.6;
+                }
+                &:nth-child(3) {
+                    opacity: 0.3;
+                }
+            }
+        }
+    }
+}
+
 .signup-container {
     height: 500px;
 }
@@ -161,7 +283,7 @@
     }
 }
 
-@media screen and (max-width:600px) {
+@media screen and (max-width: 600px) {
     .login-container,
     .signup-container,
     .forgot-password-container,
@@ -178,144 +300,70 @@
         height: 100%;
         width: 100%;
     }
-}
-
-.hero {
-    background:linear-gradient(
-        rgba(0, 0, 0, 0.4), 
-        rgba(0, 0, 0, 0.4)
-      ), url("../hero_background.jpeg");
-    /* Full height */
-    height: 100vh;
-    width: auto;
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .hero-content {
-        text-align: center;
-        color: #fff;
-
-        .title {
-            text-transform: uppercase;
-            font-size: 5rem;
-            letter-spacing: 20px;
-            margin-bottom: 50px;
-        }
-    
-        .description {
-            margin: 0 25%;
-            line-height: 1.5;
-            font-size: 1.2rem;
-            font-style: italic;
-        }
-        
-        .dots {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center; 
-            width: 100%;
-            position: absolute;
-            margin-top: 10px;
-
-            .dot {
-                margin-top: 20px;
-                border-radius: 20px;
-                width: 10px;
-                height: 10px;
-                background-color: #fff;
-
-                &:nth-child(2) {
-                    opacity: 0.6;
-                }
-
-                &:nth-child(3) {
-                    opacity: 0.3;
-                }
-            }
-        }
+    .footer {
+        width: 100%;
     }
-    
 }
 
 .event {
     display: flex;
     margin-bottom: 20px;
-
     .date {
-        color: #6A6A6A;
+        color: #6a6a6a;
         margin-right: 40px;
-
         .month {
             text-transform: uppercase;
             font-size: 1.5rem;
             position: relative;
-
             &:after {
-                content: '';
+                content: "";
                 position: absolute;
                 height: 2px;
                 width: 20px;
-                background: #B0B0B0;
+                background: #b0b0b0;
                 bottom: -10px;
                 left: 0;
             }
         }
-
         .day {
             margin-top: 10px;
             font-size: 3rem;
             font-weight: bold;
         }
     }
-
     img {
         margin-right: 40px;
         height: 300;
         widows: 400;
     }
-
     .details {
-        color: #B0B0B0;
+        color: #b0b0b0;
         position: relative;
-
         .title {
-            color: #6A6A6A;
+            color: #6a6a6a;
             font-size: 2rem;
             margin-bottom: 10px;
             font-weight: 500;
         }
-
         .description {
             margin: 20px 0;
         }
-
         .spacer {
             height: 1px;
             width: 100%;
-            box-shadow: 0px 1px 1px 0px #B0B0B0;
+            box-shadow: 0px 1px 1px 0px #b0b0b0;
         }
-
         .goto {
             position: absolute;
-            color: #6A6A6A;
+            color: #6a6a6a;
             text-decoration: none;
             font-size: 1.2rem;
             bottom: 0;
         }
     }
-
     .tags {
         display: flex;
         margin-top: 20px;
-
         .tag {
             background-color: #122335;
             color: #fff;
@@ -324,14 +372,14 @@
             margin-right: 10px;
             cursor: pointer;
         }
-    }   
+    }
 }
 
 .bottom-spacer {
     height: 1px;
     width: 100%;
     margin: 40px 0;
-    box-shadow: 0px 1px 1px 0px #B0B0B0;
+    box-shadow: 0px 1px 1px 0px #b0b0b0;
 }
 
 .sidenav {
@@ -344,13 +392,11 @@
     background-color: #fff;
     overflow-x: hidden;
     padding: 40px 20px;
-
     .title {
         padding: 0 20px;
         font-size: 1.2rem;
         font-weight: bold;
     }
-
     a {
         text-decoration: none;
         font-size: 15px;
@@ -359,12 +405,10 @@
         margin-top: 20px;
         padding: 20px;
         border-radius: 10px;
-        transition: all .2s ease;
-
+        transition: all 0.2s ease;
         i {
             margin-right: 20px;
         }
-
         &:hover {
             color: #000;
             box-shadow: 0 0px 10px rgba(0, 0, 0, 0.25);
@@ -373,30 +417,27 @@
 }
 
 .top-nav {
-    background-color: #FCFDFE;
+    background-color: #fcfdfe;
     width: 100%;
     margin-top: -20px;
     margin-bottom: 20px;
     padding: 20px 0;
     color: #404043;
-
     .container {
         display: flex;
         justify-content: space-between;
     }
-
     .user {
         display: flex;
-        color: #B2B2B2;
+        color: #b2b2b2;
         align-items: center;
         justify-content: center;
-
         img {
             width: 30px;
             height: 30px;
             border-radius: 50px;
             margin: 0 20px;
-            box-shadow: 0px 1px 15px 2px #21BBFF;
+            box-shadow: 0px 1px 15px 2px #21bbff;
         }
     }
 }
@@ -404,26 +445,20 @@
 table {
     width: 100%;
     text-align: left;
-
     thead {
         background-color: #fff;
         border-radius: 10px;
-
         th {
             padding: 20px 20px;
         }
     }
-
     tbody {
         tr {
             background-color: #fff;
-
             &:nth-child(2n) {
-                background-color: #F8F8F8;
+                background-color: #f8f8f8;
             }
         }
-        
-
         td {
             padding: 10px 20px;
         }
@@ -444,35 +479,29 @@ table {
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 15px;
-
     i {
         margin-right: 5px;
     }
-
     &.button-success {
-        background-color: #21D146;
+        background-color: #21d146;
         color: #fff;
     }
-
     &.button-icon {
         padding: 0;
         width: 30px;
         height: 30px;
-
         i {
             margin: 0;
         }
     }
-
     &.hover-info {
         &:hover {
-            background-color: #21BBFF;
+            background-color: #21bbff;
         }
     }
-
     &.hover-danger {
         &:hover {
-            background-color: #FF6699;
+            background-color: #ff6699;
         }
     }
 }
