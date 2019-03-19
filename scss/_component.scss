@@ -3,6 +3,7 @@
     > li {
       padding-left: 10px;
       padding-right: 20px;
+
       > a {
         font-size: 19px;
       }
@@ -15,6 +16,7 @@
     > li {
       padding-left: 0;
       padding-right: 0;
+
       > a {
         font-size: 10px;
       }
@@ -48,9 +50,11 @@
     margin: 0;
     padding: 0;
   }
+
   > li {
     float: right;
     display: block;
+
     > a {
       font-weight: bold;
       text-decoration-line: none;
@@ -59,6 +63,7 @@
       transition: 0.7s;
       padding: 15px 15px;
     }
+
     > a:hover,
     > a:active,
     > a:focus {
@@ -77,17 +82,17 @@
 
 .login-signup-page {
   background-image: url("../images/mountains.jpeg");
-  background-size: cover;
   background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 .login-container {
   position: absolute;
-  margin: auto;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background: white;
   height: 400px;
   width: 500px;
@@ -98,15 +103,18 @@
   border: 0px solid black;
   border-radius: 5px;
   box-shadow: -2px 0px 100px -25px rgba(0, 0, 0, 0.49);
+
   #login-form {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 70%;
+
     h1 {
       margin: 10px;
       text-align: center;
     }
+
     input {
       outline: none !important;
       transition: 0.5s;
@@ -119,10 +127,12 @@
       color: #666;
       background: #e6e6e6;
     }
+
     .field-container {
       width: 100%;
       margin: 10px;
     }
+
     #login-submit-button {
       cursor: pointer;
       border: 1px solid;
@@ -133,15 +143,19 @@
       width: 100%;
       padding: 7px 0;
     }
+
     #login-submit-button:hover {
       background-color: #1e4564;
     }
+
     #forgot-your-password-a {
       font-size: 90%;
     }
+
     #sign-up-span {
       font-size: 90%;
     }
+
     a {
       color: #122335;
     }
@@ -154,6 +168,7 @@
 
 .forgot-password-container {
   height: 300px;
+
   span {
     text-align: center;
   }
@@ -161,69 +176,98 @@
 
 .subscribe-container {
   height: 500px;
-  width: 550px;
+  width: 600px;
 
   h1 {
     margin: 20px;
   }
 
-  .categories-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin: 20px;
+  #subscribe-form {
+    text-align: center;
 
-    div {
-      input[type="checkbox"] {
-        display: none;
-      }
+    #subscribe-button {
+      cursor: pointer;
+      font-size: 20px;
+      border: 1px solid;
+      border-radius: 5px;
+      color: aliceblue;
+      background: #122335;
+      text-align: center;
+      width: 30%;
+      padding: 7px 0;
+    }
 
-      label {
-        border: 1px solid #fff;
-        padding: 10px;
-        display: block;
-        position: relative;
-        cursor: pointer;
-      }
+    .categories-container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 20px;
 
-      label::before {
-        top: -5px;
-        left: -5px;
-        width: 25px;
-        height: 25px;
-        background-color: white;
-        color: white;
-        content: "";
-        display: block;
-        border-radius: 50%;
-        border: 1px solid grey;
-        position: absolute;
-        text-align: center;
-        transition-duration: 0.5s;
-        transform: scale(0);
-      }
+      div {
+        input[type="checkbox"] {
+          display: none;
+        }
 
-      label img {
-        height: 100px;
-        width: 100px;
-        transition-duration: 0.3s;
-        transform-origin: 50% 50%;
-      }
+        label {
+          border: 1px solid #fff;
+          border-radius: 5px;
+          padding: 7px;
+          display: block;
+          position: relative;
+          cursor: pointer;
+          margin: 5px;
 
-      :checked + label {
-        border-color: #122335;
-      }
+          span {
+            position: absolute;
+            bottom: 15%;
+            right: 11%;
+            color: white;
+            font-size: 70%;
+          }
+        }
 
-      :checked + label::before {
-        content: "✓";
-        background-color: #122335;
-        transform: scale(1);
-      }
+        label::before {
+          top: -5px;
+          left: -5px;
+          width: 25px;
+          height: 25px;
+          background-color: white;
+          color: white;
+          content: "";
+          display: block;
+          border-radius: 50%;
+          border: 1px solid whitesmoke;
+          position: absolute;
+          text-align: center;
+          transition-duration: 0.5s;
+          transform: scale(0);
+        }
 
-      :checked + label img {
-        transform: scale(0.9);
-        box-shadow: 0 0 5px rgb(67, 134, 134);
-        z-index: -1;
+        label img {
+          border-radius: 5px;
+          height: 100px;
+          width: 100px;
+          transition-duration: 0.3s;
+          transform-origin: 50% 50%;
+        }
+
+        :checked + label {
+          border-color: #122335;
+        }
+
+        :checked + label::before {
+          content: "✓";
+          background-color: #122335;
+          transform: scale(1);
+          z-index: 1;
+        }
+
+        :checked + label img {
+          transform: scale(0.9);
+          box-shadow: 0 0 5px rgb(67, 134, 134);
+          z-index: -1;
+        }
       }
     }
   }
@@ -233,19 +277,16 @@
   .login-container,
   .signup-container,
   .forgot-password-container,
-  .subscribe-container,
-  .login-form {
+  .subscribe-container {
     width: 100%;
     height: 100%;
   }
+
   .login-container,
   .signup-container,
-  .forgot-password-container {
+  .forgot-password-container,
+  .subscribe-container {
     border-radius: 0%;
-  }
-  .login-signup-page {
-    height: 100%;
-    width: 100%;
   }
 }
 
