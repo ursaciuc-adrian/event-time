@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700");
 * {
   box-sizing: border-box;
@@ -81,7 +82,7 @@ body {
   }
 }
 .navbar {
-  padding-top: 10px;
+  padding-top: 10px 40px 0 40px;
   position: fixed;
   display: flex;
   flex-direction: row;
@@ -102,6 +103,9 @@ body {
   background-color: transparent;
 }
 
+.navbar-list {
+  padding-top: 10px;
+}
 .navbar-list > ul {
   list-style-type: none;
   margin: 0;
@@ -112,11 +116,11 @@ body {
   display: block;
 }
 .navbar-list > li > a {
-  font-weight: bold;
   text-decoration-line: none;
   display: block;
   color: white;
   transition: 0.7s;
+  text-transform: uppercase;
   padding: 15px 15px;
 }
 .navbar-list > li > a:hover,
@@ -132,22 +136,11 @@ body {
   z-index: 900;
   transition: 0.5s;
   background-color: #122335;
-  padding-top: 10px;
   position: fixed;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-}
-
-.hero {
-  background-image: url("../images/mountains.jpeg");
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  height: 100vh;
-  transition: 0.5s;
 }
 
 .hero-scrolled {
@@ -158,7 +151,7 @@ body {
   background-size: cover;
   background-attachment: fixed;
   height: 100vh;
-  transition: 0.5s;
+  transition: 0.6s;
 }
 
 .footer {
@@ -267,6 +260,57 @@ body {
   color: #122335;
 }
 
+.hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../images/mountains.jpeg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100vh;
+  transition: 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero .hero-content {
+  text-align: center;
+  color: #fff;
+}
+.hero .hero-content .title {
+  text-transform: uppercase;
+  font-size: 5rem;
+  letter-spacing: 20px;
+  margin-bottom: 50px;
+}
+.hero .hero-content .description {
+  margin: 0 25%;
+  line-height: 1.5;
+  font-size: 1.2rem;
+  font-style: italic;
+}
+.hero .hero-content .dots {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: absolute;
+  margin-top: 10px;
+}
+.hero .hero-content .dots .dot {
+  margin-top: 20px;
+  border-radius: 20px;
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+}
+.hero .hero-content .dots .dot:nth-child(2) {
+  opacity: 0.6;
+}
+.hero .hero-content .dots .dot:nth-child(3) {
+  opacity: 0.3;
+}
+
 .signup-container {
   height: 500px;
 }
@@ -278,6 +322,107 @@ body {
   text-align: center;
 }
 
+.subscribe-container {
+  height: 500px;
+  width: 600px;
+}
+.subscribe-container h1 {
+  margin: 20px;
+}
+.subscribe-container #subscribe-form {
+  text-align: center;
+}
+.subscribe-container #subscribe-form #subscribe-button {
+  cursor: pointer;
+  font-size: 20px;
+  border: 1px solid;
+  border-radius: 5px;
+  color: aliceblue;
+  background: #122335;
+  text-align: center;
+  width: 30%;
+  padding: 7px 0;
+}
+.subscribe-container .categories-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px;
+}
+.subscribe-container .categories-container div input[type=checkbox] {
+  display: none;
+}
+.subscribe-container .categories-container div label {
+  border: 1px solid #fff;
+  border-radius: 5px;
+  padding: 7px;
+  display: block;
+  position: relative;
+  cursor: pointer;
+  margin: 5px;
+}
+.subscribe-container .categories-container div label span {
+  position: absolute;
+  bottom: 15%;
+  right: 11%;
+  color: white;
+  font-size: 70%;
+}
+.subscribe-container .categories-container div label::before {
+  top: -5px;
+  left: -5px;
+  width: 25px;
+  height: 25px;
+  background-color: white;
+  color: white;
+  content: "";
+  display: block;
+  border-radius: 50%;
+  border: 1px solid whitesmoke;
+  position: absolute;
+  text-align: center;
+  transition-duration: 0.5s;
+  transform: scale(0);
+}
+.subscribe-container .categories-container div label img {
+  border-radius: 5px;
+  height: 100px;
+  width: 100px;
+  transition-duration: 0.3s;
+  transform-origin: 50% 50%;
+}
+.subscribe-container .categories-container div :checked + label {
+  border-color: #122335;
+}
+.subscribe-container .categories-container div :checked + label::before {
+  content: "✓";
+  background-color: #122335;
+  transform: scale(1);
+  z-index: 1;
+}
+.subscribe-container .categories-container div :checked + label img {
+  transform: scale(0.9);
+  box-shadow: 0 0 5px #438686;
+  z-index: -1;
+}
+
+@media screen and (max-width: 600px) {
+  .login-container,
+.signup-container,
+.forgot-password-container,
+.subscribe-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  .login-container,
+.signup-container,
+.forgot-password-container,
+.subscribe-container {
+    border-radius: 0%;
+  }
+}
 @media screen and (max-width: 600px) {
   .login-container,
 .signup-container,
@@ -425,7 +570,7 @@ body {
 }
 
 .top-nav {
-  background-color: #fcfdfe;
+  background-color: #FCFDFE;
   width: 100%;
   margin-bottom: 20px;
   padding: 20px 0;
@@ -452,7 +597,7 @@ body {
   height: 30px;
   border-radius: 50px;
   margin: 0 20px;
-  box-shadow: 0px 1px 15px 2px #21bbff;
+  box-shadow: 0px 1px 15px 2px #21BBFF;
 }
 
 table {
