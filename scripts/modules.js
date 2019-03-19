@@ -20,3 +20,13 @@ function httpGetAsync(url, module, callback) {
 	xmlHttp.open("GET", url, true);
 	xmlHttp.send(null);
 }
+
+window.onscroll = function() {myFunction()};
+
+function myFunction() {
+	if (document.body.scrollTop > 700 || document.documentElement.scrollTop > 700) {
+	document.getElementById("nav-scroll").className = "navbar-scrolled";
+  } else {
+	document.getElementById("nav-scroll").className = "navbar";
+  }
+}

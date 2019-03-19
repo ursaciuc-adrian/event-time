@@ -61,6 +61,7 @@ body {
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  transition: 0.5s;
 }
 
 .navbar-left {
@@ -69,6 +70,7 @@ body {
 }
 
 .navbar-right {
+  padding-bottom: 10px;
   color: white;
   border: none;
   background-color: transparent;
@@ -100,9 +102,76 @@ body {
   background-color: #c2d0ff;
 }
 
+.navbar-scrolled {
+  z-index: 900;
+  transition: 0.5s;
+  background-color: #122335;
+  padding-top: 10px;
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.hero {
+  background-image: url("../hero_background.jpeg");
+  /* Full height */
+  height: 100vh;
+  width: auto;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  transition: 0.5s;
+}
+
+.hero-scrolled {
+  background-image: url("../hero_background.jpeg");
+  transition: 0.5s;
+  /* Full height */
+  height: 100vh;
+  width: auto;
+  opacity: 0.5;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
 .footer {
-  background-color: #666;
-  height: 100px;
+  background: #122335;
+  height: 70px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: whitesmoke;
+}
+.footer #footer-left {
+  margin-left: 30px;
+}
+.footer #footer-middle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer #footer-middle #footer-logo {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  margin: 0px 3px;
+}
+.footer #footer-right {
+  margin-right: 30px;
+}
+.footer #footer-right a {
+  color: whitesmoke;
+  text-decoration: none;
 }
 
 .login-signup-page {
@@ -210,17 +279,17 @@ body {
   width: 30%;
   padding: 7px 0;
 }
-.subscribe-container #subscribe-form .categories-container {
+.subscribe-container .categories-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   margin: 20px;
 }
-.subscribe-container #subscribe-form .categories-container div input[type=checkbox] {
+.subscribe-container .categories-container div input[type=checkbox] {
   display: none;
 }
-.subscribe-container #subscribe-form .categories-container div label {
+.subscribe-container .categories-container div label {
   border: 1px solid #fff;
   border-radius: 5px;
   padding: 7px;
@@ -229,14 +298,14 @@ body {
   cursor: pointer;
   margin: 5px;
 }
-.subscribe-container #subscribe-form .categories-container div label span {
+.subscribe-container .categories-container div label span {
   position: absolute;
   bottom: 15%;
   right: 11%;
   color: white;
   font-size: 70%;
 }
-.subscribe-container #subscribe-form .categories-container div label::before {
+.subscribe-container .categories-container div label::before {
   top: -5px;
   left: -5px;
   width: 25px;
@@ -252,23 +321,23 @@ body {
   transition-duration: 0.5s;
   transform: scale(0);
 }
-.subscribe-container #subscribe-form .categories-container div label img {
+.subscribe-container .categories-container div label img {
   border-radius: 5px;
   height: 100px;
   width: 100px;
   transition-duration: 0.3s;
   transform-origin: 50% 50%;
 }
-.subscribe-container #subscribe-form .categories-container div :checked + label {
+.subscribe-container .categories-container div :checked + label {
   border-color: #122335;
 }
-.subscribe-container #subscribe-form .categories-container div :checked + label::before {
+.subscribe-container .categories-container div :checked + label::before {
   content: "✓";
   background-color: #122335;
   transform: scale(1);
   z-index: 1;
 }
-.subscribe-container #subscribe-form .categories-container div :checked + label img {
+.subscribe-container .categories-container div :checked + label img {
   transform: scale(0.9);
   box-shadow: 0 0 5px #438686;
   z-index: -1;
