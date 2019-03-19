@@ -30,6 +30,15 @@
             background-color: #ff6699;
         }
     }
+
+    &.button-primary {
+        background-color: #122335;
+        color: #fff;
+    }
+
+    &.button-large {
+        padding: 20px 40px;
+    }
 }
 
 
