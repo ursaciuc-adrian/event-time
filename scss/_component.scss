@@ -4,6 +4,7 @@
     }
 
     .sidenav {
+        width: 250px;
         left: 0 !important;
     }
 
@@ -24,6 +25,7 @@
     }
 
     .sidenav {
+        width: 50%;
         left: -250px;
     }
 
@@ -322,7 +324,6 @@
     z-index: 1;
     position: fixed;
     height: 100%;
-    width: 250px;
     top: 0;
     background-color: #fff;
     overflow-x: hidden;
@@ -376,6 +377,7 @@
     color: #404043;
 
     .container {
+        width: 100%;
         display: flex;
         justify-content: space-between;
 
