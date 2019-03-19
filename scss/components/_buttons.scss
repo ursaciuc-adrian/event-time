@@ -1,0 +1,35 @@
+
+.button {
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 15px;
+    i {
+        margin-right: 5px;
+    }
+    &.button-success {
+        background-color: #21d146;
+        color: #fff;
+    }
+    &.button-icon {
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        i {
+            margin: 0;
+        }
+    }
+    &.hover-info {
+        &:hover {
+            background-color: #21bbff;
+        }
+    }
+    &.hover-danger {
+        &:hover {
+            background-color: #ff6699;
+        }
+    }
+}
+
+
