@@ -31,6 +31,7 @@
     >li {
         float: right;
         display: block;
+        
         >a {
             text-decoration-line: none;
             display: block;
@@ -38,15 +39,15 @@
 			transition: 0.7s;
 			text-transform: uppercase;
             padding: 15px 15px;
+            letter-spacing: 3px;
 		}
 		
         >a:hover,
         >a:active,
         >a:focus {
-            color: rgb(18, 19, 112);
             border: none;
             border-radius: 30px;
-            background-color: rgb(194, 208, 255);
+            background-color: rgba(0, 0, 0, .2);
         }
     }
 }
