@@ -21,12 +21,26 @@ function httpGetAsync(url, module, callback) {
 	xmlHttp.send(null);
 }
 
-window.onscroll = function() {myFunction()};
+window.onscroll = function() {changeToSolid()};
 
-function myFunction() {
+function changeToSolid() {
 	if (document.body.scrollTop > 700 || document.documentElement.scrollTop > 700) {
 	document.getElementById("nav-scroll").className = "navbar-scrolled";
   } else {
 	document.getElementById("nav-scroll").className = "navbar";
   }
 }
+
+function showNav() {
+	document.getElementsByClassName("sidenav")[0].style.left='0px';
+}
+
+function handleMousePos(event) {
+	var mouseClickWidth = event.clientX;
+	if(mouseClickWidth>=270){
+				document.getElementsByClassName("sidenav")[0].style.left='-270px'
+				
+	}
+}
+
+document.addEventListener("click", handleMousePos);
