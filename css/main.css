@@ -54,7 +54,7 @@ body {
   }
 }
 .navbar {
-  padding-top: 10px;
+  padding-top: 10px 40px 0 40px;
   position: fixed;
   display: flex;
   flex-direction: row;
@@ -75,6 +75,9 @@ body {
   background-color: transparent;
 }
 
+.navbar-list {
+  padding-top: 10px;
+}
 .navbar-list > ul {
   list-style-type: none;
   margin: 0;
@@ -85,11 +88,11 @@ body {
   display: block;
 }
 .navbar-list > li > a {
-  font-weight: bold;
   text-decoration-line: none;
   display: block;
   color: white;
   transition: 0.7s;
+  text-transform: uppercase;
   padding: 15px 15px;
 }
 .navbar-list > li > a:hover,
@@ -105,7 +108,6 @@ body {
   z-index: 900;
   transition: 0.5s;
   background-color: #122335;
-  padding-top: 10px;
   position: fixed;
   display: flex;
   flex-direction: row;
@@ -244,6 +246,59 @@ body {
 }
 .login-container #login-form a {
   color: #122335;
+}
+
+.hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../hero_background.jpeg");
+  /* Full height */
+  height: 100vh;
+  width: auto;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero .hero-content {
+  text-align: center;
+  color: #fff;
+}
+.hero .hero-content .title {
+  text-transform: uppercase;
+  font-size: 5rem;
+  letter-spacing: 20px;
+  margin-bottom: 50px;
+}
+.hero .hero-content .description {
+  margin: 0 25%;
+  line-height: 1.5;
+  font-size: 1.2rem;
+  font-style: italic;
+}
+.hero .hero-content .dots {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: absolute;
+  margin-top: 10px;
+}
+.hero .hero-content .dots .dot {
+  margin-top: 20px;
+  border-radius: 20px;
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+}
+.hero .hero-content .dots .dot:nth-child(2) {
+  opacity: 0.6;
+}
+.hero .hero-content .dots .dot:nth-child(3) {
+  opacity: 0.3;
 }
 
 .signup-container {
