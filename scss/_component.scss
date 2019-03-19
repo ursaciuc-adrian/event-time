@@ -1,4 +1,13 @@
 @media screen and (min-width: 601px) {
+    .mobile-nav-button {
+        display: none;
+    }
+
+    .sidenav {
+        width: 250px;
+        left: 0 !important;
+    }
+
     .navbar-list {
         >li {
             padding-left: 10px;
@@ -11,6 +20,15 @@
 }
 
 @media screen and (max-width: 600px) {
+    .mobile-nav-button {
+        display: inline-block;
+    }
+
+    .sidenav {
+        width: 50%;
+        left: -250px;
+    }
+
     .navbar-list {
         >li {
             padding-left: 0;
@@ -85,32 +103,16 @@
     justify-content: space-between;
     width: 100%;
 }
-
-.hero {
-    background-image: url("../hero_background.jpeg");
-    /* Full height */
-    height: 100vh;
-    width: auto;
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    transition: 0.5s;
-}
-
 .hero-scrolled {
-    background-image: url("../hero_background.jpeg");
-    transition: 0.5s;
-    /* Full height */
-    height: 100vh;
-    width: auto;
+    background-image: url("../images/mountains.jpeg");
     opacity: 0.5;
-    /* Center and scale the image nicely */
-    background-position: center;
+    background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    height: 100vh;
+	transition: 0.6s;
+	
 }
 
 .footer {
@@ -221,15 +223,14 @@
 }
 
 .hero {
-    background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../hero_background.jpeg");
-    /* Full height */
-    height: 100vh;
-    width: auto;
-    /* Center and scale the image nicely */
-    background-position: center;
+    background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../images/mountains.jpeg");
+    background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    height: 100vh;
+    transition: 0.5s;
+	
     display: flex;
     align-items: center;
     justify-content: center;
@@ -400,18 +401,6 @@
   }
 }
 
-.hero {
-  background-image: url("../hero_background.jpeg");
-  /* Full height */
-  height: 100vh;
-  width: auto;
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-}
-
 @media screen and (max-width: 600px) {
     .login-container,
     .signup-container,
@@ -512,15 +501,15 @@
 }
 
 .sidenav {
-    height: 100%;
-    width: 250px;
-    position: fixed;
     z-index: 1;
+    position: fixed;
+    height: 100%;
     top: 0;
-    left: 0;
     background-color: #fff;
     overflow-x: hidden;
     padding: 40px 20px;
+    transition: 0.5s;
+
     .title {
         padding: 0 20px;
         font-size: 1.2rem;
@@ -534,10 +523,12 @@
         margin-top: 20px;
         padding: 20px;
         border-radius: 10px;
-        transition: all 0.2s ease;
+        transition: all .2s ease;
+
         i {
             margin-right: 20px;
         }
+
         &:hover {
             color: #000;
             box-shadow: 0 0px 10px rgba(0, 0, 0, 0.25);
@@ -545,31 +536,53 @@
     }
 }
 
+.mobile-nav-button {
+    border: solid rgb(235, 235, 235);
+    border-radius: 30px;
+    font-size: 1.5em;
+    background-color: transparent;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    outline: none !important;
+}
+
 .top-nav {
-    background-color: #fcfdfe;
+    background-color: #FCFDFE;
     width: 100%;
-    margin-top: -20px;
     margin-bottom: 20px;
     padding: 20px 0;
     color: #404043;
+
     .container {
+        width: 100%;
         display: flex;
         justify-content: space-between;
+
+        > .left-side {
+            display: flex;
+            flex-direction: row;
+        }
     }
+
     .user {
         display: flex;
-        color: #b2b2b2;
+        align-content: flex-end;
+        color: #B2B2B2;
         align-items: center;
         justify-content: center;
+
         img {
             width: 30px;
             height: 30px;
             border-radius: 50px;
             margin: 0 20px;
-            box-shadow: 0px 1px 15px 2px #21bbff;
+            box-shadow: 0px 1px 15px 2px #21BBFF;
         }
     }
 }
+
 
 table {
     width: 100%;
@@ -596,6 +609,7 @@ table {
 
 #admin-zone {
     .page-title {
+        width: auto;
         font-weight: bold;
         font-size: 2rem;
         margin-bottom: 20px;

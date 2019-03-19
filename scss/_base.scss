@@ -1,3 +1,21 @@
+@media screen and (min-width: 601px) {
+    #admin-zone {
+        .main {
+            margin-right: 15px;
+            margin-left: 250px;
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #admin-zone {
+        .main {
+            width: 100%;
+            margin-left: 0px;
+        }
+    }
+}
+
 .container {
     padding: 0 40px;
 }
@@ -6,10 +24,6 @@
     min-width: 100%;
     min-height: 100%;
     background-color: #F2F4F8;
-
-    .main {
-        margin-left: 250px;
-    }
 }
 
 .space-top {
