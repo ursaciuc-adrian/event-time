@@ -1,0 +1,18 @@
+.request-container {
+    height: 350px;
+    width: 500px;
+
+    #login-form {
+
+        textarea {
+            border: 0px solid black;
+            margin: 0%;
+            width: 100%;
+            border-radius: 5px;
+            text-decoration: none;
+            padding: 7px 0px 7px 20px;
+            background: #e6e6e6;
+            color: #666;
+        }
+    }
+}
