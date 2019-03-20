@@ -1,99 +1,106 @@
-
 .subscribe-container {
-    height: 500px;
-    width: 600px;
-  
-    h1 {
-      margin: 20px;
-    }
-  
-    #subscribe-form {
+  height: 500px;
+  width: 600px;
+
+  h1 {
+    margin: 20px;
+  }
+
+  #subscribe-form {
+    text-align: center;
+
+    #subscribe-button {
+      cursor: pointer;
+      font-size: 20px;
+      border: 1px solid;
+      border-radius: 5px;
+      color: aliceblue;
+      background: #122335;
       text-align: center;
-  
-      #subscribe-button {
-        cursor: pointer;
-        font-size: 20px;
-        border: 1px solid;
-        border-radius: 5px;
-        color: aliceblue;
-        background: #122335;
-        text-align: center;
-        width: 30%;
-        padding: 7px 0;
-      }
+      width: 30%;
+      padding: 7px 0;
     }
-  
-    .categories-container {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin: 20px;
-  
-      div {
-        input[type="checkbox"] {
-          display: none;
-        }
-  
-        label {
-          border: 1px solid #fff;
-          border-radius: 5px;
-          padding: 7px;
-          display: block;
-          position: relative;
-          cursor: pointer;
-          margin: 5px;
-  
-          span {
-            position: absolute;
-            bottom: 15%;
-            right: 11%;
-            color: white;
-            font-size: 70%;
-          }
-        }
-  
-        label::before {
-          top: -5px;
-          left: -5px;
-          width: 25px;
-          height: 25px;
-          background-color: white;
-          color: white;
-          content: "";
-          display: block;
-          border-radius: 50%;
-          border: 1px solid whitesmoke;
+  }
+
+  .categories-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px;
+
+    div {
+      input[type="checkbox"] {
+        display: none;
+      }
+
+      label {
+        border: 1px solid #fff;
+        border-radius: 5px;
+        padding: 7px;
+        display: block;
+        position: relative;
+        cursor: pointer;
+        margin: 5px;
+
+        span {
           position: absolute;
-          text-align: center;
-          transition-duration: 0.5s;
-          transform: scale(0);
+          bottom: 15%;
+          right: 11%;
+          color: white;
+          font-size: 70%;
         }
-  
-        label img {
-          border-radius: 5px;
-          height: 100px;
-          width: 100px;
-          transition-duration: 0.3s;
-          transform-origin: 50% 50%;
-        }
-  
-        :checked + label {
-          border-color: #122335;
-        }
-  
-        :checked + label::before {
-          content: "✓";
-          background-color: #122335;
-          transform: scale(1);
-          z-index: 1;
-        }
-  
-        :checked + label img {
-          transform: scale(0.9);
-          box-shadow: 0 0 5px rgb(67, 134, 134);
-          z-index: -1;
-        }
+      }
+
+      label::before {
+        top: -5px;
+        left: -5px;
+        width: 25px;
+        height: 25px;
+        background-color: white;
+        color: white;
+        content: "";
+        display: block;
+        border-radius: 50%;
+        border: 1px solid whitesmoke;
+        position: absolute;
+        text-align: center;
+        transition-duration: 0.5s;
+        transform: scale(0);
+      }
+
+      label img {
+        border-radius: 5px;
+        height: 100px;
+        width: 100px;
+        transition-duration: 0.3s;
+        transform-origin: 50% 50%;
+      }
+
+      :checked+label {
+        border-color: #122335;
+      }
+
+      :checked+label::before {
+        content: "✓";
+        background-color: #122335;
+        transform: scale(1);
+        z-index: 1;
+      }
+
+      :checked+label img {
+        transform: scale(0.9);
+        box-shadow: 0 0 5px rgb(67, 134, 134);
+        z-index: -1;
       }
     }
   }
+}
+
+@media screen and (max-width:600px) {
+  .subscribe-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 0%;
+  }
+}

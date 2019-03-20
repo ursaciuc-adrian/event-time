@@ -1,8 +1,10 @@
-
 .login-signup-page {
-    background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../images/mountains.jpeg");
-    background-size: cover;
+    background-image: url("../images/mountains.jpeg");
     background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+
 }
 
 .login-container {
@@ -22,16 +24,19 @@
     border: 0px solid black;
     border-radius: 5px;
     box-shadow: -2px 0px 100px -25px rgba(0, 0, 0, 0.49);
+
     #login-form {
-		
+
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 70%;
+
         h1 {
             margin: 10px;
             text-align: center;
         }
+
         input {
             outline: none !important;
             transition: 0.5s;
@@ -44,10 +49,12 @@
             color: #666;
             background: #e6e6e6;
         }
+
         .field-container {
             width: 100%;
             margin: 10px;
         }
+
         #login-submit-button {
             cursor: pointer;
             border: 1px solid;
@@ -58,15 +65,19 @@
             width: 100%;
             padding: 7px 0;
         }
+
         #login-submit-button:hover {
             background-color: #1e4564;
         }
+
         #forgot-your-password-a {
             font-size: 90%;
         }
+
         #sign-up-span {
             font-size: 90%;
         }
+
         a {
             color: #122335;
         }
@@ -79,29 +90,14 @@
 
 .forgot-password-container {
     height: 300px;
+
     span {
         text-align: center;
     }
 }
 
 @media screen and (max-width: 600px) {
-  .login-container,
-  .signup-container,
-  .forgot-password-container,
-  .subscribe-container {
-    width: 100%;
-    height: 100%;
-  }
 
-  .login-container,
-  .signup-container,
-  .forgot-password-container,
-  .subscribe-container {
-    border-radius: 0%;
-  }
-}
-
-@media screen and (max-width: 600px) {
     .login-container,
     .signup-container,
     .forgot-password-container,
@@ -109,15 +105,18 @@
         width: 100%;
         height: 100%;
     }
+
     .login-container,
     .signup-container,
     .forgot-password-container {
         border-radius: 0%;
     }
+
     .login-signup-page {
         height: 100%;
         width: 100%;
     }
+
     .footer {
         width: 100%;
     }
