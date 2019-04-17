@@ -1,0 +1,1120 @@
+swagger: "2.0"
+info:
+  description: "Descriere event-time"
+  version: "1.0.0"
+  title: "Event Time"
+host: "event-time.com"
+basePath: "/v1"
+tags:
+- name: "event"
+  description: "Everything about your events"
+  
+- name: "user"
+  description: "Operations about user"
+  
+- name: "category"
+  description: "Everything about your categories"
+  
+- name: "tag"
+  description: "Everything about your tags"
+  
+- name: "invitation"
+  description: "Everything about your invitations"
+  
+- name: "changeRequest"
+  description: "Everything about your change requests"
+  
+- name: "notification"
+  description: "Everything about your notifications"
+  
+- name: "follower"
+  description: "Everything about your followers"
+  
+- name: "subscription"
+  description: "Everything about your subscriptions"
+  
+
+  
+schemes:
+- "https"
+- "http"
+paths:
+  /event:
+    post:
+      tags:
+      - "event"
+      summary: "Add a new event"
+      description: ""
+      operationId: "addEvent"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Event object that needs to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/Event"
+      responses:
+        405:
+          description: "Invalid input"
+          
+    put:
+      tags:
+      - "event"
+      summary: "Update an existing event"
+      description: ""
+      operationId: "updateEvent"
+      parameters:
+      - name: "eventId"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Event object that needs to be updated"
+        required: true
+        schema:
+          $ref: "#/definitions/Event"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Event not found"
+        405:
+          description: "Validation exception"
+        
+  /event/facebook/{eventId}:
+    get:
+      tags:
+      - "event"
+      summary: "Find event by ID on Facebook"
+      operationId: "getEventByIdOnFacebook"
+      parameters:
+      - name: "eventId"
+        in: "path"
+        description: "ID of event that needs to be fetched"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Event-Facebook"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Event not found"
+  
+  /event/eventbrite/{eventId}:
+    get:
+      tags:
+      - "event"
+      summary: "Find event by ID on Eventbrite"
+      operationId: "getEventByIdOnEventbrite"
+      parameters:
+      - name: "eventId"
+        in: "path"
+        description: "ID of event that needs to be fetched"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Event-Eventbrite"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Event not found"
+    
+  /event/{eventId}:
+    get:
+      tags:
+      - "event"
+      summary: "Find event by ID"
+      operationId: "getEventById"
+      parameters:
+      - name: "eventId"
+        in: "path"
+        description: "ID of event that needs to be fetched"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Event"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Event not found"
+          
+    delete:
+      tags:
+      - "event"
+      summary: "Delete event by ID"
+      operationId: "deleteEvent"
+      parameters:
+      - name: "eventId"
+        in: "path"
+        description: "ID of the event that needs to be deleted"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Event not found"
+          
+  /category:
+    post:
+      tags:
+      - "category"
+      summary: "Add a new category"
+      description: ""
+      operationId: "addCategory"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Category object that needs to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/Category"
+      responses:
+        405:
+          description: "Invalid input"
+          
+    put:
+      tags:
+      - "category"
+      summary: "Update an existing category"
+      description: ""
+      operationId: "updateCategory"
+      parameters:
+      - name: "categoryId"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Category object that needs to be updated"
+        required: true
+        schema:
+          $ref: "#/definitions/Category"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Category not found"
+        405:
+          description: "Validation exception"
+        
+  /category/{categoryId}:
+    get:
+      tags:
+      - "category"
+      summary: "Find category by ID"
+      operationId: "getCategoryById"
+      parameters:
+      - name: "categoryId"
+        in: "path"
+        description: "ID of category that needs to be fetched"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Category"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Category not found"
+          
+    delete:
+      tags:
+      - "category"
+      summary: "Delete category by ID"
+      operationId: "deleteCategory"
+      parameters:
+      - name: "categoryId"
+        in: "path"
+        description: "ID of the category that needs to be deleted"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Category not found"
+          
+  /tag:
+    post:
+      tags:
+      - "tag"
+      summary: "Add a new tag"
+      description: ""
+      operationId: "addTag"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Tag object that needs to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/Tag"
+      responses:
+        405:
+          description: "Invalid input"
+          
+    put:
+      tags:
+      - "tag"
+      summary: "Update an existing tag"
+      description: ""
+      operationId: "updateTag"
+      parameters:
+      - name: "tagId"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Tag object that needs to be updated"
+        required: true
+        schema:
+          $ref: "#/definitions/Tag"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Tag not found"
+        405:
+          description: "Validation exception"
+        
+  /tag/{tagId}:
+    get:
+      tags:
+      - "tag"
+      summary: "Find tag by ID"
+      operationId: "getTagById"
+      parameters:
+      - name: "tagId"
+        in: "path"
+        description: "ID of tag that needs to be fetched"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Tag"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Tag not found"
+          
+    delete:
+      tags:
+      - "tag"
+      summary: "Delete tag by ID"
+      operationId: "deleteTag"
+      parameters:
+      - name: "tagId"
+        in: "path"
+        description: "ID of the tag that needs to be deleted"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Tag not found"
+          
+  /invitation:
+    post:
+      tags:
+      - "invitation"
+      summary: "Add a new invitation"
+      description: ""
+      operationId: "addInvitation"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Invitation object that needs to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/Invitation"
+      responses:
+        405:
+          description: "Invalid input"
+          
+    put:
+      tags:
+      - "invitation"
+      summary: "Update an existing invitation"
+      description: ""
+      operationId: "updateInvitation"
+      parameters:
+      - name: "invitationId"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Invitation object that needs to be updated"
+        required: true
+        schema:
+          $ref: "#/definitions/Invitation"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Invitation not found"
+        405:
+          description: "Validation exception"
+        
+  /invitation/{invitationId}:
+    get:
+      tags:
+      - "invitation"
+      summary: "Find invitation by ID"
+      operationId: "getInvitationById"
+      parameters:
+      - name: "invitationId"
+        in: "path"
+        description: "ID of invitation that needs to be fetched"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Invitation"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Invitation not found"
+          
+    delete:
+      tags:
+      - "invitation"
+      summary: "Delete invitation by ID"
+      operationId: "deleteInvitation"
+      parameters:
+      - name: "invitationId"
+        in: "path"
+        description: "ID of the invitation that needs to be deleted"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Invitation not found"
+          
+  /changeRequest:
+    post:
+      tags:
+      - "changeRequest"
+      summary: "Add a new changeRequest"
+      description: ""
+      operationId: "addChangeRequest"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "ChangeRequest object that needs to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/ChangeRequest"
+      responses:
+        405:
+          description: "Invalid input"
+          
+    put:
+      tags:
+      - "changeRequest"
+      summary: "Update an existing changeRequest"
+      description: ""
+      operationId: "updateChangeRequest"
+      parameters:
+      - name: "changeRequestId"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "ChangeRequest object that needs to be updated"
+        required: true
+        schema:
+          $ref: "#/definitions/ChangeRequest"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "ChangeRequest not found"
+        405:
+          description: "Validation exception"
+        
+  /changeRequest/{changeRequestId}:
+    get:
+      tags:
+      - "changeRequest"
+      summary: "Find changeRequest by ID"
+      operationId: "getChangeRequestById"
+      parameters:
+      - name: "changeRequestId"
+        in: "path"
+        description: "ID of changeRequest that needs to be fetched"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ChangeRequest"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "ChangeRequest not found"
+          
+    delete:
+      tags:
+      - "changeRequest"
+      summary: "Delete changeRequest by ID"
+      operationId: "deleteChangeRequest"
+      parameters:
+      - name: "changeRequestId"
+        in: "path"
+        description: "ID of the changeRequest that needs to be deleted"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "ChangeRequest not found"
+          
+  /notification:
+    post:
+      tags:
+      - "notification"
+      summary: "Add a new notification"
+      description: ""
+      operationId: "addNotification"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Notification object that needs to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/Notification"
+      responses:
+        405:
+          description: "Invalid input"
+          
+    put:
+      tags:
+      - "notification"
+      summary: "Update an existing notification"
+      description: ""
+      operationId: "updateNotification"
+      parameters:
+      - name: "notificationId"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Notification object that needs to be updated"
+        required: true
+        schema:
+          $ref: "#/definitions/Notification"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Notification not found"
+        405:
+          description: "Validation exception"
+        
+  /notification/{notificationId}:
+    get:
+      tags:
+      - "notification"
+      summary: "Find notification by ID"
+      operationId: "getNotificationById"
+      parameters:
+      - name: "notificationId"
+        in: "path"
+        description: "ID of notification that needs to be fetched"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Notification"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Notification not found"
+          
+    delete:
+      tags:
+      - "notification"
+      summary: "Delete notification by ID"
+      operationId: "deleteNotification"
+      parameters:
+      - name: "notificationId"
+        in: "path"
+        description: "ID of the notification that needs to be deleted"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Notification not found"
+          
+  /follower:
+    post:
+      tags:
+      - "follower"
+      summary: "Add a new follower"
+      description: ""
+      operationId: "addFollower"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Follower object that needs to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/Follower"
+      responses:
+        405:
+          description: "Invalid input"
+          
+    put:
+      tags:
+      - "follower"
+      summary: "Update an existing follower"
+      description: ""
+      operationId: "updateFollower"
+      parameters:
+      - name: "followerId"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Follower object that needs to be updated"
+        required: true
+        schema:
+          $ref: "#/definitions/Follower"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Follower not found"
+        405:
+          description: "Validation exception"
+        
+  /follower/{followerId}:
+    get:
+      tags:
+      - "follower"
+      summary: "Find follower by ID"
+      operationId: "getFollowerById"
+      parameters:
+      - name: "followerId"
+        in: "path"
+        description: "ID of follower that needs to be fetched"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Follower"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Follower not found"
+          
+    delete:
+      tags:
+      - "follower"
+      summary: "Delete follower by ID"
+      operationId: "deleteFollower"
+      parameters:
+      - name: "followerId"
+        in: "path"
+        description: "ID of the follower that needs to be deleted"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Follower not found"
+          
+  /subscription:
+    post:
+      tags:
+      - "subscription"
+      summary: "Add a new subscription"
+      description: ""
+      operationId: "addSubscription"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Subscription object that needs to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/Subscription"
+      responses:
+        405:
+          description: "Invalid input"
+          
+    put:
+      tags:
+      - "subscription"
+      summary: "Update an existing subscription"
+      description: ""
+      operationId: "updateSubscription"
+      parameters:
+      - name: "subscriptionId"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Subscription object that needs to be updated"
+        required: true
+        schema:
+          $ref: "#/definitions/Subscription"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Subscription not found"
+        405:
+          description: "Validation exception"
+        
+  /subscription/{subscriptionId}:
+    get:
+      tags:
+      - "subscription"
+      summary: "Find subscription by ID"
+      operationId: "getSubscriptionById"
+      parameters:
+      - name: "subscriptionId"
+        in: "path"
+        description: "ID of subscription that needs to be fetched"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Subscription"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Subscription not found"
+          
+    delete:
+      tags:
+      - "subscription"
+      summary: "Delete subscription by ID"
+      operationId: "deleteSubscription"
+      parameters:
+      - name: "subscriptionId"
+        in: "path"
+        description: "ID of the subscription that needs to be deleted"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Subscription not found"
+  
+  /user/register:
+    post:
+      tags:
+      - "user"
+      summary: "Create user"
+      description: "This can only be done by the logged in user."
+      operationId: "createUser"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Created user object"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        default:
+          description: "successful operation"
+          
+  /user/login:
+    post:
+      tags:
+      - "user"
+      summary: "Logs user into the system"
+      description: ""
+      operationId: "loginUser"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Created user object"
+        required: true
+        schema:
+          type: "object"
+          properties:
+            username:
+              type: "string"
+            password:
+              type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
+          headers:
+            X-Rate-Limit:
+              type: "integer"
+              format: "int32"
+              description: "calls per hour allowed by the user"
+            X-Expires-After:
+              type: "string"
+              format: "date-time"
+              description: "date in UTC when token expires"
+        400:
+          description: "Invalid username/password supplied"
+          
+  /user/logout:
+    get:
+      tags:
+      - "user"
+      summary: "Logs out current logged in user session"
+      description: ""
+      operationId: "logoutUser"
+      parameters: []
+      responses:
+        default:
+          description: "successful operation"
+          
+  /user/{username}:
+    get:
+      tags:
+      - "user"
+      summary: "Get user by user name"
+      description: ""
+      operationId: "getUserByName"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "path"
+        description: "The name that needs to be fetched. Use user1 for testing. "
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/User"
+        400:
+          description: "Invalid username supplied"
+        404:
+          description: "User not found"
+    put:
+      tags:
+      - "user"
+      summary: "Updated user"
+      description: "This can only be done by the logged in user."
+      operationId: "updateUser"
+      parameters:
+      - name: "username"
+        in: "path"
+        description: "name that need to be updated"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Updated user object"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        400:
+          description: "Invalid user supplied"
+        404:
+          description: "User not found"
+    delete:
+      tags:
+      - "user"
+      summary: "Delete user"
+      description: "This can only be done by the logged in user."
+      operationId: "deleteUser"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "path"
+        description: "The name that needs to be deleted"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Invalid username supplied"
+        404:
+          description: "User not found"
+          
+definitions:
+  Category:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+    xml:
+      name: "Category"
+  
+  Tag:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+    xml:
+      name: "Tag"
+      
+  Invitation:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      id_event:
+        type: "integer"
+        format: "int64"
+      id_user:
+        type: "integer"
+        format: "int64"
+    xml:
+      name: "Invitation"
+      
+  ChangeRequest:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      id_event:
+        type: "integer"
+        format: "int64"
+      id_user:
+        type: "integer"
+        format: "int64"
+      event:
+        $ref: "#/definitions/Event"
+    xml:
+      name: "ChangeRequest"
+      
+  Notification:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      id_user:
+        type: "integer"
+        format: "int64"
+      title:
+        type: "string"
+      message:
+        type: "string"
+      timestamp:
+        type: "string"
+    xml:
+      name: "Notification"
+      
+  Follower:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      link:
+        type: "string"
+      name:
+        type: "string"
+      timestamp:
+        type: "string"
+    xml:
+      name: "Follower"
+      
+  Subscription:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+    xml:
+      name: "Subscription"
+      
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      username:
+        type: "string"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+      phone:
+        type: "string"
+      subscriptions:
+        type: "array"
+        xml:
+          name: "subscription"
+          wrapped: true
+        items:
+          $ref: "#/definitions/Subscription"
+      role:
+        type: "string"
+        enum: ["User", "Administrator"]
+    xml:
+      name: "User"
+      
+  Event:
+    type: "object"
+    required:
+    - "title"
+    - "description"
+    - "location"
+    - "coverUrl"
+    - "date"
+    - "seats"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      title:
+        type: "string"
+      description:
+        type: "string"
+      category:
+        $ref: "#/definitions/Category"
+      location:
+        type: "string"
+      coverUrl:
+        type: "string"
+      date:
+        type: "string"
+      seats:
+        type: "number"
+        format: "int32"
+      tags:
+        type: "array"
+        xml:
+          name: "tag"
+          wrapped: true
+        items:
+          $ref: "#/definitions/Tag"
+      invitations:
+        type: "array"
+        xml:
+          name: "invitation"
+          wrapped: true
+        items:
+          $ref: "#/definitions/Invitation"
+    xml:
+      name: "Event"
+      
+        
+  Event-Facebook:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      attending_count:
+        type: "integer"
+        format: "int64"
+      can_guests_invite:
+        type: "boolean"
+      category:
+        type: "string"
+      cover:
+        type: "string"
+      description:
+        type: "string"
+      end_time:
+        type: "string"  
+      place:
+        type: "string"
+      start_time:
+        type: "string"
+    xml:
+      name: "Event-Facebook"
+      
+  Event-Eventbrite:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      description:
+        type: "string"
+      start:
+        type: "string"
+      end:
+        type: "string"
+      status:
+        type: "string"
+      category:
+        type: "string"
+      url:
+        type: "string"
+    xml:
+      name: "Event-Eventbrite"
