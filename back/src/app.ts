@@ -1,26 +1,22 @@
-import { EventsController } from './controllers/events.controller.';
-
 import http from 'http';
 import mongoose from 'mongoose';
-import url from 'url';
+import { EventRoutes } from './routes/event.routes';
 
 class App {
-	public eventsController: EventsController = new EventsController();
+	public eventRoutes: EventRoutes = new EventRoutes();
 
+	public app: http.RequestListener;
 	private readonly MONGO_URL: string = 'mongodb://localhost:27017/eventtime';
 
 	constructor() {
+		this.app = this.getApp();
+
 		this.config();
 	}
 
 	public getApp(): http.RequestListener {
-		// TODO: add routing
 		return (req, res) => {
-			const reqUrl = url.parse(req.url, true);
-
-			if (reqUrl.pathname === '/events' && req.method === 'GET') {
-				this.eventsController.getEvents(req, res);
-			}
+			this.eventRoutes.route(req, res);
 		};
 	}
 
@@ -34,4 +30,4 @@ class App {
 	}
 }
 
-export default new App().getApp();
+export default new App().app;
