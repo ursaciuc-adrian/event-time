@@ -1,17 +1,37 @@
-import * as EventController from './controllers/events.controller.';
+import { EventsController } from './controllers/events.controller.';
 
 import http from 'http';
+import mongoose from 'mongoose';
 import url from 'url';
 
-const hostname = '127.0.0.1';
-const port = 3000;
+class App {
+	public eventsController: EventsController = new EventsController();
 
-http.createServer((req, res) => {
-	const reqUrl = url.parse(req.url, true);
+	private readonly MONGO_URL: string = 'mongodb://localhost:27017/eventtime';
 
-	if (reqUrl.pathname === '/events' && req.method === 'GET') {
-		EventController.getEvents(req, res);
+	constructor() {
+		this.config();
 	}
-}).listen(port, hostname, () => {
-	console.log(`Server running at http://${hostname}:${port}/`);
-});
+
+	public getApp(): http.RequestListener {
+		// TODO: add routing
+		return (req, res) => {
+			const reqUrl = url.parse(req.url, true);
+
+			if (reqUrl.pathname === '/events' && req.method === 'GET') {
+				this.eventsController.getEvents(req, res);
+			}
+		};
+	}
+
+	private config(): void {
+		this.mongoSetup();
+	}
+
+	private mongoSetup(): void {
+		mongoose.Promise = global.Promise;
+		mongoose.connect(this.MONGO_URL, {useNewUrlParser: true});
+	}
+}
+
+export default new App().getApp();

@@ -9,8 +9,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const EventService = __importStar(require("../services/events.service"));
 const writer = __importStar(require("../utils/writer.util"));
-function getEvents(request, response) {
-    writer.writeJson(response, EventService.getEvents());
+class EventsController {
+    getEvents(request, response) {
+        writer.writeJson(response, EventService.getEvents());
+    }
 }
-exports.getEvents = getEvents;
+exports.EventsController = EventsController;
 //# sourceMappingURL=events.controller..js.map

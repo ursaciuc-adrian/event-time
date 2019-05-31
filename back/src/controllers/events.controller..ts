@@ -1,6 +1,8 @@
 import * as EventService from '../services/events.service';
 import * as writer from '../utils/writer.util';
 
-export function getEvents(request, response) {
-	writer.writeJson(response, EventService.getEvents());
+export class EventsController {
+	public getEvents(request, response): void {
+		writer.writeJson(response, EventService.getEvents());
+	}
 }
