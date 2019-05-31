@@ -1,8 +1,13 @@
+import http from 'http';
+
 import * as EventService from '../services/events.service';
-import * as writer from '../utils/writer.util';
 
 export class EventsController {
-	public getEvents(request, response): void {
-		writer.writeJson(response, EventService.getEvents());
+	public async addEvent(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
+		await EventService.addEvent(req, res);
+	}
+
+	public getEvents(req, res): void {
+		// writer.writeJson(response, EventService.getEvents());
 	}
 }

@@ -4,7 +4,9 @@
 	"description": "",
 	"main": "dist/app.js",
 	"scripts": {
-		"start": "tsc && node dist/server.js"
+		"start": "tsc && node dist/server.js",
+		"watch-node": "nodemon dist/server.js",
+		"watch-ts": "tsc -w"
 	},
 	"author": "",
 	"license": "ISC",
