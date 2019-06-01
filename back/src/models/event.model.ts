@@ -26,10 +26,14 @@ const EventSchema = new Schema({
 		required: 'Please enter the cover photo'
 	},
 	date: {
-		type: Date,
+		type: String,
 		required: 'Please enter the date of the event'
 	},
-	categories: [{ type: Schema.Types.ObjectId, ref: 'Category' }]
+	category: {
+		type: Number,
+		required: 'Please enter the category id'
+	}
+	// de modificat category sa fie referinta la un obiect categorie
 });
 
 export default mongoose.model('Event', EventSchema);
