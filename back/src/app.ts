@@ -1,6 +1,7 @@
 import http from 'http';
 import mongoose from 'mongoose';
 import { EventRoutes } from './routes/event.routes';
+import { UserRoutes } from './routes/user.routes';
 
 class App {
 	public app: http.RequestListener;
@@ -8,6 +9,7 @@ class App {
 	private readonly MONGO_URL: string = 'mongodb://localhost:27017/eventtime';
 
 	private eventRoutes: EventRoutes = new EventRoutes();
+	private userRoutes: UserRoutes = new UserRoutes();
 
 	constructor() {
 		this.app = this.getApp();
@@ -18,6 +20,8 @@ class App {
 	private getApp(): http.RequestListener {
 		return async (req, res) => {
 			await this.eventRoutes.route(req, res);
+			await this.userRoutes.route(req, res);
+
 		};
 	}
 
