@@ -13,6 +13,10 @@ export class EventRoutes {
 			await this.eventsController.get(req, res);
 		}
 
+		if (reqUrl.pathname === '/events/fetch/category' && req.method === 'GET') {
+			await this.eventsController.getByCategory(req, res);
+		}
+
 		if (reqUrl.pathname === '/events' && req.method === 'POST') {
 			await this.eventsController.add(req, res);
 		}
