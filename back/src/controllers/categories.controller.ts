@@ -1,15 +1,15 @@
 import http from 'http';
 import url from 'url';
 
-import User from '../models/user.model';
+import Category from '../models/category.model';
 
 import * as reader from '../utils/reader.util';
 import * as writer from '../utils/writer.util';
 
-export class UsersController {
+export class CategoriesController {
 	public async add(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
 		try {
-			const newObj = new User(await reader.readJson(req));
+			const newObj = new Category(await reader.readJson(req));
 			const saveObj = await newObj.save();
 
 			writer.writeJson(res, saveObj);
@@ -20,7 +20,7 @@ export class UsersController {
 
 	public async get(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
 		try {
-			const obj = await User.find({});
+			const obj = await Category.find({});
 
 			writer.writeJson(res, obj);
 		} catch (err) {
@@ -32,7 +32,7 @@ export class UsersController {
 		const queryData = url.parse(req.url, true).query;
 
 		try {
-			const deleteObj = await User.remove({ _id: queryData.id });
+			const deleteObj = await Category.remove({ _id: queryData.id });
 
 			writer.writeJson(res, deleteObj);
 		} catch (err) {
@@ -44,8 +44,8 @@ export class UsersController {
 		const queryData = url.parse(req.url, true).query;
 
 		try {
-			const newObj = new User(await reader.readJson(req));
-			const updateObj = await User.update({ _id: queryData.id }, newObj);
+			const newObj = new Category(await reader.readJson(req));
+			const updateObj = await Category.update({ _id: queryData.id }, newObj);
 
 			writer.writeJson(res, updateObj);
 		} catch (err) {

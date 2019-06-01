@@ -8,7 +8,6 @@ export function readJson(req: http.IncomingMessage): Promise<any> {
 			body += chunk.toString();
 		});
 
-
 		req.on('end', () => {
 			resolve(JSON.parse(body));
 		});
