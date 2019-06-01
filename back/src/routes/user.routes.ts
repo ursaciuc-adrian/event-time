@@ -9,20 +9,32 @@ export class UserRoutes {
 	public async route(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
 		const reqUrl = url.parse(req.url, true);
 
-		if (reqUrl.pathname === '/events' && req.method === 'GET') {
+		if (reqUrl.pathname === '/users' && req.method === 'GET') {
 			await this.usersController.get(req, res);
 		}
 
-		if (reqUrl.pathname === '/events' && req.method === 'POST') {
+		if (reqUrl.pathname === '/users' && req.method === 'POST') {
 			await this.usersController.add(req, res);
 		}
 
-		if (reqUrl.pathname === '/events' && req.method === 'DELETE') {
+		if (reqUrl.pathname === '/users' && req.method === 'DELETE') {
 			await this.usersController.delete(req, res);
 		}
 
-		if (reqUrl.pathname === '/events' && req.method === 'PATCH') {
+		if (reqUrl.pathname === '/users' && req.method === 'PATCH') {
 			await this.usersController.update(req, res);
+		}
+
+		if (reqUrl.pathname === '/auth/register' && req.method === 'POST') {
+			await this.usersController.register(req, res);
+		}
+
+		if (reqUrl.pathname === '/auth/login' && req.method === 'POST') {
+			await this.usersController.login(req, res);
+		}
+
+		if (reqUrl.pathname === '/auth/me' && req.method === 'GET') {
+			await this.usersController.me(req, res);
 		}
 	}
 }

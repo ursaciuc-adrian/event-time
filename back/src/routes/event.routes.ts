@@ -28,5 +28,9 @@ export class EventRoutes {
 		if (reqUrl.pathname === '/events' && req.method === 'PATCH') {
 			await this.eventsController.update(req, res);
 		}
+
+		if (reqUrl.pathname === '/email' && req.method === 'GET') {
+			await this.eventsController.sendMail(req, res);
+		}
 	}
 }

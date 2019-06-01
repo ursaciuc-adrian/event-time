@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-const CategorySchema = new Schema({
+export const CategorySchema = new Schema({
 	id: {
 		type: mongoose.Schema.ObjectId,
 		index: { unique: true }
