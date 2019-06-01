@@ -2,8 +2,10 @@ import http from 'http';
 import mongoose from 'mongoose';
 
 import { CategoryRoutes } from './routes/category.routes';
+import { ChangeRequestRoutes } from './routes/change-request.routes';
 import { EventRoutes } from './routes/event.routes';
 import { UserRoutes } from './routes/user.routes';
+
 
 import * as writer from './utils/writer.util';
 
@@ -15,6 +17,7 @@ class App {
 	private categoryRoutes: CategoryRoutes = new CategoryRoutes();
 	private eventRoutes: EventRoutes = new EventRoutes();
 	private userRoutes: UserRoutes = new UserRoutes();
+	private changeRequestRoutes: ChangeRequestRoutes = new ChangeRequestRoutes();
 
 	constructor() {
 		this.app = this.getApp();
@@ -27,6 +30,8 @@ class App {
 			await this.eventRoutes.route(req, res);
 			await this.userRoutes.route(req, res);
 			await this.categoryRoutes.route(req, res);
+			await this.categoryRoutes.route(req, res);
+			await this.changeRequestRoutes.route(req, res);
 
 			writer.writeJson(res, { error: 'The requested route was not found.' }, 404);
 		};
