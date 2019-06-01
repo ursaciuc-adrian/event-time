@@ -1,6 +1,10 @@
 import http from 'http';
 import mongoose from 'mongoose';
+
+import { CategoryRoutes } from './routes/category.routes';
 import { EventRoutes } from './routes/event.routes';
+
+import * as writer from './utils/writer.util';
 
 class App {
 	public app: http.RequestListener;
@@ -8,6 +12,7 @@ class App {
 	private readonly MONGO_URL: string = 'mongodb://localhost:27017/eventtime';
 
 	private eventRoutes: EventRoutes = new EventRoutes();
+	private categoryRoutes: CategoryRoutes = new CategoryRoutes();
 
 	constructor() {
 		this.app = this.getApp();
@@ -18,6 +23,9 @@ class App {
 	private getApp(): http.RequestListener {
 		return async (req, res) => {
 			await this.eventRoutes.route(req, res);
+			await this.categoryRoutes.route(req, res);
+
+			writer.writeJson(res, { error: 'The requested route was not found.' }, 404);
 		};
 	}
 

@@ -1,4 +1,4 @@
-import { EventsController } from '../controllers/events.controller.';
+import { EventsController } from '../controllers/events.controller';
 
 import http from 'http';
 import url from 'url';
@@ -10,13 +10,19 @@ export class EventRoutes {
 		const reqUrl = url.parse(req.url, true);
 
 		if (reqUrl.pathname === '/events' && req.method === 'GET') {
-			this.eventsController.getEvents(req, res);
+			await this.eventsController.get(req, res);
 		}
 
 		if (reqUrl.pathname === '/events' && req.method === 'POST') {
-			await this.eventsController.addEvent(req, res);
+			await this.eventsController.add(req, res);
 		}
 
-		res.end();
+		if (reqUrl.pathname === '/events' && req.method === 'DELETE') {
+			await this.eventsController.delete(req, res);
+		}
+
+		if (reqUrl.pathname === '/events' && req.method === 'PATCH') {
+			await this.eventsController.update(req, res);
+		}
 	}
 }
