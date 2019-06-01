@@ -6,6 +6,7 @@ import { ChangeRequestRoutes } from './routes/change-request.routes';
 import { EventRoutes } from './routes/event.routes';
 import { UserRoutes } from './routes/user.routes';
 
+import * as fetcher from './services/events-fetcher.service';
 
 import * as writer from './utils/writer.util';
 
@@ -19,10 +20,19 @@ class App {
 	private userRoutes: UserRoutes = new UserRoutes();
 	private changeRequestRoutes: ChangeRequestRoutes = new ChangeRequestRoutes();
 
+
+
 	constructor() {
 		this.app = this.getApp();
 
 		this.config();
+		this.schedule();
+	}
+
+	private schedule(): void {
+		setInterval(() => {
+			fetcher.fetchEvents();
+		}, 24 * 60 * 60 * 1000);
 	}
 
 	private getApp(): http.RequestListener {
