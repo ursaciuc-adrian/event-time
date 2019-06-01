@@ -26,7 +26,7 @@ export class EventRoutes {
 		}
 
 		if (reqUrl.pathname === '/email' && req.method === 'GET') {
-			await this.eventsController.sendMail();
+			await this.eventsController.sendMail(req, res);
 		}
 	}
 }
