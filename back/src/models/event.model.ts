@@ -29,7 +29,12 @@ const EventSchema = new Schema({
 		type: Date,
 		required: 'Please enter the date of the event'
 	},
-	categories: [{ type: Schema.Types.ObjectId, ref: 'Category' }]
+	categories: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Category',
+			required: 'Please enter at least a category'
+		}]
 });
 
 export default mongoose.model('Event', EventSchema);

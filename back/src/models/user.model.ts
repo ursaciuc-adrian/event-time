@@ -24,7 +24,13 @@ const UserSchema = new Schema({
 	role: {
 		type: String,
 		required: 'Please enter your role'
-	}
+	},
+	subscriptions: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Category',
+			required: 'Please enter at least a category'
+		}]
 });
 
 export default mongoose.model('User', UserSchema);
