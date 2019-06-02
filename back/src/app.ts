@@ -20,8 +20,6 @@ class App {
 	private userRoutes: UserRoutes = new UserRoutes();
 	private changeRequestRoutes: ChangeRequestRoutes = new ChangeRequestRoutes();
 
-
-
 	constructor() {
 		this.app = this.getApp();
 
@@ -43,7 +41,7 @@ class App {
 			await this.categoryRoutes.route(req, res);
 			await this.changeRequestRoutes.route(req, res);
 
-			writer.writeJson(res, { error: 'The requested route was not found.' }, 404);
+			writer.writeError(res, { message: 'The requested route was not found.' }, 404);
 		};
 	}
 
