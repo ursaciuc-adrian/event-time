@@ -18,9 +18,9 @@ export class BaseController {
 			const newObj = new this.Schema(await reader.readJson(req));
 			const saveObj = await newObj.save();
 
-			writer.writeJson(res, saveObj);
+			writer.writeSuccess(res, saveObj);
 		} catch (err) {
-			writer.writeJson(res, err, 400);
+			writer.writeError(res, err, 400);
 		}
 	}
 
@@ -28,9 +28,9 @@ export class BaseController {
 		try {
 			const obj = await this.Schema.find({});
 
-			writer.writeJson(res, obj);
+			writer.writeSuccess(res, obj);
 		} catch (err) {
-			writer.writeJson(res, err, 400);
+			writer.writeError(res, err, 400);
 		}
 	}
 
@@ -40,9 +40,9 @@ export class BaseController {
 		try {
 			const deleteObj = await this.Schema.remove({ _id: queryData.id });
 
-			writer.writeJson(res, deleteObj);
+			writer.writeSuccess(res, deleteObj);
 		} catch (err) {
-			writer.writeJson(res, err, 400);
+			writer.writeError(res, err, 400);
 		}
 	}
 
@@ -53,9 +53,9 @@ export class BaseController {
 			const newObj = new this.Schema(await reader.readJson(req));
 			const updateObj = await this.Schema.update({ _id: queryData.id }, newObj);
 
-			writer.writeJson(res, updateObj);
+			writer.writeSuccess(res, updateObj);
 		} catch (err) {
-			writer.writeJson(res, err, 400);
+			writer.writeError(res, err, 400);
 		}
 	}
 }

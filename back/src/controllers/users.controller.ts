@@ -1,5 +1,4 @@
 import http from 'http';
-import url from 'url';
 
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
@@ -30,9 +29,9 @@ export class UsersController extends BaseController {
 
 			await newObj.save();
 
-			writer.writeJson(res, { status: 'ok' });
+			writer.writeSuccess(res, {});
 		} catch (err) {
-			writer.writeJson(res, err, 400);
+			writer.writeError(res, err, 400);
 		}
 	}
 
@@ -48,16 +47,16 @@ export class UsersController extends BaseController {
 				const passwordIsValid = bcrypt.compareSync(model.password, user.password);
 
 				if (!passwordIsValid) {
-					writer.writeJson(res, { error: 'Invalid email and/or password.' }, 404);
+					writer.writeError(res, { message: 'Invalid email and/or password.' }, 404);
 				} else {
 					const token = jwt.sign({ id: user._id }, '123', { expiresIn: 86400 });
-					writer.writeJson(res, { auth: true, token });
+					writer.writeSuccess(res, { auth: true, token });
 				}
 			} else {
-				writer.writeJson(res, { error: 'Invalid email and/or password.' }, 404);
+				writer.writeError(res, { message: 'Invalid email and/or password.' }, 404);
 			}
 		} catch (err) {
-			writer.writeJson(res, err, 400);
+			writer.writeError(res, err, 400);
 		}
 	}
 
@@ -74,16 +73,16 @@ export class UsersController extends BaseController {
 
 				const user = await User.findById(decoded.id);
 
-				writer.writeJson(res, {
+				writer.writeSuccess(res, {
 					name: user.name,
 					email: user.email,
 					role: user.role
 				});
 			} catch {
-				writer.writeJson(res, { auth: false, message: 'Failed to authenticate token.' }, 500);
+				writer.writeError(res, { auth: false, message: 'Failed to authenticate token.' }, 500);
 			}
 		} else {
-			writer.writeJson(res, { auth: false, message: 'No token provided.' }, 401);
+			writer.writeError(res, { auth: false, message: 'No token provided.' }, 401);
 		}
 	}
 }

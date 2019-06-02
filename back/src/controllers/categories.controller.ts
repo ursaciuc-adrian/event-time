@@ -40,9 +40,9 @@ export class CategoriesController extends BaseController {
 				}
 			});
 
-			writer.writeSuccessMessage(res, 'The categories were fetched.');
+			writer.writeSuccess(res, {});
 		} catch (err) {
-			writer.writeJson(res, err, 400);
+			writer.writeError(res, err, 400);
 		}
 	}
 }
