@@ -13,10 +13,6 @@ export class CategoryRoutes {
 			await this.categoriesController.get(req, res);
 		}
 
-		if (reqUrl.pathname === '/categories/fetch/eventbrite' && req.method === 'GET') {
-			await this.categoriesController.getEventbrite(req, res);
-		}
-
 		if (reqUrl.pathname === '/categories' && req.method === 'POST') {
 			await this.categoriesController.add(req, res);
 		}
@@ -29,5 +25,8 @@ export class CategoryRoutes {
 			await this.categoriesController.update(req, res);
 		}
 
+		if (reqUrl.pathname === '/categories/eventbrite' && req.method === 'GET') {
+			await this.categoriesController.getEventbriteCategories(req, res);
+		}
 	}
 }

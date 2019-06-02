@@ -3,24 +3,24 @@ import mongoose, { Schema } from 'mongoose';
 const UserSchema = new Schema({
 	id: {
 		type: mongoose.Schema.ObjectId,
-		index: { unique: true },
+		index: { unique: true }
 	},
 	name: {
 		type: String,
-		required: 'Please enter the name'
+		required: true
 	},
 	email: {
 		type: String,
-		required: 'Please enter an email',
+		required: true,
 		unique: true
 	},
 	password: {
 		type: String,
-		required: 'Please enter a password'
+		required: true
 	},
 	role: {
 		type: String,
-		required: 'Please enter your role'
+		required: true
 	},
 	subscriptions: [
 		{

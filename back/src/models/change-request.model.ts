@@ -7,7 +7,7 @@ const ChageRequestSchema = new Schema({
 	},
 	problem: {
 		type: String,
-		required: 'Please enter the problem'
+		required: true
 	}
 });
 

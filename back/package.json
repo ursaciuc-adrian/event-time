@@ -17,6 +17,7 @@
 	},
 	"dependencies": {
 		"@types/node": "^12.0.4",
+		"async-request": "^1.2.0",
 		"bcryptjs": "^2.4.3",
 		"install": "^0.12.2",
 		"jsonwebtoken": "^8.5.1",

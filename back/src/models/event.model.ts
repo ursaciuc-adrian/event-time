@@ -5,35 +5,49 @@ const EventSchema = new Schema({
 		type: mongoose.Schema.ObjectId,
 		index: { unique: true }
 	},
+	idCategory: {
+		type: Schema.Types.ObjectId,
+		required: true,
+		ref: 'Category'
+	},
+	idOrigin: {
+		type: String,
+		index: { unique: true },
+		trim: true
+	},
 	title: {
 		type: String,
-		required: 'Please enter a title'
+		required: true,
+		trim: true
 	},
 	description: {
 		type: String,
-		required: 'Please enter a description'
+		required: true,
+		trim: true
 	},
 	location: {
 		type: String,
-		required: 'Please enter a location'
+		required: true,
+		trim: true
 	},
 	seats: {
 		type: Number,
-		required: 'Please enter the number of seats'
+		required: true
 	},
 	coverPhoto: {
 		type: String,
-		required: 'Please enter the cover photo'
+		required: true,
+		trim: true
 	},
 	date: {
 		type: String,
-		required: 'Please enter the date of the event'
+		required: true,
+		trim: true
 	},
-	category: {
-		type: Number,
-		required: 'Please enter the category id'
+	checked: {
+		type: Boolean,
+		default: false
 	}
-	// de modificat category sa fie referinta la un obiect categorie
 });
 
 export default mongoose.model('Event', EventSchema);

@@ -5,6 +5,8 @@ import Category from '../models/category.model';
 
 import { BaseController } from './base.controller';
 
+import request from 'async-request';
+
 import * as reader from '../utils/reader.util';
 import * as writer from '../utils/writer.util';
 
@@ -13,42 +15,34 @@ export class CategoriesController extends BaseController {
 		super(Category);
 	}
 
-	public async getEventbrite(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
-		return new Promise((resolve, reject) => {
-			try {
-				const request = require('request');
-				request({
-					uri: 'https://www.eventbriteapi.com/v3/categories/',
-					headers: { 'Authorization': 'Bearer ANYLLDVFBO24ROUAOV5G' },
-					method: 'GET'
-				}, (error, resp, body) => {
-					let theBody = JSON.parse(body);
-					let categories = theBody.categories;
-					let realCategories = [];
-
-					categories.forEach(category => {
-						realCategories.push(category);
-					});
-
-					console.log(realCategories);
-
-					realCategories.forEach(realCategory => {
-						let newObj = new Category({
-							name: realCategory.short_name,
-							origin: 'eventbrite',
-							idCategory: realCategory.id
-						});
-						let saveObj = newObj.save();
-					});
-
-					writer.writeJson(res, JSON.stringify(realCategories));
-					resolve();
+	public async getEventbriteCategories(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
+		try {
+			const response = await request(
+				'https://www.eventbriteapi.com/v3/categories/',
+				{
+					method: 'GET',
+					headers: { Authorization: 'Bearer ANYLLDVFBO24ROUAOV5G' }
 				});
 
-			} catch (err) {
-				writer.writeJson(res, err, 400);
-				reject();
-			}
-		});
+			const body = JSON.parse(response.body);
+
+			body.categories.forEach(async (element) => {
+				const count = Category.count({ idOrigin: element.id });
+
+				if (count === 0) {
+					const obj = new Category({
+						name: element.short_name,
+						idOrigin: element.id,
+						originName: 'eventbrite'
+					});
+
+					await obj.save();
+				}
+			});
+
+			writer.writeSuccessMessage(res, 'The categories were fetched.');
+		} catch (err) {
+			writer.writeJson(res, err, 400);
+		}
 	}
 }

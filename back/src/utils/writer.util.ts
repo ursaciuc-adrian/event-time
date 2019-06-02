@@ -10,3 +10,7 @@ export function writeJson(response, value, code?) {
 	response.writeHead(code, { 'Content-Type': 'application/json' });
 	response.end(value);
 }
+
+export function writeSuccessMessage(response, message): void {
+	writeJson(response, { status: 'ok', message }, 200);
+}

@@ -5,17 +5,18 @@ export const CategorySchema = new Schema({
 		type: mongoose.Schema.ObjectId,
 		index: { unique: true }
 	},
-	idCategory: {
+	idOrigin: {
 		type: String,
-		required: 'Please enter a category id'
+		required: true
+	},
+	originName: {
+		type: String,
+		trim: true
 	},
 	name: {
 		type: String,
-		required: 'Please enter a category name'
-	},
-	origin: {
-		type: String,
-		required: 'Please enter a category origin'
+		required: true,
+		trim: true
 	}
 });
 
