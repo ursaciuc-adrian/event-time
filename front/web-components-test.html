@@ -11,44 +11,7 @@
 		<app-event data-id="2" data-name="Event 2"></app-event>
 		<app-event data-id="3" data-name="Event 3"></app-event>
 
-		<template id="app-event-template">
-			<h3>{{ name }}</h3>
-			<p>{{ id }}</p>
-		</template>
-
-		<script>
-			let tmpl = document.querySelector("#app-event-template");
-
-			class AppEvent extends HTMLElement {
-				constructor() {
-					super();
-				}
-
-				createShadowRoot() {
-					let shadowRoot = this.attachShadow({ mode: "open" });
-					shadowRoot.appendChild(tmpl.content.cloneNode(true));
-				}
-
-				connectedCallback() {
-					this.createShadowRoot();
-					this.renderData();
-				}
-
-				renderData() {
-					var a = [].filter.call(this.attributes, function(at) {
-						return /^data-/.test(at.name);
-					});
-
-					a.forEach(element => {
-						const name = element.name.substr(5);
-						const value = element.value;
-
-						this.shadowRoot.innerHTML = this.shadowRoot.innerHTML.replace('{{ ' + name + ' }}', value);
-					});
-				}
-			}
-
-			window.customElements.define("app-event", AppEvent);
-		</script>
+		<script src="./src/components/base.component.js"></script>
+		<link rel="import" href="./src/components/event/event.component.html">
 	</body>
 </html>
