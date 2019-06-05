@@ -12,6 +12,4 @@ export class ChangeRequestsController extends BaseController {
 	constructor() {
 		super(ChangeRequest);
 	}
-
-
 }

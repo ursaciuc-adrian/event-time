@@ -38,7 +38,11 @@ export async function getEventbriteEvents(): Promise<void> {
 								date: element.start.local
 							});
 
-							await obj.save();
+							try {
+								await obj.save();
+							} catch (err) {
+								throw err;
+							}
 						}
 					} catch (err) {
 						throw err;
@@ -53,14 +57,15 @@ export async function getEventbriteEvents(): Promise<void> {
 	}
 }
 
-export async function getEventbriteEvents(): Promise<void> {
+export async function getMeetupEvents(): Promise<void> {
 	try {
 		const categories = await Category.find({ originName: 'meetup' });
 
 		categories.forEach(async (category) => {
 			try {
 				const response = await request(
-					'https://api.meetup.com/2/open_events?&category=' + category.idOrigin + '&sign=true&photo-host=public&key=352395f2f577c7216632a056757444',
+					'https://api.meetup.com/2/open_events?&category=' + category.idOrigin + 
+					'&sign=true&photo-host=public&key=352395f2f577c7216632a056757444',
 					{
 						method: 'GET'
 					});

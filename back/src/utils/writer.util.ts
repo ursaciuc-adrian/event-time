@@ -1,15 +1,14 @@
 function writeJson(response, value, code?) {
-	if (typeof value === 'object') {
-		value = JSON.stringify(value, undefined, 4);
-	}
-
 	if (!code) {
 		code = 200;
 	}
+	value.code = code;
 
 	response.writeHead(code, { 'Content-Type': 'application/json' });
 
-	value.code = code;
+	if (typeof value === 'object') {
+		value = JSON.stringify(value, undefined, 4);
+	}
 	response.end(value);
 }
 
