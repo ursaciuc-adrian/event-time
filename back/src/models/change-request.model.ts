@@ -24,7 +24,7 @@ const ChangeRequestSchema = new Schema({
 		type: Number,
 		required: false
 	},
-	timestamp: {
+	date: {
 		type: String,
 		required: false,
 		trim: true

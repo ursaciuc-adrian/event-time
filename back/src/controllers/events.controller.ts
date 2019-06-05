@@ -28,6 +28,17 @@ export class EventsController extends BaseController {
 		}
 	}
 
+	public async getMeetupEvents(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
+		// TODO: fix Unhandled promise rejection.
+		try {
+			await eventsFetcher.getMeetupEvents();
+
+			writer.writeSuccess(res, {});
+		} catch (err) {
+			writer.writeError(res, err, 400);
+		}
+	}
+
 	public async sendMail(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
 		if (await auth.isInRole(req.headers.authorization, 'Admin')) {
 			emailSender.sendEmail('ursaciuc.adrian27@gmail.com', 'da', 'heeey');

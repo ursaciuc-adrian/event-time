@@ -32,5 +32,9 @@ export class EventRoutes {
 		if (reqUrl.pathname === '/events/eventbrite' && req.method === 'GET') {
 			await this.eventsController.getEventbriteEvents(req, res);
 		}
+
+		if (reqUrl.pathname === '/events/meetup' && req.method === 'GET') {
+			await this.eventsController.getMeetupEvents(req, res);
+		}
 	}
 }

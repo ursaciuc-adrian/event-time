@@ -2,6 +2,7 @@ import request from 'async-request';
 
 import Category from '../models/category.model';
 import Event from '../models/event.model';
+import categoryModel from '../models/category.model';
 
 export function fetchEvents(): void {
 
@@ -11,7 +12,7 @@ export async function getEventbriteEvents(): Promise<void> {
 	try {
 		const categories = await Category.find({ originName: 'eventbrite' });
 
-		categories.forEach(async (category) => {
+		for (const category of categories) {
 			try {
 				const response = await request(
 					'https://www.eventbriteapi.com/v3/events/search/?categories=' + category.idOrigin + '&expand=venue',
@@ -22,7 +23,7 @@ export async function getEventbriteEvents(): Promise<void> {
 
 				const body = JSON.parse(response.body);
 
-				body.events.forEach(async (element) => {
+				for (const element of body.events) {
 					try {
 						const count = await Event.count({ idOrigin: element.id });
 
@@ -31,11 +32,11 @@ export async function getEventbriteEvents(): Promise<void> {
 								idOrigin: element.id,
 								idCategory: category._id,
 								title: element.name.text,
-								description: element.description.text,
-								location: element.venue.address.localized_address_display,
+								description: element.description != null ? element.description.text : "",
+								location: element.venue != null && element.venue.address != null ? element.venue.address.localized_address_display : '',
 								seats: element.capacity != null ? element.capacity : 0,
 								coverPhoto: element.logo != null ? element.logo.url : '',
-								date: element.start.local
+								date: element.start.local != null ? element.start.local : ''
 							});
 
 							try {
@@ -47,24 +48,26 @@ export async function getEventbriteEvents(): Promise<void> {
 					} catch (err) {
 						throw err;
 					}
-				});
+				}
 			} catch (err) {
 				throw err;
 			}
-		});
+		}
 	} catch (err) {
 		throw err;
 	}
 }
 
 export async function getMeetupEvents(): Promise<void> {
+	// TO DO REZOLVA PROSTIA ASTA
 	try {
 		const categories = await Category.find({ originName: 'meetup' });
 
-		categories.forEach(async (category) => {
+		for (const category of categories) {
+			console.log("categoria " + category.name)
 			try {
 				const response = await request(
-					'https://api.meetup.com/2/open_events?&category=' + category.idOrigin + 
+					'https://api.meetup.com/2/open_events?&category=' + category.idOrigin +
 					'&sign=true&photo-host=public&key=352395f2f577c7216632a056757444',
 					{
 						method: 'GET'
@@ -72,7 +75,7 @@ export async function getMeetupEvents(): Promise<void> {
 
 				const body = JSON.parse(response.body);
 
-				body.results.forEach(async (element) => {
+				for (const element of body.results) {
 					try {
 						const count = await Event.count({ idOrigin: element.id });
 
@@ -80,26 +83,34 @@ export async function getMeetupEvents(): Promise<void> {
 							const obj = new Event({
 								idOrigin: element.id,
 								idCategory: category._id,
-								title: element.name,
-								description: element.description,
-								location: element.venue.address_1 != null ? element.venue.address_1 : '',
+								title: element.name != null ? element.name : '',
+								description: element.description != null ? element.description : '',
+								location: element.venue != null ? element.venue.address_1 : '',
 								seats: element.rsvp_limit != null ? element.rsvp_limit : 0,
 								coverPhoto: element.photo_url != null ? element.photo_url : '',
-								date: element.start.local // de modificat
+								date: element.time != null ? element.time : '' // de modificat
 							});
 							// TODO : verifica pe aici 
 
-							await obj.save();
+							try {
+								await obj.save();
+							} catch (err) {
+								console.log("eroare 1");
+								throw err;
+							}
 						}
 					} catch (err) {
+						console.log("eroare 2");
 						throw err;
 					}
-				});
+				}
 			} catch (err) {
+				console.log("eroare 3");
 				throw err;
 			}
-		});
+		}
 	} catch (err) {
+		console.log("eroare 4");
 		throw err;
 	}
 }
