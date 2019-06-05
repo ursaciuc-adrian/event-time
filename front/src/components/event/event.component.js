@@ -1,7 +1,7 @@
 (function() {
 	const currentDocument = document.currentScript.ownerDocument;
 
-	class AppEvent extends BaseComponent {
+	class AppEvent extends HTMLElement {
 		constructor() {
 			super();
 		}
