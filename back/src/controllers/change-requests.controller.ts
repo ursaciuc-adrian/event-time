@@ -1,7 +1,7 @@
 import http from 'http';
 import url from 'url';
 
-import ChageRequest from '../models/change-request.model';
+import ChangeRequest from '../models/change-request.model';
 
 import { BaseController } from './base.controller';
 
@@ -10,6 +10,8 @@ import * as writer from '../utils/writer.util';
 
 export class ChangeRequestsController extends BaseController {
 	constructor() {
-		super(ChageRequest);
+		super(ChangeRequest);
 	}
+
+
 }

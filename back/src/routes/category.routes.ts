@@ -28,5 +28,9 @@ export class CategoryRoutes {
 		if (reqUrl.pathname === '/categories/eventbrite' && req.method === 'GET') {
 			await this.categoriesController.getEventbriteCategories(req, res);
 		}
+
+		if (reqUrl.pathname === '/categories/meetup' && req.method === 'GET') {
+			await this.categoriesController.getMeetupCategories(req, res);
+		}
 	}
 }

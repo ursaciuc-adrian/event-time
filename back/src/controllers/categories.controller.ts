@@ -45,4 +45,35 @@ export class CategoriesController extends BaseController {
 			writer.writeError(res, err, 400);
 		}
 	}
+
+	public async getMeetupCategories(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
+		try {
+			const response = await request(
+				'https://api.meetup.com/2/categories?&sign=true&photo-host=public&key=352395f2f577c7216632a056757444',
+				{
+					method: 'GET'
+				});
+
+			const body = JSON.parse(response.body);
+
+			body.results.forEach(async (element) => {
+				const count = Category.count({ idOrigin: element.id });
+
+				if (count === 0) {
+					const obj = new Category({
+						name: element.shortname,
+						idOrigin: element.id,
+						originName: 'meetup'
+					});
+
+					await obj.save();
+				}
+			});
+
+			writer.writeSuccess(res, {});
+		} catch (err) {
+			writer.writeError(res, err, 400);
+		}
+	}
+
 }
