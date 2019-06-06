@@ -5,6 +5,11 @@ const ChangeRequestSchema = new Schema({
 		type: mongoose.Schema.ObjectId,
 		index: { unique: true }
 	},
+	idEvent: {
+		type: Schema.Types.ObjectId,
+		required: true,
+		ref: 'Event'
+	},
 	title: {
 		type: String,
 		required: false,

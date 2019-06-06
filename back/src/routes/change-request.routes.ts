@@ -24,5 +24,9 @@ export class ChangeRequestRoutes {
 		if (reqUrl.pathname === '/change-requests' && req.method === 'PATCH') {
 			await this.changeRequestsController.update(req, res);
 		}
+
+		if (reqUrl.pathname === '/change-requests/accept' && req.method === 'GET') {
+			await this.changeRequestsController.acceptChangeRequest(req, res);
+		}
 	}
 }
