@@ -25,7 +25,7 @@ export async function getEventbriteEvents(): Promise<void> {
 
 				for (const element of body.events) {
 					try {
-						const count = await Event.count({ idOrigin: element.id });
+						const count = await Event.count({ idOrigin: element.id, title: element.name.text });
 
 						if (count === 0) {
 							const obj = new Event({
@@ -59,12 +59,9 @@ export async function getEventbriteEvents(): Promise<void> {
 }
 
 export async function getMeetupEvents(): Promise<void> {
-	// TO DO REZOLVA PROSTIA ASTA
 	try {
 		const categories = await Category.find({ originName: 'meetup' });
-
 		for (const category of categories) {
-			console.log("categoria " + category.name)
 			try {
 				const response = await request(
 					'https://api.meetup.com/2/open_events?&category=' + category.idOrigin +
@@ -77,7 +74,7 @@ export async function getMeetupEvents(): Promise<void> {
 
 				for (const element of body.results) {
 					try {
-						const count = await Event.count({ idOrigin: element.id });
+						const count = await Event.count({ idOrigin: element.id, title: element.name });
 
 						if (count === 0) {
 							const obj = new Event({
@@ -88,29 +85,24 @@ export async function getMeetupEvents(): Promise<void> {
 								location: element.venue != null ? element.venue.address_1 : '',
 								seats: element.rsvp_limit != null ? element.rsvp_limit : 0,
 								coverPhoto: element.photo_url != null ? element.photo_url : '',
-								date: element.time != null ? element.time : '' // de modificat
+								date: element.time != null ? element.time : ''
 							});
-							// TODO : verifica pe aici 
 
 							try {
 								await obj.save();
 							} catch (err) {
-								console.log("eroare 1");
 								throw err;
 							}
 						}
 					} catch (err) {
-						console.log("eroare 2");
 						throw err;
 					}
 				}
 			} catch (err) {
-				console.log("eroare 3");
 				throw err;
 			}
 		}
 	} catch (err) {
-		console.log("eroare 4");
 		throw err;
 	}
 }
