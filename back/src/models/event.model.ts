@@ -22,12 +22,12 @@ const EventSchema = new Schema({
 	},
 	description: {
 		type: String,
-		required: true,
+		required: false,
 		trim: true
 	},
 	location: {
 		type: String,
-		required: true,
+		required: false,
 		trim: true
 	},
 	seats: {
@@ -36,7 +36,7 @@ const EventSchema = new Schema({
 	},
 	coverPhoto: {
 		type: String,
-		required: true,
+		required: false,
 		trim: true
 	},
 	date: {

@@ -2,6 +2,7 @@ import request from 'async-request';
 
 import Category from '../models/category.model';
 import Event from '../models/event.model';
+import categoryModel from '../models/category.model';
 
 import * as emailSender from '../services/email-sender.service';
 
@@ -42,18 +43,18 @@ export async function getEventbriteEvents(): Promise<void> {
 
 				for (const element of body.events) {
 					try {
-						const count = await Event.count({ idOrigin: element.id });
+						const count = await Event.count({ idOrigin: element.id, title: element.name.text });
 
 						if (count === 0) {
 							const obj = new Event({
 								idOrigin: element.id,
 								idCategory: category._id,
 								title: element.name.text,
-								description: element.description.text,
-								location: element.venue.address.localized_address_display,
+								description: element.description != null ? element.description.text : "",
+								location: element.venue != null && element.venue.address != null ? element.venue.address.localized_address_display : '',
 								seats: element.capacity != null ? element.capacity : 0,
 								coverPhoto: element.logo != null ? element.logo.url : '',
-								date: element.start.local
+								date: element.start.local != null ? element.start.local : ''
 							});
 
 							try {
@@ -78,8 +79,7 @@ export async function getEventbriteEvents(): Promise<void> {
 export async function getMeetupEvents(): Promise<void> {
 	try {
 		const categories = await Category.find({ originName: 'meetup' });
-
-		categories.forEach(async (category) => {
+		for (const category of categories) {
 			try {
 				const response = await request(
 					'https://api.meetup.com/2/open_events?&category=' + category.idOrigin +
@@ -90,33 +90,36 @@ export async function getMeetupEvents(): Promise<void> {
 
 				const body = JSON.parse(response.body);
 
-				body.results.forEach(async (element) => {
+				for (const element of body.results) {
 					try {
-						const count = await Event.count({ idOrigin: element.id });
+						const count = await Event.count({ idOrigin: element.id, title: element.name });
 
 						if (count === 0) {
 							const obj = new Event({
 								idOrigin: element.id,
 								idCategory: category._id,
-								title: element.name,
-								description: element.description,
-								location: element.venue.address_1 != null ? element.venue.address_1 : '',
+								title: element.name != null ? element.name : '',
+								description: element.description != null ? element.description : '',
+								location: element.venue != null ? element.venue.address_1 : '',
 								seats: element.rsvp_limit != null ? element.rsvp_limit : 0,
 								coverPhoto: element.photo_url != null ? element.photo_url : '',
-								date: element.start.local // de modificat
+								date: element.time != null ? element.time : ''
 							});
-							// TODO : verifica pe aici 
 
-							await obj.save();
+							try {
+								await obj.save();
+							} catch (err) {
+								throw err;
+							}
 						}
 					} catch (err) {
 						throw err;
 					}
-				});
+				}
 			} catch (err) {
 				throw err;
 			}
-		});
+		}
 	} catch (err) {
 		throw err;
 	}
