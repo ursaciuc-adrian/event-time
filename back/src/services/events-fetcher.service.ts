@@ -2,28 +2,34 @@ import request from 'async-request';
 
 import Category from '../models/category.model';
 import Event from '../models/event.model';
-import categoryModel from '../models/category.model';
+import User from '../models/user.model';
+
 
 import * as emailSender from '../services/email-sender.service';
 
 export async function fetchEvents(): Promise<void> {
-	const categories = await Category.find({ originName: 'eventbrite' });
+	const users = await User.find({});
+	for (const user of users) {
 
-	let message = 'Check out our new events: \n\n';
+		if (user.subscriptions.length > 0) {
+			const categories = await Category.find({ _id: { $in: user.subscriptions } });
 
-	for (const category of categories) {
-		const events = await Event.find({ checked: false, idCategory: category._id });
+			let message = 'Check out our new events: \n\n';
 
-		message += category.name + '\n';
+			for (const category of categories) {
+				const events = await Event.find({ checked: false, idCategory: category._id });
 
-		for (const event of events) {
-			message += event.title + '\n';
+				message += category.name + '\n------------------------\n';
+
+				for (const event of events) {
+					message += event.title + '\n';
+				}
+
+				message += '\n\n';
+			}
+			emailSender.sendEmail(user.email, 'New events', message);
 		}
-
-		message += '\n-------------------------------\n';
 	}
-
-	emailSender.sendEmail('ursaciuc.adrian27@gmail.com', 'New events', message);
 }
 
 export async function getEventbriteEvents(): Promise<void> {
