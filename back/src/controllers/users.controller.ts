@@ -1,14 +1,18 @@
 import http from 'http';
+import url from 'url';
+import ObjectId from 'mongoose';
 
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 
 import User from '../models/user.model';
+import Category from '../models/category.model';
 
 import { BaseController } from './base.controller';
 
 import * as reader from '../utils/reader.util';
 import * as writer from '../utils/writer.util';
+import { type } from 'os';
 
 export class UsersController extends BaseController {
 	constructor() {
@@ -85,4 +89,62 @@ export class UsersController extends BaseController {
 			writer.writeError(res, { auth: false, message: 'No token provided.' }, 401);
 		}
 	}
+
+	public async addSubscription(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
+		const queryData = url.parse(req.url, true).query;
+
+		try {
+			const user = await User.findOne({ _id: queryData.id });
+			const count = await Category.count({ _id: queryData.category });
+
+			let subscriptions = user.subscriptions;
+
+			if (count !== 0) {
+				if (subscriptions.includes(queryData.category) === false) {
+					subscriptions.push(queryData.category);
+					await User.update({ _id: queryData.id }, { $set: { subscriptions: subscriptions } });
+					const newUser = await User.findOne({ _id: queryData.id });
+					writer.writeSuccess(res, newUser);
+				} else {
+					writer.writeSuccess(res, user);
+				}
+			} else {
+				writer.writeError(res, "This category doesn't exist", 400);
+			}
+		} catch (err) {
+			writer.writeError(res, err, 400);
+		}
+	}
+
+	public async removeSubscription(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
+		const queryData = url.parse(req.url, true).query;
+
+		try {
+			const countUser = await User.count({ _id: queryData.id });
+			if (countUser !== 0) {
+				const user = await User.findOne({ _id: queryData.id });
+				const countCategory = await Category.count({ _id: queryData.category });
+				let subscriptions = user.subscriptions;
+
+				if (countCategory !== 0) {
+					if (subscriptions.includes(queryData.category) === true) {
+						let index = subscriptions.indexOf(queryData.category);
+						if (index > -1) {
+							subscriptions.splice(index, 1);
+						}
+						await User.update({ _id: queryData.id }, { $set: { subscriptions: subscriptions } });
+						const newUser = await User.findOne({ _id: queryData.id });
+						writer.writeSuccess(res, newUser);
+					} else {
+						writer.writeSuccess(res, user);
+					}
+				} else {
+					writer.writeError(res, "This category doesn't exist", 400);
+				}
+			}
+		} catch (err) {
+			writer.writeError(res, err, 400);
+		}
+	}
+
 }

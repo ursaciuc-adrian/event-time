@@ -36,5 +36,13 @@ export class UserRoutes {
 		if (reqUrl.pathname === '/auth/me' && req.method === 'GET') {
 			await this.usersController.me(req, res);
 		}
+
+		if (reqUrl.pathname === '/users/add-subscription' && req.method === 'GET') {
+			await this.usersController.addSubscription(req, res);
+		}
+
+		if (reqUrl.pathname === '/users/remove-subscription' && req.method === 'GET') {
+			await this.usersController.removeSubscription(req, res);
+		}
 	}
 }
