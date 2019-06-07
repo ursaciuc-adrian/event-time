@@ -17,6 +17,17 @@ export class EventsController extends BaseController {
 		super(Event);
 	}
 
+	public async notifications(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
+		// TODO: fix Unhandled promise rejection.
+		try {
+			await eventsFetcher.fetchEvents();
+
+			writer.writeSuccess(res, {});
+		} catch (err) {
+			writer.writeError(res, err, 400);
+		}
+	}
+
 	public async getEventbriteEvents(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
 		// TODO: fix Unhandled promise rejection.
 		try {
@@ -24,6 +35,7 @@ export class EventsController extends BaseController {
 
 			writer.writeSuccess(res, {});
 		} catch (err) {
+			console.log(err);
 			writer.writeError(res, err, 400);
 		}
 	}

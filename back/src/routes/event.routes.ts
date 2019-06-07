@@ -29,6 +29,10 @@ export class EventRoutes {
 			await this.eventsController.sendMail(req, res);
 		}
 
+		if (reqUrl.pathname === '/notifications' && req.method === 'GET') {
+			await this.eventsController.notifications(req, res);
+		}
+
 		if (reqUrl.pathname === '/events/eventbrite' && req.method === 'GET') {
 			await this.eventsController.getEventbriteEvents(req, res);
 		}

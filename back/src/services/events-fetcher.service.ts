@@ -3,15 +3,33 @@ import request from 'async-request';
 import Category from '../models/category.model';
 import Event from '../models/event.model';
 
-export function fetchEvents(): void {
+import * as emailSender from '../services/email-sender.service';
 
+export async function fetchEvents(): Promise<void> {
+	const categories = await Category.find({ originName: 'eventbrite' });
+
+	let message = 'Check out our new events: \n\n';
+
+	for (const category of categories) {
+		const events = await Event.find({ checked: false, idCategory: category._id });
+
+		message += category.name + '\n';
+
+		for (const event of events) {
+			message += event.title + '\n';
+		}
+
+		message += '\n-------------------------------\n';
+	}
+
+	emailSender.sendEmail('ursaciuc.adrian27@gmail.com', 'New events', message);
 }
 
 export async function getEventbriteEvents(): Promise<void> {
 	try {
 		const categories = await Category.find({ originName: 'eventbrite' });
 
-		categories.forEach(async (category) => {
+		for (const category of categories) {
 			try {
 				const response = await request(
 					'https://www.eventbriteapi.com/v3/events/search/?categories=' + category.idOrigin + '&expand=venue',
@@ -22,7 +40,7 @@ export async function getEventbriteEvents(): Promise<void> {
 
 				const body = JSON.parse(response.body);
 
-				body.events.forEach(async (element) => {
+				for (const element of body.events) {
 					try {
 						const count = await Event.count({ idOrigin: element.id });
 
@@ -41,17 +59,17 @@ export async function getEventbriteEvents(): Promise<void> {
 							try {
 								await obj.save();
 							} catch (err) {
-								throw err;
+								// we can ignore it
 							}
 						}
 					} catch (err) {
-						throw err;
+						// who needs this?
 					}
-				});
+				}
 			} catch (err) {
 				throw err;
 			}
-		});
+		}
 	} catch (err) {
 		throw err;
 	}
@@ -64,7 +82,7 @@ export async function getMeetupEvents(): Promise<void> {
 		categories.forEach(async (category) => {
 			try {
 				const response = await request(
-					'https://api.meetup.com/2/open_events?&category=' + category.idOrigin + 
+					'https://api.meetup.com/2/open_events?&category=' + category.idOrigin +
 					'&sign=true&photo-host=public&key=352395f2f577c7216632a056757444',
 					{
 						method: 'GET'
