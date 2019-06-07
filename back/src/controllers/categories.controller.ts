@@ -26,9 +26,8 @@ export class CategoriesController extends BaseController {
 
 			const body = JSON.parse(response.body);
 
-			body.categories.forEach(async (element) => {
-				const count = Category.count({ idOrigin: element.id });
-
+			for (const element of body.categories) {
+				const count = await Category.count({ idOrigin: element.id, originName: 'eventbrite' });
 				if (count === 0) {
 					const obj = new Category({
 						name: element.short_name,
@@ -38,7 +37,7 @@ export class CategoriesController extends BaseController {
 
 					await obj.save();
 				}
-			});
+			}
 
 			writer.writeSuccess(res, {});
 		} catch (err) {
@@ -57,8 +56,7 @@ export class CategoriesController extends BaseController {
 			const body = JSON.parse(response.body);
 
 			body.results.forEach(async (element) => {
-				const count = Category.count({ idOrigin: element.id });
-
+				const count = await Category.count({ idOrigin: element.id, originName: 'meetup' });
 				if (count === 0) {
 					const obj = new Category({
 						name: element.shortname,
