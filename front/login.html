@@ -33,37 +33,15 @@
 				<input type="submit" value="Login" id="login-submit-button">
 			</div>
 
+			<span id="wrong-user-pass">Incorrect username or password</span>
+
 			<a href="forgot-password.html" id="forgot-your-password-a">Forgot your password?</a>
 
 			<span id="sign-up-span">You don't have an account? Create one here <a
 					href="register.html">Sign-up</a>.</span>
 		</form>
 	</div>
-	<script>
-		document.querySelector("#login-form").addEventListener("submit", function (e) {
-			e.preventDefault();
+	<script src="scripts/login.js"></script>
 
-			fetch("http://localhost:3000/auth/login", {
-				method: "POST",
-				body: JSON.stringify({
-					email: document.getElementById('login-email').value,
-					password: document.getElementById('login-password').value
-				}),
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			})
-				.then(function (response) {
-					return response.json();
-				})
-				.then(function (myJson) {
-					console.log(myJson);
-				})
-				.catch(err => {
-					alert(err);
-				});
-		});
-	</script>
 </body>
-
 </html>
