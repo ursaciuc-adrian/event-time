@@ -39,13 +39,6 @@
 
 					<button class="button button-primary button-large">Export</button>
 				</div>
-				<div class="bottom-spacer"></div>
-				<div class="module" data-module="partials/event.html"></div>
-				<div class="module" data-module="partials/event.html"></div>
-				<div class="module" data-module="partials/event.html"></div>
-				<div class="module" data-module="partials/event.html"></div>
-				<div class="module" data-module="partials/event.html"></div>
-				<div class="module" data-module="partials/event.html"></div>
 			</div>
 		</div>
 	</main>
@@ -54,21 +47,8 @@
 
 	<script src="scripts/modules.js"></script>
 	<script src="scripts/scroller.js"></script>
+	<script src="scripts/events.js"></script>
 
-	<script>
-		fetch('http://localhost:3000/categories', {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				// 'Content-Type': 'application/x-www-form-urlencoded',
-			},
-		})
-			.then((resp) => resp.json()) // Transform the data into json
-			.then(function (resp) {
-				console.log(resp)
-				// Create and append the li's to the ul
-			})
-	</script>
 </body>
 
 </html>
