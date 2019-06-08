@@ -10,9 +10,6 @@ import * as fetcher from './services/events-fetcher.service';
 
 import * as writer from './utils/writer.util';
 
-const cors = require('cors');
-
-
 class App {
 	public app: http.RequestListener;
 
