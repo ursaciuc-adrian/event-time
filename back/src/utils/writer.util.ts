@@ -4,8 +4,15 @@ function writeJson(response, value, code?) {
 	}
 	value.code = code;
 
-	response.writeHead(code, { 'Content-Type': 'application/json' });
+	const headers = {
+		'Content-Type': 'application/json',
+		'Access-Control-Allow-Origin': '*',
+		'Access-Control-Allow-Methods': '*',
+		'Access-Control-Max-Age': 2592000 // 30 days
+		/** add other headers as per requirement */
+	};
 
+	response.writeHead(code, headers);
 	if (typeof value === 'object') {
 		value = JSON.stringify(value, undefined, 4);
 	}

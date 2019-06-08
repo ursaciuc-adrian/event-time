@@ -10,6 +10,9 @@ import * as fetcher from './services/events-fetcher.service';
 
 import * as writer from './utils/writer.util';
 
+const cors = require('cors');
+
+
 class App {
 	public app: http.RequestListener;
 
@@ -35,9 +38,21 @@ class App {
 
 	private getApp(): http.RequestListener {
 		return async (req, res) => {
+			const headers = {
+				'Access-Control-Allow-Origin': '*',
+				'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT',
+				'Access-Control-Max-Age': 2592000, // 30 days
+				'Access-Control-Allow-Headers': 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers'
+			};
+
+			if (req.method === 'OPTIONS') {
+				res.writeHead(204, headers);
+				res.end();
+			}
+			res.writeHead(200, headers);
+
 			await this.eventRoutes.route(req, res);
 			await this.userRoutes.route(req, res);
-			await this.categoryRoutes.route(req, res);
 			await this.categoryRoutes.route(req, res);
 			await this.changeRequestRoutes.route(req, res);
 

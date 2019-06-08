@@ -6,8 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Event Time</title>
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-	crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+		integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/main.css" />
 </head>
 
@@ -20,15 +20,17 @@
 			<div class="hero-content">
 				<h1 class="title">Event Time</h1>
 				<p class="description">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem quae vel accusamus ipsa suscipit minima magni cupiditate doloremque quo a. Accusamus mollitia minima ea quasi consectetur pariatur. Architecto, rerum voluptatum!
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem quae vel accusamus ipsa suscipit minima
+					magni cupiditate doloremque quo a. Accusamus mollitia minima ea quasi consectetur pariatur.
+					Architecto, rerum voluptatum!
 				</p>
 				<div class="dots">
-						<div class="dot"></div>
-						<div class="dot"></div>
-						<div class="dot"></div>
-					</div>
+					<div class="dot"></div>
+					<div class="dot"></div>
+					<div class="dot"></div>
+				</div>
 			</div>
-		
+
 		</div>
 		<div class="events">
 			<div class="container">
@@ -52,6 +54,21 @@
 
 	<script src="scripts/modules.js"></script>
 	<script src="scripts/scroller.js"></script>
+
+	<script>
+		fetch('http://localhost:3000/categories', {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				// 'Content-Type': 'application/x-www-form-urlencoded',
+			},
+		})
+			.then((resp) => resp.json()) // Transform the data into json
+			.then(function (resp) {
+				console.log(resp)
+				// Create and append the li's to the ul
+			})
+	</script>
 </body>
 
 </html>
