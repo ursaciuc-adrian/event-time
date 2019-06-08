@@ -5,8 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-        crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
     <link rel="stylesheet" href="css/main.css" />
 
     <title>Event Time</title>
@@ -17,32 +17,86 @@
         <h1>Tell us what you're interested in.</h1>
 
         <form action="index.html" id="subscribe-form">
-            <div class="categories-container">
+            <div class="categories-container" id="categories">
                 <div>
                     <input type="checkbox" id="c1" /><label for="c1"><img src="images/mountains.jpeg" alt="" /><span>Web
                             development</span></label>
                 </div>
                 <div>
-                    <input type="checkbox" id="c2" /><label for="c2"><img src="images/mountains.jpeg" alt="" /><span>CSS</span></label>
+                    <input type="checkbox" id="c2" /><label for="c2"><img src="images/mountains.jpeg"
+                            alt="" /><span>CSS</span></label>
                 </div>
                 <div>
-                    <input type="checkbox" id="c3" /><label for="c3"><img src="images/mountains.jpeg" alt="" /><span>CSS</span></label>
+                    <input type="checkbox" id="c3" /><label for="c3"><img src="images/mountains.jpeg"
+                            alt="" /><span>CSS</span></label>
                 </div>
                 <div>
-                    <input type="checkbox" id="c4" /><label for="c4"><img src="images/mountains.jpeg" alt="" /><span>CSS</span></label>
+                    <input type="checkbox" id="c4" /><label for="c4"><img src="images/mountains.jpeg"
+                            alt="" /><span>CSS</span></label>
                 </div>
                 <div>
-                    <input type="checkbox" id="c5" /><label for="c5"><img src="images/mountains.jpeg" alt="" /><span>CSS</span></label>
+                    <input type="checkbox" id="c5" /><label for="c5"><img src="images/mountains.jpeg"
+                            alt="" /><span>CSS</span></label>
                 </div>
                 <div>
-                    <input type="checkbox" id="c6" /><label for="c6"><img src="images/mountains.jpeg" alt="" /><span>CSS</span></label>
+                    <input type="checkbox" id="c6" /><label for="c6"><img src="images/mountains.jpeg"
+                            alt="" /><span>CSS</span></label>
                 </div>
                 <div>
-                    <input type="checkbox" id="c7" /><label for="c7"><img src="images/mountains.jpeg" alt="" /><span>CSS</span></label>
+                    <input type="checkbox" id="c7" /><label for="c7"><img src="images/mountains.jpeg"
+                            alt="" /><span>CSS</span></label>
                 </div>
                 <div>
-                    <input type="checkbox" id="c8" /><label for="c8"><img src="images/mountains.jpeg" alt="" /><span>CSS</span></label>
+                    <input type="checkbox" id="c8" /><label for="c8"><img src="images/mountains.jpeg"
+                            alt="" /><span>CSS</span></label>
                 </div>
+
+                <!-- <script>
+                    let categoriesContainer = document.getElementById("categories");
+                    fetch("http://localhost:3000/categories", {
+                            method: 'GET',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        .then(function (response) {
+                            return response.json();
+                        })
+                        .then(function (myJson) {
+                            console.log(myJson);
+                            let categories = myJson.data;
+                            let i = 0;
+                            categories.forEach(category => {
+                                let div = document.createElement("div");
+                                let input = document.createElement("input");
+                                input.type = "checkbox";
+                                input.id = "c" + i;
+
+                                let label = document.createElement("label");
+                                label.htmlFor = "c" + i;
+
+                                let img = document.createElement("img");
+                                img.src = "images/mountains.jpeg";
+
+                                let span = document.createElement("span");
+                                span.innerText = category.name;
+
+                                label.appendChild(img);
+                                label.appendChild(span);
+                                input.appendChild(label);
+                                div.appendChild(input);
+                                console.log(div);
+
+                                categoriesContainer.appendChild(div);
+
+                                i++;
+                            });
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        });
+                </script> -->
+
             </div>
 
             <input type="submit" id="subscribe-button" value="Subscribe" />

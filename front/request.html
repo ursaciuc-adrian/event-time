@@ -20,13 +20,28 @@
             <h1>Modify an event</h1>
 
             <div class="field-container">
-                <input type="text" id="request-event" placeholder="Event" name="request_event"
-                    onfocus="this.placeholder = ''" onblur="this.placeholder='Event'" required>
+                <input type="text" id="title" placeholder="Title" name="title" onfocus="this.placeholder = ''"
+                    onblur="this.placeholder='Title'">
             </div>
 
             <div class="field-container">
-                <textarea rows="4" cols="50" placeholder="Tell us what you think should be changed."
-                    required></textarea>
+                <input type="text" id="description" placeholder="Description" name="description"
+                    onfocus="this.placeholder = ''" onblur="this.placeholder='Description'">
+            </div>
+
+            <div class="field-container">
+                <input type="text" id="location" placeholder="Location" name="location" onfocus="this.placeholder = ''"
+                    onblur="this.placeholder='Location'">
+            </div>
+
+            <div class="field-container">
+                <input type="number" id="seats" placeholder="Seats" name="seats" onfocus="this.placeholder = ''"
+                    onblur="this.placeholder='Seats'">
+            </div>
+
+            <div class="field-container">
+                <input type="date" id="date" placeholder="Date" name="title" onfocus="this.placeholder = ''"
+                    onblur="this.placeholder='Date'">
             </div>
 
             <div class="field-container">
@@ -35,6 +50,8 @@
 
         </form>
     </div>
+
+    <script src="scripts/request.js"></script>
 
 </body>
 
