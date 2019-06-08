@@ -60,4 +60,17 @@ export class EventsController extends BaseController {
 
 		writer.writeError(res, { message: 'You don\'t have the right to be here.' }, 401);
 	}
+
+	public async  getNEvents(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
+		const queryData = url.parse(req.url, true).query;
+
+		try {
+			let obj = await Event.aggregate([{ $sample: { size: parseInt(queryData.nr[0], 10) } }]);
+
+			writer.writeSuccess(res, obj);
+		} catch (err) {
+			console.log(err);
+			writer.writeError(res, err, 400);
+		}
+	}
 }
