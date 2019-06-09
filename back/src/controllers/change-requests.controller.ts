@@ -14,6 +14,16 @@ export class ChangeRequestsController extends BaseController {
 		super(ChangeRequest);
 	}
 
+	public async getUnchecked(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
+		try {
+			const obj = await ChangeRequest.find({ checked: false });
+
+			writer.writeSuccess(res, obj);
+		} catch (err) {
+			writer.writeError(res, err, 400);
+		}
+	}
+
 	public async acceptChangeRequest(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
 		const queryData = url.parse(req.url, true).query;
 
