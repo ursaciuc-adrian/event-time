@@ -6,11 +6,10 @@ fetch('http://localhost:3000/events/random?nr=5', {
 })
     .then((resp) => resp.json())
     .then(function (resp) {
-        console.log(resp)
         let parent = document.getElementsByClassName("container");
 
-        var months = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
-           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+        var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
         resp.data.forEach(element => {
             let raw = document.createElement("div");
@@ -20,8 +19,7 @@ fetch('http://localhost:3000/events/random?nr=5', {
             <p class='month'>`;
 
             let rawDate = element.date;
-            console.log(rawDate);
-            let rawMonth = rawDate.substring(5,7);
+            let rawMonth = rawDate.substring(5, 7);
             let value = parseInt(rawMonth, 10);
 
             event += months[value - 1];
@@ -29,9 +27,9 @@ fetch('http://localhost:3000/events/random?nr=5', {
             event += `</p>
             <p class='day'>`;
 
-            let rawDay = rawDate.substring(8,10);
+            let rawDay = rawDate.substring(8, 10);
             rawDay = parseInt(rawDay, 10);
-            
+
             event += rawDay;
 
             event += `</p>
@@ -44,7 +42,7 @@ fetch('http://localhost:3000/events/random?nr=5', {
             <div class='details'>
                 <div class='title'>
                     `;
-            
+
             event += element.title;
 
             event += `
@@ -56,7 +54,7 @@ fetch('http://localhost:3000/events/random?nr=5', {
             event += `</p>
             <p class='time'>`;
 
-            let hour = rawDate.substring(11,16);
+            let hour = rawDate.substring(11, 16);
 
             event += hour;
 
@@ -65,7 +63,7 @@ fetch('http://localhost:3000/events/random?nr=5', {
                 `;
 
             let rawDescription = element.description;
-            if(rawDescription.length > 300) {
+            if (rawDescription.length > 300) {
                 rawDescription = rawDescription.substring(0, 300);
                 rawDescription = rawDescription + " ...";
             }
@@ -77,8 +75,23 @@ fetch('http://localhost:3000/events/random?nr=5', {
             <div class='tags'>
                 <div class='tag'>`
 
-            event += "CEVA";
-                
+            let fetchCategoryURL = 'http://localhost:3000/categories/name?id=';
+            fetchCategoryURL += element.idCategory;
+            fetch(fetchCategoryURL, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then((resp) => resp.json())
+                .then(function (resp) {
+                    if (resp.status == "success") {
+                        event += resp.data.name;
+                    } else {
+                        event += "No tags";
+                    }
+                });
+
             event += `</div>
             </div>
             <a href='../request.html' class='goto'>Request change <i class='fas fa-long-arrow-alt-right'></i> </a>
@@ -86,9 +99,7 @@ fetch('http://localhost:3000/events/random?nr=5', {
         
         </div>`;
 
-
             raw.innerHTML = event;
-            console.log(event);
             parent[0].appendChild(raw);
 
             let spacer = document.createElement("div");
