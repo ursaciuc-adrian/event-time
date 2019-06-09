@@ -25,9 +25,9 @@
 				<table class="space-top">
 					<thead>
 						<tr>
-							<th>First Name</th>
-							<th>Last Name</th>
+							<th>Name</th>
 							<th>Email</th>
+							<th>Password</th>
 							<th>Action</th>
 						</tr>
 					</thead>
@@ -102,7 +102,7 @@
 								return response.json();
 							})
 							.then(function (myJson) {
-								let users = myJson.data;
+								var users = myJson.data;
 								users.forEach(element => {
 									let tr = document.createElement("tr");
 									let tdName = document.createElement("td");
@@ -110,18 +110,59 @@
 									let tdPassword = document.createElement("td");
 									let tdButtons = document.createElement("td");
 
-									let buttons =
-										'<button class="button button-icon"><i class="fas fa-info"></i></button><button class="button button-icon hover-info"><i class="fas fa-pen"></i></button><button class="button button-icon hover-danger"><i class="fas fa-trash"></i></button>';
-									tdButtons.innerHTML = buttons;
+									let btn1 = document.createElement('button');
+									btn1.className += "button";
+									btn1.className += " button-icon";
+									btn1.addEventListener('click', () => {
+										console.log("Nothing here!");
+									});
+									let i1 = document.createElement("i");
+									i1.className += "fas";
+									i1.className += " fa-info";
+									btn1.appendChild(i1);
+									let btn2 = document.createElement('button');
+									btn2.className += "button";
+									btn2.className += " button-icon";
+									btn2.className += " hover-info";
+									let i2 = document.createElement("i");
+									i2.className += "fas";
+									i2.className += " fa-pen";
+									btn2.appendChild(i2);
+									let btn3 = document.createElement('button');
+									btn3.className += "button";
+									btn3.className += " button-icon";
+									btn3.className += " hover-danger";
+									btn3.addEventListener('click', () => {
+										fetch('http://localhost:3000/users?id=' + element._id, {
+												method: "DELETE",
+												headers: {
+													'Content-Type': 'application/json'
+												}
+											})
+											.then(resp => resp.json())
+											.then(myJson2 => {
+												console.log(myJson2);
+											})
+											.catch(err => {
+												alert("some error occured");
+											});
+									});
+									let i3 = document.createElement("i");
+									i3.className += "fas";
+									i3.className += " fa-trash";
+									btn3.appendChild(i3);
+
 									tdName.innerText = element.name;
 									tdEmail.innerText = element.email;
 									tdPassword.innerText = element.password;
 
+									tdButtons.appendChild(btn1);
+									tdButtons.appendChild(btn2);
+									tdButtons.appendChild(btn3);
 									tr.appendChild(tdName);
 									tr.appendChild(tdEmail);
 									tr.appendChild(tdPassword);
 									tr.appendChild(tdButtons);
-
 									tbody.appendChild(tr);
 								});
 							})
