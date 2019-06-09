@@ -16,10 +16,10 @@ document.querySelector("#login-form").addEventListener("submit", function (e) {
         })
         .then(function (myJson) {
             if(myJson.status == "success") {
-                window.location.href = "http://localhost:5500/index.html";
+                window.location.href = "index.html";
             }
             else {
-                document.getElementById("wrong-user-pass").style.display = "block";
+                document.getElementById("error").innerText = myJson.data.message;
             }
         })
         .catch(err => {
