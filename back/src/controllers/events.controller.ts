@@ -2,6 +2,7 @@ import http from 'http';
 import url from 'url';
 
 import Event from '../models/event.model';
+import Category from '../models/category.model';
 
 import { BaseController } from './base.controller';
 
@@ -61,15 +62,17 @@ export class EventsController extends BaseController {
 		writer.writeError(res, { message: 'You don\'t have the right to be here.' }, 401);
 	}
 
-	public async  getNEvents(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
+	public async getNEvents(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
 		const queryData = url.parse(req.url, true).query;
 
 		try {
-			let obj = await Event.aggregate([{ $sample: { size: parseInt(queryData.nr[0], 10) } }]);
+			const result = await Event.aggregate([{ $sample: { size: parseInt(queryData.nr[0], 10) } }]);
+			for (const event of result) {
+				event.category = (await Category.findById({ _id: event.idCategory })).name;
+			}
 
-			writer.writeSuccess(res, obj);
+			writer.writeSuccess(res, result);
 		} catch (err) {
-			console.log(err);
 			writer.writeError(res, err, 400);
 		}
 	}

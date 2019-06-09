@@ -6,13 +6,13 @@ fetch('http://localhost:3000/events/random?nr=5', {
 })
 	.then((resp) => resp.json())
 	.then(function (resp) {
-		console.log(resp)
 		let parent = document.getElementsByClassName("container");
 
 		var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
 			"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 		resp.data.forEach(element => {
+			console.log(element);
 			let raw = document.createElement("div");
 			raw.className = "event";
 
@@ -36,6 +36,8 @@ fetch('http://localhost:3000/events/random?nr=5', {
 				rawDescription = rawDescription + " ...";
 			}
 
+			var options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+
 			let event = `
 				<img src="${element.coverPhoto}" alt="placeholder" />
 				<div class="details">
@@ -43,81 +45,17 @@ fetch('http://localhost:3000/events/random?nr=5', {
 						${rawTitle}
 					</div>
 					<p class="location">${element.location}</p>
-					<p class="time">${element.date}</p>
+					<p class="time">${new Date(element.date).toLocaleString("en-US", options)}</p>
 					<p class="description">
 						${rawDescription}
 					</p>
 					<div class="spacer"></div>
 					<div class="tags">
-						<div class="tag">Web Development</div>
+						<div class="tag">${element.category}</div>
 					</div>
 					<a href="../request.html" class="goto"><i class="fas fa-exchange-alt"></i></a>
 				</div>
 			`;
-
-			
-
-		// 	event += months[value - 1];
-
-		// 	event += `</p>
-        //     <p class='day'>`;
-
-			
-
-		// 	event += rawDay;
-
-		// 	event += `</p>
-        //     </div>
-        //     <img src='`;
-
-		// 	event += element.coverPhoto;
-
-		// 	event += `' alt='placeholder' />
-        //     <div class='details'>
-        //         <div class='title'>
-        //             `;
-
-		// 	event += element.title;
-
-		// 	event += `
-        //     </div>
-        //     <p class='location'>`;
-
-		// 	event += element.location;
-
-		// 	event += `</p>
-        //     <p class='time'>`;
-
-		// 	let hour = rawDate.substring(11, 16);
-
-		// 	event += hour;
-
-		// 	event += `</p>
-        //     <p class='description'>
-        //         `;
-
-		// 	let rawDescription = element.description;
-		// 	if (rawDescription.length > 300) {
-		// 		rawDescription = rawDescription.substring(0, 300);
-		// 		rawDescription = rawDescription + " ...";
-		// 	}
-		// 	event += rawDescription;
-
-		// 	event += `
-        //     </p>
-        //     <div class='spacer'></div>
-        //     <div class='tags'>
-        //         <div class='tag'>`
-
-		// 	event += "CEVA";
-
-		// 	event += `</div>
-        //     </div>
-        //     <a href='../request.html' class='goto'>Request change <i class='fas fa-long-arrow-alt-right'></i> </a>
-        // </div>
-        
-        // </div>`;
-
 
 			raw.innerHTML = event;
 			console.log(event);
