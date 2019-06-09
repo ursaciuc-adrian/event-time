@@ -74,4 +74,19 @@ export class CategoriesController extends BaseController {
 		}
 	}
 
+	public async getNameById(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
+		const queryData = url.parse(req.url, true).query;
+		try {
+			const category = await Category.findOne({ _id: queryData.id });
+
+			let data = {
+				name: category.name
+			};
+
+			writer.writeSuccess(res, data);
+		} catch (err) {
+			writer.writeError(res, err, 400);
+		}
+	}
+
 }

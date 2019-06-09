@@ -28,12 +28,11 @@
 							<th>First Name</th>
 							<th>Last Name</th>
 							<th>Email</th>
-							<th>Age</th>
 							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						<!-- <tr>
 							<td>Jill</td>
 							<td>Smith</td>
 							<td>jill@gmail.com</td>
@@ -87,15 +86,53 @@
 								<button class="button button-icon hover-info"><i class="fas fa-pen"></i></button>
 								<button class="button button-icon hover-danger"><i class="fas fa-trash"></i></button>
 							</td>
-						</tr>
+						</tr> -->
 					</tbody>
 
+					<script>
+						let tbody = document.querySelector("tbody");
 
+						fetch("http://localhost:3000/users", {
+								method: "GET",
+								headers: {
+									'Content-Type': 'application/json'
+								}
+							})
+							.then(function (response) {
+								return response.json();
+							})
+							.then(function (myJson) {
+								let users = myJson.data;
+								users.forEach(element => {
+									let tr = document.createElement("tr");
+									let tdName = document.createElement("td");
+									let tdEmail = document.createElement("td");
+									let tdPassword = document.createElement("td");
+									let tdButtons = document.createElement("td");
+
+									let buttons =
+										'<button class="button button-icon"><i class="fas fa-info"></i></button><button class="button button-icon hover-info"><i class="fas fa-pen"></i></button><button class="button button-icon hover-danger"><i class="fas fa-trash"></i></button>';
+									tdButtons.innerHTML = buttons;
+									tdName.innerText = element.name;
+									tdEmail.innerText = element.email;
+									tdPassword.innerText = element.password;
+
+									tr.appendChild(tdName);
+									tr.appendChild(tdEmail);
+									tr.appendChild(tdPassword);
+									tr.appendChild(tdButtons);
+
+									tbody.appendChild(tr);
+								});
+							})
+							.catch(err => {
+								console.log(err);
+							});
+					</script>
 				</table>
 			</div>
 		</div>
 	</main>
-
 	<script src="../scripts/modules.js"></script>
 	<script src="../scripts/left-side-navbar.js"></script>
 </body>
