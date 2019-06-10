@@ -12,12 +12,10 @@ fetch('http://localhost:3000/events/random?nr=5', {
 			"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 		resp.data.forEach(element => {
-			console.log(element);
 			let raw = document.createElement("div");
 			raw.className = "event";
 
 			let rawDate = element.date;
-			console.log(rawDate);
 			let rawMonth = rawDate.substring(5, 7);
 			let value = parseInt(rawMonth, 10);
 
@@ -63,7 +61,6 @@ fetch('http://localhost:3000/events/random?nr=5', {
 			`;
 
 			raw.innerHTML = event;
-			console.log(event);
 			parent[0].appendChild(raw);
 
 			let spacer = document.createElement("div");
