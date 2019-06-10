@@ -36,10 +36,15 @@ fetch('http://localhost:3000/events/random?nr=5', {
 				rawDescription = rawDescription + " ...";
 			}
 
+			let coverPhoto = element.coverPhoto;
+			if (!coverPhoto) {
+				coverPhoto = "/images/no-image-found.jpg";
+			}
+
 			var options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
 
 			let event = `
-				<img src="${element.coverPhoto}" alt="placeholder" />
+				<img src="${coverPhoto}" alt="placeholder" />
 				<div class="details">
 					<div class="title">
 						${rawTitle}
