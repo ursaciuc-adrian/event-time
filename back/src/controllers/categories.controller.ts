@@ -2,6 +2,7 @@ import http from 'http';
 import url from 'url';
 
 import Category from '../models/category.model';
+import User from '../models/user.model';
 
 import { BaseController } from './base.controller';
 
@@ -9,6 +10,7 @@ import request from 'async-request';
 
 import * as reader from '../utils/reader.util';
 import * as writer from '../utils/writer.util';
+import { write } from 'fs';
 
 export class CategoriesController extends BaseController {
 	constructor() {
@@ -89,4 +91,29 @@ export class CategoriesController extends BaseController {
 		}
 	}
 
+
+	public async getUnsubscribedCategories(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
+		const queryData = url.parse(req.url, true).query;
+
+		try {
+			const user = await User.findOne({ _id: queryData.id });
+			let categoriesObj = await Category.find({});
+			let categories = [];
+			let subscriptions = user.subscriptions;
+
+			categoriesObj.forEach(element => {
+				categories.push(element._id);
+			});
+
+			categoriesObj = categoriesObj.filter(item => !subscriptions.includes(item._id));
+
+			let data = {
+				categories: categoriesObj
+			};
+
+			writer.writeSuccess(res, data);
+		} catch (err) {
+			writer.writeError(res, err, 400);
+		}
+	}
 }

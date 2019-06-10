@@ -76,6 +76,7 @@ export class UsersController extends BaseController {
 				const user = await User.findById(decoded.id);
 
 				writer.writeSuccess(res, {
+					id: user._id,
 					name: user.name,
 					email: user.email,
 					role: user.role
@@ -144,5 +145,4 @@ export class UsersController extends BaseController {
 			writer.writeError(res, err, 400);
 		}
 	}
-
 }
