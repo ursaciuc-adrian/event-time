@@ -32,7 +32,7 @@ export class CategoriesController extends BaseController {
 					const obj = new Category({
 						name: element.short_name,
 						idOrigin: element.id,
-						originName: 'eventbrite'
+						originName: 'Eventbrite'
 					});
 
 					await obj.save();
@@ -61,7 +61,7 @@ export class CategoriesController extends BaseController {
 					const obj = new Category({
 						name: element.shortname,
 						idOrigin: element.id,
-						originName: 'meetup'
+						originName: 'Meetup'
 					});
 
 					await obj.save();
