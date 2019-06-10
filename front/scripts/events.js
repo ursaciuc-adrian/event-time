@@ -12,17 +12,17 @@ fetch('http://localhost:3000/events/random?nr=5', {
 			"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 		resp.data.forEach(element => {
-			console.log(element);
 			let raw = document.createElement("div");
 			raw.className = "event";
 
 			let rawDate = element.date;
-			console.log(rawDate);
 			let rawMonth = rawDate.substring(5, 7);
 			let value = parseInt(rawMonth, 10);
 
 			let rawDay = rawDate.substring(8, 10);
 			rawDay = parseInt(rawDay, 10);
+
+			let hour = rawDate.substring(11,16);
 
 			let rawTitle = element.title;
 			if (rawTitle.length > 40) {
@@ -44,13 +44,17 @@ fetch('http://localhost:3000/events/random?nr=5', {
 			var options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
 
 			let event = `
+				<div class="date">
+					<p class="month">${months[value - 1]}</p>
+					<p class="day">${rawDay}</p>
+				</div>
 				<img src="${coverPhoto}" alt="placeholder" />
 				<div class="details">
 					<div class="title">
 						${rawTitle}
 					</div>
 					<p class="location">${element.location}</p>
-					<p class="time">${new Date(element.date).toLocaleString("en-US", options)}</p>
+					<p class="time">${hour}</p>
 					<p class="description">
 						${rawDescription}
 					</p>
@@ -63,7 +67,6 @@ fetch('http://localhost:3000/events/random?nr=5', {
 			`;
 
 			raw.innerHTML = event;
-			console.log(event);
 			parent[0].appendChild(raw);
 
 			let spacer = document.createElement("div");
