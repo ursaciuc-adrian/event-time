@@ -1,9 +1,8 @@
 import request from 'async-request';
 
 import Category from '../models/category.model';
-import Event from '../models/event.model';
+import Event, { IEvent } from '../models/event.model';
 import User from '../models/user.model';
-
 
 import * as emailSender from '../services/email-sender.service';
 
@@ -27,6 +26,7 @@ export async function fetchEvents(): Promise<void> {
 
 				message += '\n\n';
 			}
+
 			emailSender.sendEmail(user.email, 'New events', message);
 		}
 	}

@@ -1,4 +1,18 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Document, Schema } from 'mongoose';
+
+export interface IEvent extends Document {
+	id?: string;
+	idCategory: string;
+	idOrigin: string;
+	originName: string;
+	title: string;
+	description: string;
+	location: string;
+	seats: string;
+	coverPhoto: string;
+	date: string;
+	checked?: boolean;
+}
 
 const EventSchema = new Schema({
 	id: {
@@ -55,4 +69,4 @@ const EventSchema = new Schema({
 	}
 });
 
-export default mongoose.model('Event', EventSchema);
+export default mongoose.model<IEvent>('Event', EventSchema);

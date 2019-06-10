@@ -49,8 +49,12 @@ export class EventRoutes {
 			await this.eventsController.getNEvents(req, res);
 		}
 
-		if (reqUrl.pathname === '/events/organizer' && req.method === 'GET') {
-			await this.eventsController.getEventsByOrganization(req, res);
+		if (reqUrl.pathname === '/events/eventbrite/organizer' && req.method === 'GET') {
+			await this.eventsController.getEventbriteEventsByOrganization(req, res);
+		}
+
+		if (reqUrl.pathname === '/events/meetup/organizer' && req.method === 'GET') {
+			await this.eventsController.getMeetupEventsByOrganization(req, res);
 		}
 	}
 }
