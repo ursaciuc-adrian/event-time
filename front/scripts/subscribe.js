@@ -36,11 +36,4 @@ document.querySelector("#subscribe-form").addEventListener("submit", function (e
                 console.log(err);
             })
     });
-
-
-
-
-
-
-
 });
