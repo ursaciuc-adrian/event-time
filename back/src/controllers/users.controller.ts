@@ -1,18 +1,16 @@
 import http from 'http';
 import url from 'url';
-import ObjectId from 'mongoose';
 
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 
-import User from '../models/user.model';
 import Category from '../models/category.model';
+import User from '../models/user.model';
 
 import { BaseController } from './base.controller';
 
 import * as reader from '../utils/reader.util';
 import * as writer from '../utils/writer.util';
-import { type } from 'os';
 
 export class UsersController extends BaseController {
 	constructor() {

@@ -8,6 +8,7 @@ import * as writer from '../utils/writer.util';
 
 export class BaseController {
 	public readonly Schema: Schema;
+	public readonly Authorization: any;
 
 	constructor(schema: Schema) {
 		this.Schema = schema;
@@ -25,10 +26,22 @@ export class BaseController {
 	}
 
 	public async get(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
-		try {
-			const obj = await this.Schema.find({});
+		const queryData = url.parse(req.url, true).query;
 
-			writer.writeSuccess(res, obj);
+		try {
+			const pageNo = +queryData.pageNo;
+			const size = +queryData.size;
+			let query = {};
+			if (pageNo && size) {
+				query = {
+					skip: size * (pageNo - 1),
+					limit: size
+				};
+			}
+
+			const result = await this.Schema.find({}, {}, query);
+			writer.writeSuccess(res, result);
+
 		} catch (err) {
 			writer.writeError(res, err, 400);
 		}
