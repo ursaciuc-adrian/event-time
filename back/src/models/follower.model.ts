@@ -7,13 +7,15 @@ export const FollowerSchema = new Schema({
 	},
 	idOrigin: {
 		type: String,
-		required: true
+		required: true,
+		unique: true,
+		dropDups: true
 	},
 	originName: {
 		type: String,
 		trim: true
 	},
-	name: {
+	url: {
 		type: String,
 		required: true,
 		trim: true

@@ -5,6 +5,7 @@ import { CategoryRoutes } from './routes/category.routes';
 import { ChangeRequestRoutes } from './routes/change-request.routes';
 import { EventRoutes } from './routes/event.routes';
 import { UserRoutes } from './routes/user.routes';
+import { FollowerRoutes } from './routes/follower.routes';
 
 import * as fetcher from './services/events-fetcher.service';
 
@@ -16,6 +17,7 @@ class App {
 	private readonly MONGO_URL: string = 'mongodb://localhost:27017/eventtime';
 
 	private categoryRoutes: CategoryRoutes = new CategoryRoutes();
+	private followerRoutes: FollowerRoutes = new FollowerRoutes();
 	private eventRoutes: EventRoutes = new EventRoutes();
 	private userRoutes: UserRoutes = new UserRoutes();
 	private changeRequestRoutes: ChangeRequestRoutes = new ChangeRequestRoutes();
@@ -50,6 +52,7 @@ class App {
 
 			await this.eventRoutes.route(req, res);
 			await this.userRoutes.route(req, res);
+			await this.followerRoutes.route(req, res);
 			await this.categoryRoutes.route(req, res);
 			await this.changeRequestRoutes.route(req, res);
 
