@@ -76,16 +76,15 @@ export class UsersController extends BaseController {
 
 					const user = await User.findById(decoded.id);
 
-					writer.writeSuccess(res, {
-						name: user.name,
-						email: user.email,
-						role: user.role
-					});
-				} catch {
-					writer.writeError(res, { auth: false, message: 'Failed to authenticate token.' }, 500);
-				}
-			} else {
-				writer.writeError(res, { auth: false, message: 'No token provided.' }, 401);
+
+				writer.writeSuccess(res, {
+					id: user._id,
+					name: user.name,
+					email: user.email,
+					role: user.role
+				});
+			} catch {
+				writer.writeError(res, { auth: false, message: 'Failed to authenticate token.' }, 500);
 			}
 		} else {
 			writer.writeError(res, { auth: false, message: 'No authorization in header provided.' }, 402);
@@ -148,5 +147,4 @@ export class UsersController extends BaseController {
 			writer.writeError(res, err, 400);
 		}
 	}
-
 }
