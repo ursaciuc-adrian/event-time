@@ -4,7 +4,7 @@ let ADJACENTS = 3;
 let TOTAL_PAGES = 0;
 
 (function () {
-    fetchEvents();
+    fetchCategories();
 })();
 
 function setupPagination() {
@@ -27,14 +27,14 @@ function setupPagination() {
 function prevPage() {
     if (CURRENT_PAGE > 1) {
         CURRENT_PAGE--;
-        fetchEvents();
+        fetchCategories();
     }
 }
 
 function nextPage() {
     if (CURRENT_PAGE < TOTAL_PAGES) {
         CURRENT_PAGE++;
-        fetchEvents();
+        fetchCategories();
     }
 }
 
@@ -46,7 +46,7 @@ function getPageLink(i, page) {
     a.innerText = i;
     a.onclick = function () {
         CURRENT_PAGE = i;
-        fetchEvents();
+        fetchCategories();
     };
 
     if (i === page) {
@@ -109,7 +109,7 @@ function setPagination() {
     }
 }
 
-function fetchEvents() {
+function fetchCategories() {
     let tbody = document.getElementById("categories-list");
     tbody.innerHTML = '';
 
