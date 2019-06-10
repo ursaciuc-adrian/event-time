@@ -34,7 +34,7 @@ export async function fetchEvents(): Promise<void> {
 
 export async function getEventbriteEvents(): Promise<void> {
 	try {
-		const categories = await Category.find({ originName: 'eventbrite' });
+		const categories = await Category.find({ originName: 'Eventbrite' });
 
 		for (const category of categories) {
 			try {
@@ -85,7 +85,7 @@ export async function getEventbriteEvents(): Promise<void> {
 
 export async function getMeetupEvents(): Promise<void> {
 	try {
-		const categories = await Category.find({ originName: 'meetup' });
+		const categories = await Category.find({ originName: 'Meetup' });
 		for (const category of categories) {
 			try {
 				const response = await request(
