@@ -53,6 +53,21 @@
 
                 <script>
                     let categoriesContainer = document.getElementById("categories");
+
+                    // fetch("http://localhost:3000/auth/me", {
+                    //         method: "GET",
+                    //         headers: {
+                    //             'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+                    //         }
+                    //     })
+                    //     .then(resp => resp.json)
+                    //     .then(myJson2 => {
+                    //         console.log(myJson2);
+                    //     })
+                    //     .catch(err => {
+                    //         console.log(err);
+                    //     })
+
                     fetch("http://localhost:3000/categories", {
                             method: 'GET',
                             headers: {
