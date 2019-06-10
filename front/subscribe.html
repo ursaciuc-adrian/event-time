@@ -18,7 +18,7 @@
 
         <form action="index.html" id="subscribe-form">
             <div class="categories-container" id="categories">
-                <div>
+                <!-- <div>
                     <input type="checkbox" id="c1" /><label for="c1"><img src="images/mountains.jpeg" alt="" /><span>Web
                             development</span></label>
                 </div>
@@ -49,9 +49,9 @@
                 <div>
                     <input type="checkbox" id="c8" /><label for="c8"><img src="images/mountains.jpeg"
                             alt="" /><span>CSS</span></label>
-                </div>
+                </div> -->
 
-                <!-- <script>
+                <script>
                     let categoriesContainer = document.getElementById("categories");
                     fetch("http://localhost:3000/categories", {
                             method: 'GET',
@@ -77,14 +77,15 @@
 
                                 let img = document.createElement("img");
                                 img.src = "images/mountains.jpeg";
+                                img.alt = " ";
 
                                 let span = document.createElement("span");
                                 span.innerText = category.name;
 
                                 label.appendChild(img);
                                 label.appendChild(span);
-                                input.appendChild(label);
                                 div.appendChild(input);
+                                div.appendChild(label);
                                 console.log(div);
 
                                 categoriesContainer.appendChild(div);
@@ -95,7 +96,7 @@
                         .catch(err => {
                             console.log(err);
                         });
-                </script> -->
+                </script>
 
             </div>
 
