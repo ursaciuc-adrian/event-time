@@ -8,8 +8,7 @@ let TOTAL_PAGES = 0;
 })();
 
 function setupPagination() {
-	fetch(`http://localhost:3000/events/pages?size=${SIZE}`,
-		{
+	fetch(`http://localhost:3000/events/pages?size=${SIZE}`, {
 			method: "GET",
 			headers: {
 				'Content-Type': 'application/json'
@@ -26,14 +25,14 @@ function setupPagination() {
 }
 
 function prevPage() {
-	if(CURRENT_PAGE > 1) {
+	if (CURRENT_PAGE > 1) {
 		CURRENT_PAGE--;
 		fetchEvents();
 	}
 }
 
 function nextPage() {
-	if(CURRENT_PAGE < TOTAL_PAGES) {
+	if (CURRENT_PAGE < TOTAL_PAGES) {
 		CURRENT_PAGE++;
 		fetchEvents();
 	}
@@ -83,8 +82,7 @@ function setPagination() {
 			list.appendChild(getPageLink(TOTAL_PAGES - 2, CURRENT_PAGE));
 			list.appendChild(getPageLink(TOTAL_PAGES - 1, CURRENT_PAGE));
 			list.appendChild(getPageLink(TOTAL_PAGES, CURRENT_PAGE));
-		}
-		else if (TOTAL_PAGES - (ADJACENTS * 2) > CURRENT_PAGE && CURRENT_PAGE > (ADJACENTS * 2)) {
+		} else if (TOTAL_PAGES - (ADJACENTS * 2) > CURRENT_PAGE && CURRENT_PAGE > (ADJACENTS * 2)) {
 			list.appendChild(getPageLink(1, CURRENT_PAGE));
 			list.appendChild(getPageLink(2, CURRENT_PAGE));
 			list.appendChild(getPageLink(3, CURRENT_PAGE));
@@ -98,8 +96,7 @@ function setPagination() {
 			list.appendChild(getPageLink(TOTAL_PAGES - 2, CURRENT_PAGE));
 			list.appendChild(getPageLink(TOTAL_PAGES - 1, CURRENT_PAGE));
 			list.appendChild(getPageLink(TOTAL_PAGES, CURRENT_PAGE));
-		}
-		else {
+		} else {
 			list.appendChild(getPageLink(1, CURRENT_PAGE));
 			list.appendChild(getPageLink(2, CURRENT_PAGE));
 			list.appendChild(getPageLink(3, CURRENT_PAGE));
@@ -117,11 +114,11 @@ function fetchEvents() {
 	tbody.innerHTML = '';
 
 	fetch(`http://localhost:3000/events?pageNo=${CURRENT_PAGE}&&size=${SIZE}`, {
-		method: "GET",
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	})
+			method: "GET",
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
 		.then(function (response) {
 			return response.json();
 		})
@@ -131,7 +128,7 @@ function fetchEvents() {
 				let tr = document.createElement('tr');
 				tr.innerHTML = `
 							<tr>
-								<td>${element.originName}</td>
+								<td>${element.idOrigin}</td>
 								<td>${element.title}</td>
 								<td>${element.location}</td>
 								<td>${new Date(element.date).toLocaleString()}</td>
@@ -154,8 +151,7 @@ function fetchEvents() {
 function deleteEvent(id) {
 	var r = confirm("Are you sure you want to delete this event?");
 	if (r == true) {
-		fetch('http://localhost:3000/events?id=' + id,
-			{
+		fetch('http://localhost:3000/events?id=' + id, {
 				method: "DELETE",
 				headers: {
 					'Content-Type': 'application/json'

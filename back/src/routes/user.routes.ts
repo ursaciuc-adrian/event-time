@@ -13,6 +13,10 @@ export class UserRoutes {
 			await this.usersController.get(req, res);
 		}
 
+		if (reqUrl.pathname === '/users/pages' && req.method === 'GET') {
+			await this.usersController.getTotalPages(req, res);
+		}
+
 		if (reqUrl.pathname === '/users' && req.method === 'POST') {
 			await this.usersController.add(req, res);
 		}
