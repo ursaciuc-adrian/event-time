@@ -54,6 +54,7 @@ export async function getEventbriteEvents(): Promise<void> {
 						if (count === 0) {
 							const obj = new Event({
 								idOrigin: element.id,
+								originName: 'Eventbrite',
 								idCategory: category._id,
 								title: element.name.text,
 								description: element.description != null ? element.description.text : "",
@@ -103,6 +104,7 @@ export async function getMeetupEvents(): Promise<void> {
 						if (count === 0) {
 							const obj = new Event({
 								idOrigin: element.id,
+								originName: 'Meetup',
 								idCategory: category._id,
 								title: element.name != null ? element.name : '',
 								description: element.description != null ? element.description : '',

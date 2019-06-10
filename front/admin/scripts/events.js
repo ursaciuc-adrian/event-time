@@ -131,7 +131,7 @@ function fetchEvents() {
 				let tr = document.createElement('tr');
 				tr.innerHTML = `
 							<tr>
-								<td>${element.seats}</td>
+								<td>${element.originName}</td>
 								<td>${element.title}</td>
 								<td>${element.location}</td>
 								<td>${new Date(element.date).toLocaleString()}</td>

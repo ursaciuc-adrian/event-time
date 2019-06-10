@@ -15,6 +15,11 @@ const EventSchema = new Schema({
 		index: { unique: true },
 		trim: true
 	},
+	originName: {
+		type: String,
+		index: { unique: true },
+		trim: true
+	},
 	title: {
 		type: String,
 		required: true,
