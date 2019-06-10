@@ -40,5 +40,9 @@ export class CategoryRoutes {
 		if (reqUrl.pathname === '/categories/name' && req.method === 'GET') {
 			await this.categoriesController.getNameById(req, res);
 		}
+
+		if (reqUrl.pathname === '/categories/unsubscribed' && req.method === 'GET') {
+			await this.categoriesController.getUnsubscribedCategories(req, res);
+		}
 	}
 }
