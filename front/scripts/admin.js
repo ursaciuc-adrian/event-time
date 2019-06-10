@@ -11,10 +11,10 @@ fetch('http://localhost:3000/auth/me', {
         if (resp.status == "fail") {
             window.location.href = "../index.html";
         } else {
-            if (resp.role != "admin") {
+            if (resp.data.role != "admin") {
                 window.location.href = "../index.html";
             } else {
-                let adminName = resp.name;
+                let adminName = resp.data.name;
                 document.getElementsByClassName("name").innerHTML = adminName;
             }
         }
