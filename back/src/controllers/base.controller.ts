@@ -25,6 +25,22 @@ export class BaseController {
 		}
 	}
 
+	public async getTotalPages(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
+		const queryData = url.parse(req.url, true).query;
+
+		try {
+			let size = +queryData.size;
+			if (size === null || size === undefined || size < 1 || isNaN(size)) {
+				size = 1;
+			}
+
+			const result = +(await this.Schema.countDocuments({}));
+			writer.writeSuccess(res, Math.ceil((result / size)));
+		} catch (err) {
+			writer.writeError(res, err, 400);
+		}
+	}
+
 	public async get(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
 		const queryData = url.parse(req.url, true).query;
 

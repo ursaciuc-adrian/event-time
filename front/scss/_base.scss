@@ -60,3 +60,38 @@ table {
     color: #B00020;
     margin-bottom: 10px;
 }
+
+.pagination {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+	text-align: center;
+	margin: 20px 0;
+	
+	.pagination-list {
+		display: flex;
+		list-style: none;
+	}
+
+	.pagination-link {
+		justify-content: space-between;
+
+		&.active {
+			color: #fff;
+			background-color: #21BBFF;
+		}
+	}
+
+	.pagination-link, 
+	.pagination-next, 
+	.pagination-previous {
+		justify-content: center;
+		margin: .25rem;
+		padding: .5rem 1rem;
+		text-align: center;
+		border: 1px solid #dbdbdb;
+		background-color: #fff;
+		cursor: pointer;
+		border-radius: 3px;
+	}
+}

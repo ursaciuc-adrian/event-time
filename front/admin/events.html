@@ -2,187 +2,58 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Event Time</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Event Time</title>
 
-    <link rel="stylesheet" href="../css/main.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<link rel="stylesheet" href="../css/main.css" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+		integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
 
 <body id="admin-zone">
-    <div class="module" data-module="partials/navbar.html"></div>
+	<div class="module" data-module="partials/navbar.html"></div>
 
-    <main class="main">
-        <div class="module" data-module="partials/top_nav.html"></div>
+	<main class="main">
+		<div class="module" data-module="partials/top_nav.html"></div>
 
-        <div class="container">
-            <div class="page-title">Events</div>
-            <button class="button button-success"><i class="fas fa-plus"></i> Create new</button>
-            <div class="adm-tabel">
-                <table class="space-top">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Location</th>
-                            <th>Seats</th>
-                            <th>Date</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- <tr>
-                            <td>Concert Cantaret</td>
-                            <td>Arena Nationala</td>
-                            <td>cantaret@gmail.com</td>
-                            <td>99999</td>
-                            <td>
-                                <button class="button button-icon"><i class="fas fa-info"></i></button>
-                                <button class="button button-icon hover-info"><i class="fas fa-pen"></i></button>
-                                <button class="button button-icon hover-danger"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Concert Cantaret</td>
-                            <td>Arena Nationala</td>
-                            <td>cantaret@gmail.com</td>
-                            <td>99999</td>
-                            <td>
-                                <button class="button button-icon"><i class="fas fa-info"></i></button>
-                                <button class="button button-icon hover-info"><i class="fas fa-pen"></i></button>
-                                <button class="button button-icon hover-danger"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Concert Cantaret</td>
-                            <td>Arena Nationala</td>
-                            <td>cantaret@gmail.com</td>
-                            <td>99999</td>
-                            <td>
-                                <button class="button button-icon"><i class="fas fa-info"></i></button>
-                                <button class="button button-icon hover-info"><i class="fas fa-pen"></i></button>
-                                <button class="button button-icon hover-danger"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Concert Cantaret</td>
-                            <td>Arena Nationala</td>
-                            <td>cantaret@gmail.com</td>
-                            <td>99999</td>
-                            <td>
-                                <button class="button button-icon"><i class="fas fa-info"></i></button>
-                                <button class="button button-icon hover-info"><i class="fas fa-pen"></i></button>
-                                <button class="button button-icon hover-danger"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Concert Cantaret</td>
-                            <td>Arena Nationala</td>
-                            <td>cantaret@gmail.com</td>
-                            <td>99999</td>
-                            <td>
-                                <button class="button button-icon"><i class="fas fa-info"></i></button>
-                                <button class="button button-icon hover-info"><i class="fas fa-pen"></i></button>
-                                <button class="button button-icon hover-danger"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr> -->
-                    </tbody>
-                    <script>
-                        let tbody = document.querySelector("tbody");
+		<div class="container">
+			<div class="page-title">Events</div>
+			<button class="button button-success"><i class="fas fa-plus"></i> Create new</button>
+			<div class="adm-tabel">
+				<table class="space-top">
+					<thead>
+						<tr>
+							<th>Origin</th>
+							<th>Title</th>
+							<th>Location</th>
+							<th>Date</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody id="events-list">
+					</tbody>
+				</table>
+			</div>
+			<div class="pagination">
+				<a class="pagination-previous" onclick="prevPage()">Previous</a>
+				<ul class="pagination-list" id='pagination-list'>
+					<li><a class="pagination-link" onclick="fetchEvents(1, 10)">1</a></li>
+					<li><a class="pagination-link" onclick="fetchEvents(2, 10)">2</a></li>
+					<li><a class="pagination-link">3</a></li>
+					<li><a class="pagination-link">4</a></li>
+					<li><a class="pagination-link">5</a></li>
+				</ul>
+				<a class="pagination-next" onclick="nextPage()">Next page</a>
+			</div>
+		</div>
+	</main>
 
-                        fetch("http://localhost:3000/events", {
-                                method: "GET",
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                }
-                            })
-                            .then(function (response) {
-                                return response.json();
-                            })
-                            .then(function (myJson) {
-                                let users = myJson.data;
-                                users.forEach(element => {
-                                    let tr = document.createElement("tr");
-                                    let tdName = document.createElement("td");
-                                    let tdLocation = document.createElement("td");
-                                    let tdSeats = document.createElement("td");
-                                    let tdDate = document.createElement("td");
-                                    let tdButtons = document.createElement("td");
+	<script src="./scripts/events.js"></script>
 
-                                    let btn1 = document.createElement('button');
-                                    btn1.className += "button";
-                                    btn1.className += " button-icon";
-                                    btn1.addEventListener('click', () => {
-                                        console.log("Nothing here!");
-                                    });
-                                    let i1 = document.createElement("i");
-                                    i1.className += "fas";
-                                    i1.className += " fa-info";
-                                    btn1.appendChild(i1);
-                                    let btn2 = document.createElement('button');
-                                    btn2.className += "button";
-                                    btn2.className += " button-icon";
-                                    btn2.className += " hover-info";
-                                    let i2 = document.createElement("i");
-                                    i2.className += "fas";
-                                    i2.className += " fa-pen";
-                                    btn2.appendChild(i2);
-                                    let btn3 = document.createElement('button');
-                                    btn3.className += "button";
-                                    btn3.className += " button-icon";
-                                    btn3.className += " hover-danger";
-                                    btn3.addEventListener('click', () => {
-                                        fetch('http://localhost:3000/events?id=' + element
-                                                ._id, {
-                                                    method: "DELETE",
-                                                    headers: {
-                                                        'Content-Type': 'application/json'
-                                                    }
-                                                })
-                                            .then(resp => resp.json())
-                                            .then(myJson2 => {
-                                                console.log(myJson2);
-                                            })
-                                            .catch(err => {
-                                                alert("some error occured");
-                                            });
-                                    });
-                                    let i3 = document.createElement("i");
-                                    i3.className += "fas";
-                                    i3.className += " fa-trash";
-                                    btn3.appendChild(i3);
-                                    tdName.innerText = element.title;
-                                    tdLocation.innerText = element.location;
-                                    tdSeats.innerText = element.seats === 0 ? "-" : element.seats;
-                                    tdDate.innerText = Date(element.date).toString();
-
-                                    tdButtons.appendChild(btn1);
-                                    tdButtons.appendChild(btn2);
-                                    tdButtons.appendChild(btn3);
-                                    tr.appendChild(tdName);
-                                    tr.appendChild(tdLocation);
-                                    tr.appendChild(tdSeats);
-                                    tr.appendChild(tdDate);
-                                    tr.appendChild(tdButtons);
-
-                                    tbody.appendChild(tr);
-                                });
-                            })
-                            .catch(err => {
-                                console.log(err);
-                            });
-                    </script>
-
-
-                </table>
-            </div>
-        </div>
-    </main>
-
-    <script src="../scripts/modules.js"></script>
-    <script src="../scripts/left-side-navbar.js"></script>
+	<script src="../scripts/modules.js"></script>
+	<script src="../scripts/left-side-navbar.js"></script>
 </body>
 
 </html>
