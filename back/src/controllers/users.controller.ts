@@ -63,17 +63,19 @@ export class UsersController extends BaseController {
 	}
 
 	public async me(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
-		let token = req.headers.authorization.toString();
+		if (req.headers.authorization) {
+			let token = req.headers.authorization.toString();
 
-		if (token.startsWith('Bearer ')) {
-			token = token.slice(7, token.length);
-		}
+			if (token.startsWith('Bearer ')) {
+				token = token.slice(7, token.length);
+			}
 
-		if (token !== undefined) {
-			try {
-				const decoded = await jwt.verify(token, '123');
+			if (token !== undefined) {
+				try {
+					const decoded = await jwt.verify(token, '123');
 
-				const user = await User.findById(decoded.id);
+					const user = await User.findById(decoded.id);
+
 
 				writer.writeSuccess(res, {
 					id: user._id,
@@ -85,7 +87,7 @@ export class UsersController extends BaseController {
 				writer.writeError(res, { auth: false, message: 'Failed to authenticate token.' }, 500);
 			}
 		} else {
-			writer.writeError(res, { auth: false, message: 'No token provided.' }, 401);
+			writer.writeError(res, { auth: false, message: 'No authorization in header provided.' }, 402);
 		}
 	}
 
