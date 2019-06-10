@@ -10,7 +10,7 @@ export class ChangeRequestRoutes {
 		const reqUrl = url.parse(req.url, true);
 
 		if (reqUrl.pathname === '/change-requests' && req.method === 'GET') {
-			await this.changeRequestsController.get(req, res);
+			await this.changeRequestsController.getUnchecked(req, res);
 		}
 
 		if (reqUrl.pathname === '/change-requests' && req.method === 'POST') {

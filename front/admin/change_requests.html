@@ -25,14 +25,17 @@
                 <table class="space-top">
                     <thead>
                         <tr>
-                            <th>From</th>
                             <th>Event</th>
-                            <th>Reason</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Location</th>
+                            <th>Seats</th>
+                            <th>Date</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <!-- <tr>
                             <td>Cantaret</td>
                             <td>Concert Cantaret</td>
                             <td>Nu am fost invitat!</td>
@@ -81,9 +84,122 @@
                                 <button class="button button-icon hover-info"><i class="fas fa-pen"></i></button>
                                 <button class="button button-icon hover-danger"><i class="fas fa-trash"></i></button>
                             </td>
-                        </tr>
+                        </tr> -->
                     </tbody>
+                    <script>
+                        let tbody = document.querySelector("tbody");
 
+                        fetch("http://localhost:3000/change-requests", {
+                                method: "GET",
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                }
+                            })
+                            .then(function (response) {
+                                return response.json();
+                            })
+                            .then(function (myJson) {
+                                var users = myJson.data;
+                                users.forEach(element => {
+                                    let tr = document.createElement("tr");
+                                    let tdEvent = document.createElement("td");
+                                    let tdTitle = document.createElement("td");
+                                    let tdDescription = document.createElement("td");
+                                    let tdLocation = document.createElement("td");
+                                    let tdSeats = document.createElement("td");
+                                    let tdDate = document.createElement("td");
+                                    let tdButtons = document.createElement("td");
+
+                                    let btn1 = document.createElement('button');
+                                    btn1.className += "button";
+                                    btn1.className += " button-icon";
+                                    btn1.addEventListener('click', () => {
+                                        console.log("Nothing here!");
+                                    });
+                                    let i1 = document.createElement("i");
+                                    i1.className += "fas";
+                                    i1.className += " fa-info";
+                                    btn1.appendChild(i1);
+                                    let btn2 = document.createElement('button');
+                                    btn2.className += "button";
+                                    btn2.className += " button-icon";
+                                    btn2.className += " hover-info";
+                                    btn2.addEventListener('click', () => {
+                                        fetch('http://localhost:3000/change-requests/accept?id=' +
+                                                element
+                                                ._id, {
+                                                    method: "GET",
+                                                    headers: {
+                                                        'Content-Type': 'application/json'
+                                                    }
+                                                })
+                                            .then(resp => resp.json())
+                                            .then(myJson2 => {
+                                                console.log(myJson2);
+                                            })
+                                            .catch(err => {
+                                                alert("some error occured");
+                                            });
+                                    });
+                                    let i2 = document.createElement("i");
+                                    i2.className += "fas";
+                                    i2.className += " fa-check";
+                                    btn2.appendChild(i2);
+                                    let btn3 = document.createElement('button');
+                                    btn3.className += "button";
+                                    btn3.className += " button-icon";
+                                    btn3.className += " hover-danger";
+                                    btn3.addEventListener('click', () => {
+                                        fetch('http://localhost:3000/change-requests?id=' + element
+                                                ._id, {
+                                                    method: "DELETE",
+                                                    headers: {
+                                                        'Content-Type': 'application/json'
+                                                    }
+                                                })
+                                            .then(resp => resp.json())
+                                            .then(myJson2 => {
+                                                console.log(myJson2);
+                                            })
+                                            .catch(err => {
+                                                alert("some error occured");
+                                            });
+                                    });
+                                    let i3 = document.createElement("i");
+                                    i3.className += "fas";
+                                    i3.className += " fa-trash";
+                                    btn3.appendChild(i3);
+
+                                    tdEvent.innerText = element.idEvent;
+                                    tdTitle.innerText = typeof element.title !== "undefined" ? element
+                                        .title : "-";
+                                    tdDescription.innerText = typeof element.description !== "undefined" ?
+                                        element
+                                        .description : "-";
+                                    tdLocation.innerText = typeof element.location !== "undefined" ? element
+                                        .location : "-";
+                                    tdSeats.innerText = typeof element.seats !== "undefined" ? element
+                                        .seats : "-";
+                                    tdDate.innerText = typeof element.date !== "undefined" ? element.date :
+                                        "-";
+
+                                    tdButtons.appendChild(btn1);
+                                    tdButtons.appendChild(btn2);
+                                    tdButtons.appendChild(btn3);
+                                    tr.appendChild(tdEvent);
+                                    tr.appendChild(tdTitle);
+                                    tr.appendChild(tdDescription);
+                                    tr.appendChild(tdLocation);
+                                    tr.appendChild(tdSeats);
+                                    tr.appendChild(tdDate);
+                                    tr.appendChild(tdButtons);
+                                    tbody.appendChild(tr);
+                                });
+                            })
+                            .catch(err => {
+                                console.log(err);
+                            });
+                    </script>
 
                 </table>
             </div>
