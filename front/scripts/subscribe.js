@@ -12,7 +12,7 @@ document.querySelector("#subscribe-form").addEventListener("submit", function (e
             })
             .then(resp => resp.json())
             .then(myJson2 => {
-                if (myJson2) {
+                if (typeof myJson2.data.id !== 'undefined') {
                     fetch("http://localhost:3000/users/add-subscription?id=" + myJson2.data.id + '&category=' + element.id, {
                             method: 'GET',
                             headers: {
@@ -48,8 +48,7 @@ fetch("http://localhost:3000/auth/me", {
     })
     .then(resp => resp.json())
     .then(myJson2 => {
-        if (myJson2) {
-            console.log(myJson2.data.id);
+        if (typeof myJson2.data.id !== 'undefined') {
             fetch("http://localhost:3000/categories/unsubscribed?id=" + myJson2.data.id, {
                     method: 'GET',
                     headers: {
