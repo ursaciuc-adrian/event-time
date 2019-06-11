@@ -32,6 +32,35 @@ export class EventsController extends BaseController {
 		this.meetupEventsFetcher = new MeetupEventsFetcher();
 	}
 
+	public async get(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
+		const queryData = url.parse(req.url, true).query;
+
+		try {
+			const pageNo = +queryData.pageNo;
+			const size = +queryData.size;
+			let query = {};
+			if (pageNo && size) {
+				query = {
+					skip: size * (pageNo - 1),
+					limit: size
+				};
+			}
+
+			let result = [];
+			if (await auth.isLoggedIn(req.headers.authorization)) {
+				const user = await auth.getUser(req.headers.authorization);
+
+				result = await Event.find({ idCategory: { $in: user.subscriptions } }, {}, query).populate('idCategory');
+			} else {
+				result = await Event.find({}, {}, query).populate('idCategory');
+			}
+
+			writer.writeSuccess(res, result);
+		} catch (err) {
+			writer.writeError(res, err, 400);
+		}
+	}
+
 	public async fetchNewEvents(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
 		try {
 			const result = await eventsFetcher.checkForEvents();
@@ -125,7 +154,7 @@ export class EventsController extends BaseController {
 			throw err;
 		}
 	}
-  
+
 	public async getMyEvents(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
 		try {
 			const queryData = url.parse(req.url, true).query;

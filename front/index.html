@@ -39,12 +39,25 @@
 
 					<button class="button button-primary button-large" id="exportBtn">Export</button>
 				</div>
+				<div class="events-list">
+					
+					</div>
+				<div class="pagination">
+					<a class="pagination-previous" onclick="prevPage()">Previous</a>
+					<ul class="pagination-list" id='pagination-list'>
+					</ul>
+					<a class="pagination-next" onclick="nextPage()">Next page</a>
+				</div>
+				
 			</div>
+			
 		</div>
+	
 	</main>
 
 	<div class="module" data-module="partials/footer.html"></div>
 
+	<script src="scripts/index.js"></script>
 	<script src="scripts/modules.js"></script>
 	<script src="scripts/scroller.js"></script>
 	<script src="scripts/events.js"></script>
