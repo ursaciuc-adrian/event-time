@@ -1,5 +1,7 @@
 import request from 'async-request';
 
+import Category from '../../models/category.model';
+
 import { IEvent } from '../../models/event.model';
 import { IEventsFetcher } from './events-fetcher';
 
@@ -32,10 +34,14 @@ export class EventbriteEventsFetcher implements IEventsFetcher {
 				});
 
 			const body = JSON.parse(response.body);
-
 			const events: IEvent[] = [];
 			for (const element of body.events) {
-				events.push(this.getEventFromObject(element));
+				const event = this.getEventFromObject(element);
+
+				if (event.idCategory !== null) {
+					event.idCategory = (await Category.findOne({ idOrigin: event.idCategory }))._id;
+					events.push(event);
+				}
 			}
 
 			return events;

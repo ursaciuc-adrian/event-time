@@ -2,34 +2,82 @@ import request from 'async-request';
 
 import Category from '../models/category.model';
 import Event, { IEvent } from '../models/event.model';
+import Follower from '../models/follower.model';
 import User from '../models/user.model';
 
 import * as emailSender from '../services/email-sender.service';
+import { EventbriteEventsFetcher } from './events-fetcher/eventbrite.events-fetcher';
+import { MeetupEventsFetcher } from './events-fetcher/meetup.events-fetcher';
 
-export async function fetchEvents(): Promise<void> {
+export async function checkForNotifications(): Promise<any> {
+	let emailsSent = 0;
 	const users = await User.find({});
 	for (const user of users) {
-
 		if (user.subscriptions.length > 0) {
 			const categories = await Category.find({ _id: { $in: user.subscriptions } });
 
 			let message = 'Check out our new events: \n\n';
 
+			let hasEvents = false;
 			for (const category of categories) {
 				const events = await Event.find({ checked: false, idCategory: category._id });
 
-				message += category.name + '\n------------------------\n';
+				if (events.length > 0) {
+					hasEvents = true;
 
-				for (const event of events) {
-					message += event.title + '\n';
+					message += category.name + '\n------------------------\n';
+
+					for (const event of events) {
+						message += event.title + '\n';
+					}
+
+					message += '\n\n';
 				}
-
-				message += '\n\n';
 			}
 
-			emailSender.sendEmail(user.email, 'New events', message);
+			if (hasEvents) {
+				emailSender.sendEmail(user.email, 'New events', message);
+				emailsSent++;
+			}
 		}
 	}
+
+	await Event.update({}, { checked: true }, { multi: true });
+
+	return emailsSent;
+}
+
+export async function checkForEvents(): Promise<any> {
+	const followers = await Follower.find({});
+
+	let events: IEvent[] = [];
+
+	const eventbrite = new EventbriteEventsFetcher();
+	const meetup = new MeetupEventsFetcher();
+
+	for (const follower of followers) {
+		if (follower.originName === 'meetup') {
+			events = events.concat(await meetup.getEventsByOrganizer(follower.idOrigin));
+		}
+		if (follower.originName === 'eventbrite') {
+			events = events.concat(await eventbrite.getEventsByOrganizer(follower.idOrigin));
+		}
+	}
+
+	const newEvents = [];
+	for (const event of events) {
+		const newObj = new Event(event);
+		try {
+			const saveObj = await newObj.save();
+			newEvents.push(saveObj);
+		} catch (err) {
+			// do nothing
+			console.log(err);
+
+		}
+	}
+
+	return newEvents;
 }
 
 export async function getEventbriteEvents(): Promise<void> {

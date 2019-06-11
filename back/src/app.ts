@@ -31,7 +31,8 @@ class App {
 
 	private schedule(): void {
 		setInterval(() => {
-			fetcher.fetchEvents();
+			fetcher.checkForEvents();
+			fetcher.checkForNotifications();
 		}, 24 * 60 * 60 * 1000);
 	}
 

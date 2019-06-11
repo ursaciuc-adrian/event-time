@@ -19,16 +19,33 @@ export class FollowersController extends BaseController {
 		try {
 			const organizationUrl = url.parse(queryData.url.toString());
 
-			const id = organizationUrl.href.substr(organizationUrl.href.lastIndexOf('-') + 1, organizationUrl.href.length - 1);
+			if (organizationUrl.hostname === 'www.eventbrite.com') {
+				const id = organizationUrl.href.substr(organizationUrl.href.lastIndexOf('-') + 1, organizationUrl.href.length - 1);
 
-			const newObj = new this.Schema({
-				idOrigin: id,
-				originName: organizationUrl.hostname,
-				url: organizationUrl.href
-			});
-			const saveObj = await newObj.save();
+				const newObj = new this.Schema({
+					idOrigin: id,
+					originName: 'eventbrite',
+					url: organizationUrl.href
+				});
+				const saveObj = await newObj.save();
 
-			writer.writeSuccess(res, saveObj);
+				writer.writeSuccess(res, saveObj);
+			}
+
+			if (organizationUrl.hostname === 'www.meetup.com') {
+				const id = organizationUrl.pathname.replace('/', '');
+				const newObj = new this.Schema({
+					idOrigin: id,
+					originName: 'meetup',
+					url: organizationUrl.href
+				});
+
+				const saveObj = await newObj.save();
+
+				writer.writeSuccess(res, saveObj);
+			}
+
+			writer.writeError(res, { message: 'Website not recognized.' }, 400);
 		} catch (err) {
 			writer.writeError(res, err, 400);
 		}

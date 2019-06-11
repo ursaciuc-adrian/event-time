@@ -26,8 +26,8 @@ const EventSchema = new Schema({
 	},
 	idOrigin: {
 		type: String,
-		index: { unique: true },
-		trim: true
+		unique: true,
+		dropDups: true
 	},
 	originName: {
 		type: String,

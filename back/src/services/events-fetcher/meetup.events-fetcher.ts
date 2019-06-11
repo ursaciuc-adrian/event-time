@@ -1,5 +1,7 @@
 import request from 'async-request';
 
+import Category from '../../models/category.model';
+
 import { IEvent } from '../../models/event.model';
 import { IEventsFetcher } from './events-fetcher';
 
@@ -37,9 +39,12 @@ export class MeetupEventsFetcher implements IEventsFetcher {
 			const events: IEvent[] = [];
 			for (const element of body) {
 				const event: IEvent = this.getEventFromObject(element);
-				event.idCategory = await this.getOrganizationCategory(id);
+				const origincategoryId = await this.getOrganizationCategory(id);
 
-				events.push(event);
+				if (origincategoryId !== null) {
+					event.idCategory = (await Category.findOne({ idOrigin: origincategoryId }))._id;
+					events.push(event);
+				}
 			}
 
 			return events;

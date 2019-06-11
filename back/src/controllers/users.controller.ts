@@ -76,18 +76,18 @@ export class UsersController extends BaseController {
 
 					const user = await User.findById(decoded.id);
 
-
-				writer.writeSuccess(res, {
-					id: user._id,
-					name: user.name,
-					email: user.email,
-					role: user.role
-				});
-			} catch {
-				writer.writeError(res, { auth: false, message: 'Failed to authenticate token.' }, 500);
+					writer.writeSuccess(res, {
+						id: user._id,
+						name: user.name,
+						email: user.email,
+						role: user.role
+					});
+				} catch {
+					writer.writeError(res, { auth: false, message: 'Failed to authenticate token.' }, 500);
+				}
+			} else {
+				writer.writeError(res, { auth: false, message: 'No authorization in header provided.' }, 402);
 			}
-		} else {
-			writer.writeError(res, { auth: false, message: 'No authorization in header provided.' }, 402);
 		}
 	}
 
@@ -98,12 +98,12 @@ export class UsersController extends BaseController {
 			const user = await User.findOne({ _id: queryData.id });
 			const count = await Category.count({ _id: queryData.category });
 
-			let subscriptions = user.subscriptions;
+			const subscriptions = user.subscriptions;
 
 			if (count !== 0) {
 				if (subscriptions.includes(queryData.category) === false) {
 					subscriptions.push(queryData.category);
-					await User.update({ _id: queryData.id }, { $set: { subscriptions: subscriptions } });
+					await User.update({ _id: queryData.id }, { $set: { subscriptions } });
 					const newUser = await User.findOne({ _id: queryData.id });
 					writer.writeSuccess(res, newUser);
 				} else {
@@ -125,11 +125,11 @@ export class UsersController extends BaseController {
 			if (countUser !== 0) {
 				const user = await User.findOne({ _id: queryData.id });
 				const countCategory = await Category.count({ _id: queryData.category });
-				let subscriptions = user.subscriptions;
+				const subscriptions = user.subscriptions;
 
 				if (countCategory !== 0) {
 					if (subscriptions.includes(queryData.category) === true) {
-						let index = subscriptions.indexOf(queryData.category);
+						const index = subscriptions.indexOf(queryData.category);
 						if (index > -1) {
 							subscriptions.splice(index, 1);
 						}

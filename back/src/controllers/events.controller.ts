@@ -28,12 +28,21 @@ export class EventsController extends BaseController {
 		this.meetupEventsFetcher = new MeetupEventsFetcher();
 	}
 
-	public async notifications(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
-		// TODO: fix Unhandled promise rejection.
+	public async fetchNewEvents(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
 		try {
-			await eventsFetcher.fetchEvents();
+			const result = await eventsFetcher.checkForEvents();
 
-			writer.writeSuccess(res, {});
+			writer.writeSuccess(res, result);
+		} catch (err) {
+			writer.writeError(res, err, 400);
+		}
+	}
+
+	public async notify(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
+		try {
+			const result = await eventsFetcher.checkForNotifications();
+
+			writer.writeSuccess(res, { emailsSent: result });
 		} catch (err) {
 			writer.writeError(res, err, 400);
 		}
