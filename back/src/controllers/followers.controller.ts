@@ -33,7 +33,7 @@ export class FollowersController extends BaseController {
 			}
 
 			if (organizationUrl.hostname === 'www.meetup.com') {
-				const id = organizationUrl.pathname.replace('/', '');
+				const id = organizationUrl.pathname.replace(new RegExp('/', 'g'), '');
 				const newObj = new this.Schema({
 					idOrigin: id,
 					originName: 'meetup',

@@ -68,12 +68,15 @@ export async function checkForEvents(): Promise<any> {
 	for (const event of events) {
 		const newObj = new Event(event);
 		try {
-			const saveObj = await newObj.save();
-			newEvents.push(saveObj);
+			const count = await Event.countDocuments({ idOrigin: newObj.idOrigin });
+
+			if (count === 0) {
+				const saveObj = await newObj.save();
+				newEvents.push(saveObj);
+			}
 		} catch (err) {
 			// do nothing
 			console.log(err);
-
 		}
 	}
 

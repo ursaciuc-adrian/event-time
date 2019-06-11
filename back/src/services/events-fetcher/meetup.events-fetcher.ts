@@ -28,6 +28,7 @@ export class MeetupEventsFetcher implements IEventsFetcher {
 
 	public async getEventsByOrganizer(id: string): Promise<IEvent[]> {
 		try {
+			console.log(id);
 			const response = await request(
 				`https://api.meetup.com/${id}/events?key=352395f2f577c7216632a056757444`, 
 				{
