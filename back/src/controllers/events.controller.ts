@@ -3,7 +3,7 @@ import url from 'url';
 import ICAL from 'ical.js';
 import request from 'async-request';
 
-import Event from '../models/event.model';
+import Event, { IEvent } from '../models/event.model';
 import Category from '../models/category.model';
 import User from '../models/user.model';
 
@@ -18,17 +18,35 @@ import * as reader from '../utils/reader.util';
 import * as writer from '../utils/writer.util';
 import { write } from 'fs';
 
+import { EventbriteEventsFetcher } from '../services/events-fetcher/eventbrite.events-fetcher';
+import { MeetupEventsFetcher } from '../services/events-fetcher/meetup.events-fetcher';
+
 export class EventsController extends BaseController {
+	public eventbriteEventsFetcher: EventbriteEventsFetcher;
+	public meetupEventsFetcher: MeetupEventsFetcher;
+
 	constructor() {
 		super(Event);
+
+		this.eventbriteEventsFetcher = new EventbriteEventsFetcher();
+		this.meetupEventsFetcher = new MeetupEventsFetcher();
 	}
 
-	public async notifications(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
-		// TODO: fix Unhandled promise rejection.
+	public async fetchNewEvents(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
 		try {
-			await eventsFetcher.fetchEvents();
+			const result = await eventsFetcher.checkForEvents();
 
-			writer.writeSuccess(res, {});
+			writer.writeSuccess(res, result);
+		} catch (err) {
+			writer.writeError(res, err, 400);
+		}
+	}
+
+	public async notify(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
+		try {
+			const result = await eventsFetcher.checkForNotifications();
+
+			writer.writeSuccess(res, { emailsSent: result });
 		} catch (err) {
 			writer.writeError(res, err, 400);
 		}
@@ -82,57 +100,32 @@ export class EventsController extends BaseController {
 		}
 	}
 
-	public async getEventsByOrganization(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
+	public async getEventbriteEventsByOrganization(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
 		const queryData = url.parse(req.url, true).query;
 
 		try {
-			const categories = await Category.find({ originName: 'Meetup' });
-			let events = [];
+			const id = queryData.id.toString();
+			const events: IEvent[] = await this.eventbriteEventsFetcher.getEventsByOrganizer(id);
 
-			const response = await request(
-				'https://api.meetup.com/find/groups?&sign=true&photo-host=public&key=352395f2f577c7216632a056757444', {
-					method: 'GET'
-				});
-
-			const body = JSON.parse(response.body);
-
-			for (const group of body) {
-				console.log(group.urlname);
-				if (queryData.name === group.organizer.name) {
-					const response2 = await request(
-						'https://api.meetup.com/' + group.urlname + '/events?&sign=true&photo-host=public&key=352395f2f577c7216632a056757444', {
-							method: 'GET'
-						});
-
-					const body2 = JSON.parse(response2.body);
-
-					for (const element of body2) {
-						let event = {
-							idOrigin: element.id,
-							originName: 'Meetup',
-							title: element.name != null ? element.name : '',
-							description: element.description != null ? element.description : '',
-							location: element.group.localized_location !== null && typeof element.group.localized_location !== 'undefined' ? element.group.localized_location : '',
-							seats: element.yes_rsvp_count != null ? element.yes_rsvp_count : 0,
-							coverPhoto: element.photo_url != null ? element.photo_url : '',
-							date: element.time != null ? element.time : ''
-						};
-						events.push(event);
-					}
-					break;
-				}
-			}
-
-			const data = {
-				events: events
-			};
-
-			writer.writeSuccess(res, data);
+			writer.writeSuccess(res, events);
 		} catch (err) {
 			throw err;
 		}
 	}
 
+	public async getMeetupEventsByOrganization(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
+		const queryData = url.parse(req.url, true).query;
+
+		try {
+			const id = queryData.id.toString();
+			const events: IEvent[] = await this.meetupEventsFetcher.getEventsByOrganizer(id);
+
+			writer.writeSuccess(res, events);
+		} catch (err) {
+			throw err;
+		}
+	}
+  
 	public async getMyEvents(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
 		try {
 			const queryData = url.parse(req.url, true).query;
@@ -179,7 +172,6 @@ export class EventsController extends BaseController {
 				let jcalDataEvent = ICAL.parse(anEvent);
 				let vcalendarEvent = new ICAL.Component(jcalDataEvent);
 				vcalendar.addSubcomponent(vcalendarEvent);
-
 			}
 			let data = {
 				iCalendarString: vcalendar.toString()

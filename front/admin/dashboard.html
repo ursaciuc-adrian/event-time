@@ -8,7 +8,8 @@
 	<title>Event Time</title>
 
 	<link rel="stylesheet" href="../css/main.css" />
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+		integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
 
 <body id="admin-zone">
@@ -18,8 +19,50 @@
 		<div class="module" data-module="partials/top_nav.html"></div>
 
 		<h1 class="is-centered">Super Duper Admin Dashboard</h1>
+
+		<div class="container">
+			<button class="button button-success" id="fetch">Fetch events</button>
+			<button class="button" id="sendNotifications">Send notifications</button>
+
+
+		</div>
 	</main>
 
+	<script>
+		document.getElementById('fetch').addEventListener("click", function (e) {
+			fetch(`http://localhost:3000/events/fetch`, {
+				method: "GET",
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+				.then(resp => resp.json())
+				.then(myJson => {
+					console.log(myJson);
+					alert("Done!");
+				})
+				.catch(err => {
+					alert("An error occurred!");
+				});
+		});
+
+		document.getElementById('sendNotifications').addEventListener("click", function (e) {
+			fetch(`http://localhost:3000/events/notify`, {
+				method: "GET",
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+				.then(resp => resp.json())
+				.then(myJson => {
+					console.log(myJson);
+					alert("Done!");
+				})
+				.catch(err => {
+					alert("An error occurred!");
+				});
+		});
+	</script>
 	<script src="../scripts/modules.js"></script>
 	<script src="../scripts/left-side-navbar.js"></script>
 	<script src="../scripts/admin.js"></script>

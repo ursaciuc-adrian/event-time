@@ -33,8 +33,12 @@ export class EventRoutes {
 			await this.eventsController.sendMail(req, res);
 		}
 
-		if (reqUrl.pathname === '/notifications' && req.method === 'GET') {
-			await this.eventsController.notifications(req, res);
+		if (reqUrl.pathname === '/events/fetch' && req.method === 'GET') {
+			await this.eventsController.fetchNewEvents(req, res);
+		}
+
+		if (reqUrl.pathname === '/events/notify' && req.method === 'GET') {
+			await this.eventsController.notify(req, res);
 		}
 
 		if (reqUrl.pathname === '/events/eventbrite' && req.method === 'GET') {
@@ -49,8 +53,12 @@ export class EventRoutes {
 			await this.eventsController.getNEvents(req, res);
 		}
 
-		if (reqUrl.pathname === '/events/organizer' && req.method === 'GET') {
-			await this.eventsController.getEventsByOrganization(req, res);
+		if (reqUrl.pathname === '/events/eventbrite/organizer' && req.method === 'GET') {
+			await this.eventsController.getEventbriteEventsByOrganization(req, res);
+		}
+
+		if (reqUrl.pathname === '/events/meetup/organizer' && req.method === 'GET') {
+			await this.eventsController.getMeetupEventsByOrganization(req, res);
 		}
 
 		if (reqUrl.pathname === '/events/me' && req.method === 'GET') {
