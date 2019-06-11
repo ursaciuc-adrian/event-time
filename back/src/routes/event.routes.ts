@@ -60,5 +60,9 @@ export class EventRoutes {
 		if (reqUrl.pathname === '/events/meetup/organizer' && req.method === 'GET') {
 			await this.eventsController.getMeetupEventsByOrganization(req, res);
 		}
+
+		if (reqUrl.pathname === '/events/me' && req.method === 'GET') {
+			await this.eventsController.getMyEvents(req, res);
+		}
 	}
 }

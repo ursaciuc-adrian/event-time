@@ -60,13 +60,15 @@ export class CategoriesController extends BaseController {
 			body.results.forEach(async (element) => {
 				const count = await Category.count({ idOrigin: element.id, originName: 'meetup' });
 				if (count === 0) {
-					const obj = new Category({
-						name: element.shortname,
-						idOrigin: element.id,
-						originName: 'Meetup'
-					});
+					if (element.shortname.indexOf('?') <= -1) {
+						const obj = new Category({
+							name: element.shortname,
+							idOrigin: element.id,
+							originName: 'Meetup'
+						});
 
-					await obj.save();
+						await obj.save();
+					}
 				}
 			});
 
