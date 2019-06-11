@@ -115,6 +115,7 @@ function fetchEvents() {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
+			'Authorization': 'Bearer ' + sessionStorage.getItem('token')
 		},
 	})
 		.then((resp) => resp.json())

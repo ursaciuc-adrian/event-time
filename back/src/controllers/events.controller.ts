@@ -46,7 +46,14 @@ export class EventsController extends BaseController {
 				};
 			}
 
-			const result = await Event.find({}, {}, query).populate('idCategory');
+			let result = [];
+			if (await auth.isLoggedIn(req.headers.authorization)) {
+				const user = await auth.getUser(req.headers.authorization);
+
+				result = await Event.find({ idCategory: { $in: user.subscriptions } }, {}, query).populate('idCategory');
+			} else {
+				result = await Event.find({}, {}, query).populate('idCategory');
+			}
 
 			writer.writeSuccess(res, result);
 		} catch (err) {
@@ -147,7 +154,7 @@ export class EventsController extends BaseController {
 			throw err;
 		}
 	}
-  
+
 	public async getMyEvents(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
 		try {
 			const queryData = url.parse(req.url, true).query;

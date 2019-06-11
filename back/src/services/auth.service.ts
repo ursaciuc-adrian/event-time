@@ -42,3 +42,22 @@ export async function isInRole(token: string, role: string): Promise<boolean> {
 		return false;
 	}
 }
+
+export async function getUser(token: string): Promise<any> {
+	if (token === undefined) {
+		return false;
+	}
+
+	if (token.startsWith('Bearer ')) {
+		token = token.slice(7, token.length);
+	}
+
+	try {
+		const decoded = await jwt.verify(token, '123');
+		const user = await User.findById(decoded.id);
+
+		return user;
+	} catch {
+		return undefined;
+	}
+}
