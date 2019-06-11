@@ -100,7 +100,6 @@ export async function getMeetupEvents(): Promise<void> {
 				for (const element of body.results) {
 					try {
 						const count = await Event.count({ idOrigin: element.id, title: element.name });
-						console.log(element.name);
 
 						if (count === 0 && element.name != null && element.name.includes('?') === false) {
 							const obj = new Event({
