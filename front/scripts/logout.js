@@ -14,6 +14,20 @@ window.onload = function () {
                     loginBtn.innerText = "Logout";
                     loginBtn.setAttribute('href', 'index.html');
                     loginBtn.setAttribute('onClick', 'logoutFunction()');
+
+                    let exportBtn = document.getElementById("exportBtn");
+                    exportBtn.style.display = "block";
+
+                    let registerBtn = document.getElementById("registerBtn");
+                    registerBtn.style.display = "none";
+
+                    changeSubscribeBtn("block");
+
+                    if (myJson.data.role == "User") {
+                        changeAdminBtn("none");
+                    } else {
+                        changeAdminBtn("block");
+                    }
                 }
             })
             .catch(err => {
@@ -24,4 +38,14 @@ window.onload = function () {
 
 function logoutFunction() {
     sessionStorage.setItem('token', 'null');
+}
+
+function changeSubscribeBtn(disp) {
+    let subscribeBtn = document.getElementById("subscribeBtn");
+    subscribeBtn.style.display = disp;
+}
+
+function changeAdminBtn(disp) {
+    let adminBtn = document.getElementById("adminBtn");
+    adminBtn.style.display = disp;
 }
