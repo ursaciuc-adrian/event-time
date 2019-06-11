@@ -13,6 +13,10 @@ export class FollowerRoutes {
 			await this.followerController.get(req, res);
 		}
 
+		if (reqUrl.pathname === '/followers/pages' && req.method === 'GET') {
+			await this.followerController.getTotalPages(req, res);
+		}
+
 		if (reqUrl.pathname === '/followers' && req.method === 'POST') {
 			await this.followerController.add(req, res);
 		}
