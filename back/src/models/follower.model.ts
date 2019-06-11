@@ -2,8 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 
 export const FollowerSchema = new Schema({
 	id: {
-		type: mongoose.Schema.ObjectId,
-		index: { unique: true }
+		type: mongoose.Schema.ObjectId
 	},
 	idOrigin: {
 		type: String,

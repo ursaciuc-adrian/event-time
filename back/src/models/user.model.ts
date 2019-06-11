@@ -2,8 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 
 const UserSchema = new Schema({
 	id: {
-		type: mongoose.Schema.ObjectId,
-		index: { unique: true }
+		type: mongoose.Schema.ObjectId
 	},
 	name: {
 		type: String,
@@ -12,7 +11,8 @@ const UserSchema = new Schema({
 	email: {
 		type: String,
 		required: true,
-		unique: true
+		unique: true,
+		dropDups: true
 	},
 	password: {
 		type: String,
