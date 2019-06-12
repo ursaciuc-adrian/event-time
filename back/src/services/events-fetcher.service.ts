@@ -158,11 +158,11 @@ export async function getMeetupEvents(): Promise<void> {
 								originName: 'Meetup',
 								idCategory: category._id,
 								title: element.name != null ? element.name : '',
-								description: element.description != null ? element.description : '',
-								location: element.venue != null ? element.venue.address_1 : '',
+								description: element.description != null ? element.description : 'There is no description!',
+								location: element.venue != null ? element.venue.address_1 : 'There is no address!',
 								seats: element.rsvp_limit != null ? element.rsvp_limit : 0,
 								coverPhoto: element.photo_url != null ? element.photo_url : '',
-								date: element.time != null ? element.time : ''
+								date: element.time != null ? element.time : '-'
 							});
 
 							try {
