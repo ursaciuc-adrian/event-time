@@ -26,8 +26,6 @@ fetch("http://localhost:3000/auth/me", {
                     alert("Seems like there's a problem and you can't do that.")
                     console.log(err);
                 });
-        } else {
-            window.location.href = "index.html";
         }
     })
     .catch(err => {

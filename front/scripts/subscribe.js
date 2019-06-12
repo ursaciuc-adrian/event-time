@@ -71,7 +71,7 @@ fetch("http://localhost:3000/auth/me", {
                         label.htmlFor = category._id;
 
                         let img = document.createElement("img");
-                        img.src = "images/mountains.jpeg";
+                        img.src = "https://bit.ly/2KHxDpm";
                         img.alt = " ";
 
                         let span = document.createElement("span");
