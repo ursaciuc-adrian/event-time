@@ -1,5 +1,5 @@
 window.onload = function () {
-    if (sessionStorage.getItem('token') != 'null') {
+    if (sessionStorage.getItem('token') != 'null' && sessionStorage.getItem('token')) {
         fetch("http://localhost:3000/auth/me", {
             method: "GET",
             headers: {
