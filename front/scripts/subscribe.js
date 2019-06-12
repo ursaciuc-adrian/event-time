@@ -1,7 +1,6 @@
 document.querySelector("#subscribe-form").addEventListener("submit", function (e) {
     e.preventDefault();
     var checkedBoxes = document.querySelectorAll('input[name=category]:checked');
-    console.log(checkedBoxes);
 
     checkedBoxes.forEach(element => {
         fetch("http://localhost:3000/auth/me", {

@@ -1,3 +1,4 @@
+<script src="../scripts/check-admin.js"></script>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,22 +38,22 @@
 				</table>
 			</div>
 			<div class="pagination">
-					<a class="pagination-previous" onclick="prevPage()">Previous</a>
-					<ul class="pagination-list" id='pagination-list'>
-					</ul>
-					<a class="pagination-next" onclick="nextPage()">Next page</a>
-				</div>
+				<a class="pagination-previous" onclick="prevPage()">Previous</a>
+				<ul class="pagination-list" id='pagination-list'>
+				</ul>
+				<a class="pagination-next" onclick="nextPage()">Next page</a>
+			</div>
 		</div>
 	</main>
 
 	<script>
 		document.getElementById('create').addEventListener("click", function (e) {
 			fetch(`http://localhost:3000/followers/from-url?url=` + document.getElementById('url').value, {
-				method: "GET",
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			})
+					method: "GET",
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				})
 				.then(resp => resp.json())
 				.then(myJson => {
 					console.log(myJson);

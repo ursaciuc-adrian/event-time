@@ -1,3 +1,4 @@
+<script src="../scripts/check-admin.js"></script>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,11 +32,11 @@
 	<script>
 		document.getElementById('fetch').addEventListener("click", function (e) {
 			fetch(`http://localhost:3000/events/fetch`, {
-				method: "GET",
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			})
+					method: "GET",
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				})
 				.then(resp => resp.json())
 				.then(myJson => {
 					console.log(myJson);
@@ -48,11 +49,11 @@
 
 		document.getElementById('sendNotifications').addEventListener("click", function (e) {
 			fetch(`http://localhost:3000/events/notify`, {
-				method: "GET",
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			})
+					method: "GET",
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				})
 				.then(resp => resp.json())
 				.then(myJson => {
 					console.log(myJson);
