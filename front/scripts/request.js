@@ -55,6 +55,7 @@ document.querySelector("#login-form").addEventListener("submit", function (e) {
         })
         .then(function (myJson) {
             console.log(myJson);
+            window.location.href = "index.html";
         })
         .catch(err => {
             console.log(err);
