@@ -17,8 +17,7 @@ export class MeetupEventsFetcher implements IEventsFetcher {
 			location: obj.venue != null ? obj.venue.address_1 : '',
 			seats: obj.rsvp_limit != null ? obj.rsvp_limit : 0,
 			coverPhoto: obj.photo_url != null ? obj.photo_url : '',
-			date: obj.time != null ? obj.time : ''
-
+			date: new Date().toLocaleString()
 		};
 	}
 
