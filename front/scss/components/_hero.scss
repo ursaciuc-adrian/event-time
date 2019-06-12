@@ -19,6 +19,32 @@
             letter-spacing: 20px;
             margin-bottom: 50px;
         }
+        .eventtitle {
+            font-size: 3rem;
+            letter-spacing: 20px;
+            margin-bottom: 50px;
+        }
+        .eventdescription {
+            margin: 0 25%;
+            line-height: 1.5;
+            font-size: 1.2rem;
+        }
+        .eventlocation {
+            margin-top: 10px;
+            line-height: 1.5;
+            font-size: 1.5rem;
+        }
+        .eventseats {
+            margin-top: 10px;
+            line-height: 1.5;
+            font-size: 1.5rem;
+        }
+        .eventdate {
+            margin-top: 10px;
+            line-height: 1.5;
+            font-size: 1.5rem;
+            font-style: italic;
+        }
         .description {
             margin: 0 25%;
             line-height: 1.5;

@@ -1,70 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Event Time</title>
+	<title>Event Details</title>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
 		integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/main.css" />
 </head>
-
 <body>
-	<div class="module" data-module="partials/navbar.html"></div>
+    	<div class="module" data-module="partials/event-navbar.html"></div>
 
 	<main class="main">
 		<div class="hero">
 			<div class="filter"></div>
 			<div class="hero-content">
-				<h1 class="title">Event Time</h1>
-				<p class="description">
+				<h1 class="eventtitle">Event Time</h1>
+				<p class="eventdescription">
 					“The gladdest moment in human life is a departure into unknown lands.”
 				</p>
-				<p class="description">
-					Sir Richard Burton
+				<p class="eventdate">
+					Default Date
 				</p>
-				<div class="dots">
+				<p class="eventlocation">
+					Default Location
+				</p>
+				<p class="eventseats">
+					Default Seats
+				</p>
+				<!-- <div class="dots">
 					<div class="dot"></div>
 					<div class="dot"></div>
 					<div class="dot"></div>
-				</div>
+				</div> -->
 			</div>
-
-		</div>
-		<div class="events">
-			<div class="container">
-				<div class="upcoming">
-					<span>Upcoming Events</span>
-
-					<button class="button button-primary button-large" id="exportBtn">Export</button>
-				</div>
-				<div class="events-list">
-
-				</div>
-				<div class="pagination">
-					<a class="pagination-previous" onclick="prevPage()">Previous</a>
-					<ul class="pagination-list" id='pagination-list'>
-					</ul>
-					<a class="pagination-next" onclick="nextPage()">Next page</a>
-				</div>
-
-			</div>
-
 		</div>
 
 	</main>
 
 	<div class="module" data-module="partials/footer.html"></div>
 
-	<script src="scripts/index.js"></script>
 	<script src="scripts/modules.js"></script>
 	<script src="scripts/scroller.js"></script>
 	<script src="scripts/logout.js"></script>
-	<script src="scripts/set-event-id.js"></script>
-	<script src="scripts/export.js"></script>
-
+	<script src="scripts/set-event-details.js"></script>
 </body>
-
 </html>
