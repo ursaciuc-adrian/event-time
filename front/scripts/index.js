@@ -155,8 +155,6 @@ function fetchEvents() {
 					coverPhoto = "/images/no-image-found.jpg";
 				}
 
-				var options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
-
 				let event = `
 				<div class="date">
 					<p class="month">${months[value - 1]}</p>
@@ -164,9 +162,9 @@ function fetchEvents() {
 				</div>
 				<img src="${coverPhoto}" alt="placeholder" />
 				<div class="details">
-					<div class="title">
+					<a href="/event.html" class="title" onclick="setEventDetails('${element._id}')">
 						${rawTitle}
-					</div>
+					</a>
 					<p class="location">${element.location}</p>
 					<p class="time">${hour}</p>
 					<p class="description">

@@ -155,6 +155,18 @@ export class EventsController extends BaseController {
 		}
 	}
 
+	public async getEventById(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
+		const queryData = url.parse(req.url, true).query;
+
+		try {
+			const event = await Event.findOne({_id : queryData.id});
+
+			writer.writeSuccess(res, event);
+		} catch (err) {
+			throw err;
+		}
+	}
+
 	public async getMyEvents(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
 		try {
 			const queryData = url.parse(req.url, true).query;
