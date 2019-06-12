@@ -16,8 +16,7 @@ export interface IEvent extends Document {
 
 const EventSchema = new Schema({
 	id: {
-		type: mongoose.Schema.ObjectId,
-		index: { unique: true }
+		type: mongoose.Schema.ObjectId
 	},
 	idCategory: {
 		type: Schema.Types.ObjectId,
@@ -31,7 +30,6 @@ const EventSchema = new Schema({
 	},
 	originName: {
 		type: String,
-		index: { unique: true },
 		trim: true
 	},
 	title: {
