@@ -22,10 +22,9 @@
 		<h1 class="is-centered">Super Duper Admin Dashboard</h1>
 
 		<div class="container">
+			<button class="button button-success" id="fetchCateg">Fetch categories</button>
 			<button class="button button-success" id="fetch">Fetch events</button>
 			<button class="button" id="sendNotifications">Send notifications</button>
-
-
 		</div>
 	</main>
 
@@ -41,6 +40,38 @@
 				.then(myJson => {
 					console.log(myJson);
 					alert("Done!");
+				})
+				.catch(err => {
+					alert("An error occurred!");
+				});
+		});
+
+		document.getElementById('fetchCateg').addEventListener("click", function (e) {
+			fetch(`http://localhost:3000/categories/eventbrite`, {
+				method: "GET",
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+				.then(resp => resp.json())
+				.then(myJson => {
+					console.log(myJson);
+					alert("Fetched categories from eventbrite.");
+				})
+				.catch(err => {
+					alert("An error occurred!");
+				});
+
+			fetch(`http://localhost:3000/categories/meetup`, {
+				method: "GET",
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+				.then(resp => resp.json())
+				.then(myJson => {
+					console.log(myJson);
+					alert("Fetched categories from meetup.");
 				})
 				.catch(err => {
 					alert("An error occurred!");

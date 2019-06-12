@@ -2,8 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 
 const ChangeRequestSchema = new Schema({
 	id: {
-		type: mongoose.Schema.ObjectId,
-		index: { unique: true }
+		type: mongoose.Schema.ObjectId
 	},
 	idEvent: {
 		type: Schema.Types.ObjectId,

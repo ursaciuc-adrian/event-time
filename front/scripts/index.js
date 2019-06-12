@@ -111,7 +111,7 @@ function setPagination() {
 }
 
 function fetchEvents() {
-	fetch(`http://localhost:3000/events?pageNo=${CURRENT_PAGE}&&size=${SIZE}`, {
+	fetch(`http://localhost:3000/events/filtered?pageNo=${CURRENT_PAGE}&&size=${SIZE}`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',

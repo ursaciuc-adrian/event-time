@@ -39,9 +39,7 @@ document.querySelector("#login-form").addEventListener("submit", function (e) {
                     .catch(err => {
                         alert(err);
                     });
-
-
-                window.location.href = "http://localhost:5500/subscribe.html";
+                window.location.href = "login.html";
             }
         })
         .catch(err => {

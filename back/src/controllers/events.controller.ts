@@ -32,7 +32,7 @@ export class EventsController extends BaseController {
 		this.meetupEventsFetcher = new MeetupEventsFetcher();
 	}
 
-	public async get(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
+	public async getEventsFiltered(req: http.IncomingMessage, res: http.ServerResponse): Promise<void> {
 		const queryData = url.parse(req.url, true).query;
 
 		try {

@@ -13,6 +13,10 @@ export class EventRoutes {
 			await this.eventsController.get(req, res);
 		}
 
+		if (reqUrl.pathname === '/events/filtered' && req.method === 'GET') {
+			await this.eventsController.getEventsFiltered(req, res);
+		}
+
 		if (reqUrl.pathname === '/events/pages' && req.method === 'GET') {
 			await this.eventsController.getTotalPages(req, res);
 		}
