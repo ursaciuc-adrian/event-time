@@ -93,7 +93,7 @@ export async function getEventbriteEvents(): Promise<void> {
 					'https://www.eventbriteapi.com/v3/events/search/?categories=' + category.idOrigin + '&expand=venue',
 					{
 						method: 'GET',
-						headers: { Authorization: 'Bearer ANYLLDVFBO24ROUAOV5G' }
+						headers: { Authorization: 'Bearer eventbriteKey' }
 					});
 
 				const body = JSON.parse(response.body);
@@ -141,7 +141,7 @@ export async function getMeetupEvents(): Promise<void> {
 			try {
 				const response = await request(
 					'https://api.meetup.com/2/open_events?&category=' + category.idOrigin +
-					'&sign=true&photo-host=public&key=352395f2f577c7216632a056757444',
+					'&sign=true&photo-host=public&key=meetupKey',
 					{
 						method: 'GET'
 					});
